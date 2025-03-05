@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Producto view</title>
+</head>
+<body>
+    <h1>Producto view</h1>
+    <ul>
+        <li th:text="${producto.nombre}"></li>
+        <li th:text="${producto.precio}"></li>
+    </ul>
+    <p th:text="|${producto.nombre} - ${producto.precio}|"></p>
+    <a th:href="@{/producto/list}">Volver</a>
+</body>
+</html>
