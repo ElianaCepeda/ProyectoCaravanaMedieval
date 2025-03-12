@@ -25,7 +25,7 @@ public class Ciudad {
     private List<Servicio> servicios;
 
     @OneToMany(mappedBy = "ciudad")
-    private List<StockCiudad> sotck;
+    private List<StockCiudad> stock;
 
     @OneToMany( mappedBy = "ciudad")
     private List<Caravana> caravanas;
@@ -64,6 +64,12 @@ public class Ciudad {
 
     public void setTarifa(int tarifa) {
         this.tarifa = tarifa;
+    }
+
+    public List<Ruta> getRutas(){
+        List<Ruta> rutas = rutas_salida;
+        rutas.addAll(rutas_llegada);
+        return rutas;
     }
 
     

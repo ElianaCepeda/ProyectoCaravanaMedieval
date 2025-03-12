@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciudad</title>
+</head>
+<body>
+    <p><a th:href="@{/ciudad/list}">Volver a la lista de ciudades</a></p>
+    <h1>Ciudad</h1>
+    <p>Nombre: <span th:text="${ciudad.nombre}"></span></p>
+    <p>Tarifa: <span th:text="${ciudad.tarifa}"></span></p>
+
+</body>
+</html>

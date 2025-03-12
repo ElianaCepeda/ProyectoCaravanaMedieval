@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta Ciudades Edit</title>
+</head>
+<body>
+    <form action="/ciudad/rutas/save" method="post" th:object="${ciudadRutas}">
+        <input type="hidden" name="idCiudad" th:value="${ciudadRutas.idCiudad}">
+
+        
+        <ul>
+            <li th:each="ruta : ${rutas}">
+            
+
+                <input type="checkbox" name="rutasID" th:value="${ruta.id}"
+                th:checked="${ciudadRutas.rutasID.contains(ruta.id)}">
+                <label th:text="${ruta.descripcion_dano}"></label>
+
+            </li>
+        </ul>
+       
+        <button type="submit">Guardar</button>
+    </form>
+    
+</body>
+</html>

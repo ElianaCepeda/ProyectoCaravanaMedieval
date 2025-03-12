@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Ciudad</title>
+</head>
+<body>
+    <form action="/ciudad/save" method="post">
+        
+        <input type="hidden" name="id" th:value="${ciudad.id}">
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" th:value="${ciudad.nombre}">
+
+        <label>Tarifa:</label>
+        <input type="text" id="tarifa" name="tarifa"  th:value="${ciudad.tarifa}">
+
+        <button type="submit">Guardar</button>
+    </form>
+    <p>
+        <a th:href="@{/ciudad/rutas/edit/{id}(id=${ciudad.id})}">Editar Rutas</a>
+    </p>
+</body>
+</html> 

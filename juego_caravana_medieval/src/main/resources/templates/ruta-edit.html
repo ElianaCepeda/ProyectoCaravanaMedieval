@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Ruta</title>
+</head>
+<body>
+    <form action="/ruta/save" method="post">
+        
+        <input type="hidden" name="id" th:value="${ruta.id}">
+
+        <label>Descripción:</label>
+        <input type="text" id="descripcion_dano" name="descripcion_dano" th:value="${ruta.descripcion_dano}">
+
+        <label>Cantidad de daño:</label>
+        <input type="text" id="cantidad_dano" name="cantidad_dano"  th:value="${ruta.cantidad_dano}">
+
+        <button type="submit">Guardar</button>
+    </form>
+    
+</body>
+</html> 
