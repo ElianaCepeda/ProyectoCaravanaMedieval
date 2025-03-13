@@ -52,6 +52,10 @@ public class CiudadService {
                 ciudad.getRutas().stream().map(Ruta::getId).toList()
             ));
     }
+
+    public Ciudad obtenerCiudadPorId(Long id) {
+        return ciudadRepository.findById(id).orElseThrow();
+    }
     
 
     public void updateCiudadRutas(CiudadRutasDTO ciudadRutasDTO) {

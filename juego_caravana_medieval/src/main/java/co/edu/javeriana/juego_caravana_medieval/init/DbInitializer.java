@@ -142,20 +142,35 @@ public class DbInitializer implements CommandLineRunner {
         System.out.println("Ciudades iniciales insertadas.");
     
       // Crear rutas aleatorias
-Random random = new Random();
-List<Ruta> rutas = ciudades.stream()
-    .flatMap(ciudad -> ciudades.stream()
-        .filter(destino -> !ciudad.equals(destino))
-        .limit(3) // Limitar a 3 rutas por ciudad
-        .map(destino -> new Ruta(
-            ciudad,
-            destino,
-            random.nextInt(100) + 1,
-            "Ruta de " + ciudad.getNombre() + " a " + destino.getNombre() // Costo de daño aleatorio entre 1 y 100
-        ))
-    )
-    .collect(Collectors.toList());
-
+      Random random = new Random();
+      List<Ruta> rutas = ciudades.stream()
+          .flatMap(ciudad -> ciudades.stream()
+              .filter(destino -> !ciudad.equals(destino))
+              .limit(3) // Limitar a 3 rutas por ciudad
+              .map(destino -> {
+                  boolean esSegura = random.nextBoolean();
+                  String descripcion;
+                  if (esSegura) {
+                      descripcion = "Ruta segura. Es más larga, pero la caravana no sufre daño durante el viaje.";
+                  } else {
+                      descripcion = random.nextBoolean() ? 
+                          "Ruta insegura. Hay bandidos en el camino." : 
+                          "Ruta insegura. Hay desastres naturales en el camino.";
+                  }
+                  int costoDano = esSegura ? 0 : random.nextInt(100) + 1; // Costo de daño aleatorio entre 1 y 100 para rutas inseguras, 0 para rutas seguras
+                  return new Ruta(
+                      ciudad,
+                      destino,
+                      costoDano,
+                      descripcion
+                      
+                  );
+              })
+          )
+          .collect(Collectors.toList());
+      
+      rutaRepository.saveAll(rutas);
+      System.out.println("Rutas iniciales insertadas.");
 rutaRepository.saveAll(rutas);
 System.out.println("Rutas iniciales insertadas.");
     

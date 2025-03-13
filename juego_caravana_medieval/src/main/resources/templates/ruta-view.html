@@ -9,6 +9,8 @@
     <p><a th:href="@{/ruta/list}">Volver a la lista de rutas</a></p>
     
     <h1>Ruta</h1>
+    <p>Ciudad de Origen: <span th:text="${ciudadOrigen}"></span></p>
+    <p>Ciudad de Destino: <span th:text="${ciudadDestino}"></span></p>
     <p>Descripción: <span th:text="${ruta.descripcion_dano}"></span></p>
     <p>Cantidad de daño: <span th:text="${ruta.cantidad_dano}"></span></p>
 </body>

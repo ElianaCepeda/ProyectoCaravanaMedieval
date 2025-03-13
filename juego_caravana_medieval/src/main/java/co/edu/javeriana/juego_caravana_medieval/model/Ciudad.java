@@ -2,6 +2,7 @@ package co.edu.javeriana.juego_caravana_medieval.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,10 +16,10 @@ public class Ciudad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany (mappedBy = "ciudad_origen")
+    @OneToMany (mappedBy = "ciudad_origen", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<Ruta> rutas_salida;
 
-    @OneToMany (mappedBy = "ciudad_destino")
+    @OneToMany (mappedBy = "ciudad_destino", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<Ruta> rutas_llegada;
 
     @ManyToMany (mappedBy = "ciudades")

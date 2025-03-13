@@ -23,16 +23,23 @@ public class RutaService {
     RutaRepository rutaRepository;
 
 
-
+    @Autowired
+    private CiudadService ciudadService;
     
     public Optional<RutaDTO> searchById(Long id){
         return rutaRepository.findById(id).map(RutaMapper::toDTO);
     }
     
 
-    public List<RutaDTO> searchAll(){
+    public List<RutaDTO> searchAll() {
         return rutaRepository.findAll().stream()
-                .map(RutaMapper::toDTO).toList();
+                .map(ruta -> {
+                    RutaDTO dto = RutaMapper.toDTO(ruta);
+                    dto.setCiudadOrigenNombre(ciudadService.searchById(dto.getCiudadOrigenId()).orElseThrow().getNombre());
+                    dto.setCiudadDestinoNombre(ciudadService.searchById(dto.getCiudadDestinoId()).orElseThrow().getNombre());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     public void save (RutaDTO rutaDTO) {
