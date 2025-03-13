@@ -179,3 +179,60 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
 }
 
+
+
+
+.edit-container {
+    background: rgba(0, 0, 0, 0.75); 
+    padding: 30px;
+    border-radius: 12px;
+    width: 50%;
+    margin: 130px auto; 
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #E3D4B6; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+}
+
+
+.edit-container label {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #C7A05C; 
+}
+
+
+.edit-container input {
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+    margin-top: 5px;
+    border: 2px solid #C7A05C; 
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #E3D4B6;
+}
+
+
+.save-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    background: #C7A05C; 
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    
+}
+
+
+.save-btn:hover {
+    background: #b9a847; 
+    transform: scale(1.05);
+}

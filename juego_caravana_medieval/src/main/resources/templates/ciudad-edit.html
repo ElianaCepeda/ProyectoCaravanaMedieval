@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Ciudad</title>
+    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaDefault.css">
+    <title>Editar Ciudad</title>
 </head>
-<body>
-    <form action="/ciudad/save" method="post">
-        
-        <input type="hidden" name="id" th:value="${ciudad.id}">
+<body class="admin-page">
 
-        <label>Nombre:</label>
-        <input type="text" id="nombre" name="nombre" th:value="${ciudad.nombre}">
+    <div class="foreground-image"></div>
+    <div class="foreground-text-aux"></div>
 
-        <label>Tarifa:</label>
-        <input type="text" id="tarifa" name="tarifa"  th:value="${ciudad.tarifa}">
+    <div class="banner-container">
+        <h1 class="listTitle">Editar Ciudad</h1>
+    </div>
 
-        <button type="submit">Guardar</button>
-    </form>
-  
+    <div class="foreground-text">
+        <p><a th:href="@{/ciudad/list}" class="subtitle_List">⬅ Volver a la lista de ciudades</a></p>
+
+        <div class="edit-container">
+            <form action="/ciudad/save" method="post">
+                <input type="hidden" name="id" th:value="${ciudad.id}">
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" th:value="${ciudad.nombre}" required>
+
+                <label for="tarifa">Tarifa:</label>
+                <input type="text" id="tarifa" name="tarifa" th:value="${ciudad.tarifa}" required>
+
+                <button type="submit" class="save-btn">Guardar</button>
+            </form>
+        </div>
+    </div>
+
 </body>
-</html> 
+</html>
