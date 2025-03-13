@@ -1,14 +1,22 @@
 package co.edu.javeriana.juego_caravana_medieval.controller;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
+import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadRutasDTO;
+import co.edu.javeriana.juego_caravana_medieval.DTO.RutaDTO;
 import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 import co.edu.javeriana.juego_caravana_medieval.service.CiudadService;
+import co.edu.javeriana.juego_caravana_medieval.service.RutaService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +35,9 @@ public class CiudadController {
     @Autowired
     private CiudadService ciudadService;
 
+    @Autowired
+    private RutaService rutaService;
+
 
     @GetMapping("/list")
     public ModelAndView mostrarCiudades() {
@@ -36,16 +47,29 @@ public class CiudadController {
         return mv;
     }
 
+    
     @GetMapping("/view/{idCiudad}")
-    public ModelAndView buscarCiudad(@PathVariable("idCiudad") Long idCiudad){
-      
-        CiudadDTO ciudad = ciudadService.searchById(idCiudad).orElseThrow();
-        ModelAndView mv = new ModelAndView("ciudad-view");
-        mv.addObject("ciudad", ciudad);
-        return mv;
+public ModelAndView buscarCiudad(@PathVariable("idCiudad") Long idCiudad) {
+    CiudadDTO ciudad = ciudadService.searchById(idCiudad).orElseThrow();
 
-    }
+    // Obtener solo las rutas de la ciudad
+    List<RutaDTO> rutas = ciudadService.getRutasPorCiudad(idCiudad);
 
+    // Convertir a una lista de mapas con nombres de ciudades
+    List<Map<String, String>> rutasConCiudades = rutas.stream().map(ruta -> {
+        Map<String, String> rutaMap = new HashMap<>();
+        rutaMap.put("ciudad_origen", ciudadService.searchById(ruta.getCiudadOrigenId()).orElseThrow().getNombre());
+        rutaMap.put("ciudad_destino", ciudadService.searchById(ruta.getCiudadDestinoId()).orElseThrow().getNombre());
+        return rutaMap;
+    }).toList();
+
+    ModelAndView mv = new ModelAndView("ciudad-view");
+    mv.addObject("rutasLista", rutasConCiudades);
+    mv.addObject("ciudad", ciudad);
+    return mv;
+}
+
+    
     @GetMapping("/create")
     public ModelAndView crearCiudad(){
         ModelAndView mv = new ModelAndView("ciudad-edit");

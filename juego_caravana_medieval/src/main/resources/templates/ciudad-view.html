@@ -11,5 +11,16 @@
     <p>Nombre: <span th:text="${ciudad.nombre}"></span></p>
     <p>Tarifa: <span th:text="${ciudad.tarifa}"></span></p>
 
+    <p>Rutas existentes:</p>
+    <ul>
+        <li th:each="ruta : ${rutasLista}" 
+            th:if="${ruta.ciudad_origen == ciudad.nombre}">
+            Origen: <span th:text="${ruta.ciudad_origen}"></span> - 
+            Destino: <span th:text="${ruta.ciudad_destino}"></span>
+        </li>
+    </ul>
+    
+    
+
 </body>
 </html>

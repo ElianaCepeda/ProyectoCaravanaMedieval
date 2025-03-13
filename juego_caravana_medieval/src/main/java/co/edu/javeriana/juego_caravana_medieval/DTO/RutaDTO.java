@@ -22,6 +22,13 @@ public class RutaDTO {
         this.ciudadDestinoNombre = ciudadDestinoNombre;
     }
 
+    public RutaDTO (Long id, Long ciudadOrigenId, Long ciudadDestinoId){
+        this.id =id;
+        this.ciudadDestinoId = ciudadDestinoId;
+        this.ciudadOrigenId = ciudadOrigenId;
+
+    }
+
     public Long getId() {
         return id;
     }

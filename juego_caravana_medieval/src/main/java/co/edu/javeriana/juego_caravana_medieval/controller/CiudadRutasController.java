@@ -27,16 +27,7 @@ public class CiudadRutasController {
     @Autowired
     private CiudadService ciudadService;
 
-    @GetMapping("/edit/{idCiudad}")
-    public ModelAndView editCiudadRutasForm(@PathVariable("idCiudad") Long idCiudad) {
-        CiudadRutasDTO ciudadRutasDTO = ciudadService.getRutasPorCiudad(idCiudad).orElseThrow();
-        List<RutaDTO> rutas = rutaService.searchAll();
-        
-        ModelAndView mv = new ModelAndView("ciudad-rutas-edit");
-        mv.addObject("ciudadRutas", ciudadRutasDTO);
-        mv.addObject("rutas", rutas);
-        return mv;
-    }
+
 
     @PostMapping("/save")
     public RedirectView saveCiudadRutas(@ModelAttribute CiudadRutasDTO ciudadRutasDTO) {
