@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const startText = document.getElementById("ciudad");
 
     startText.addEventListener("click", function () {
-        window.location.href = "/juego_caravana_medieval/src/main/resources/templates/ruta-ciudad-edit.html"; 
+        window.location.href = "/juego_caravana_medieval/src/main/resources/templates/ciudad-edit.html"; 
     });
 
   
