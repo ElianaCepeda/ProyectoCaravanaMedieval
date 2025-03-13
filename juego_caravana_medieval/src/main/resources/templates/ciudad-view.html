@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaDefault.css">
     <title>Ciudad</title>
 </head>
-<body>
-    <p><a th:href="@{/ciudad/list}">Volver a la lista de ciudades</a></p>
-    <h1>Ciudad</h1>
-    <p>Nombre: <span th:text="${ciudad.nombre}"></span></p>
-    <p>Tarifa: <span th:text="${ciudad.tarifa}"></span></p>
+<body class="view-page">
 
-    <p>Rutas existentes:</p>
-    <ul>
-        <li th:each="ruta : ${rutasLista}" 
-            th:if="${ruta.ciudad_origen == ciudad.nombre}">
-            Origen: <span th:text="${ruta.ciudad_origen}"></span> - 
-            Destino: <span th:text="${ruta.ciudad_destino}"></span>
-        </li>
-    </ul>
-    
-    
+    <div class="foreground-image"></div>
+    <div class="foreground-text-aux"></div>
+
+    <div class="banner-container">
+        <h1 class="listTitle">Ciudad</h1>
+    </div>
+
+    <div class="foreground-text">
+        <p><a th:href="@{/ciudad/list}" class="subtitle_List">⬅ Volver a la lista de ciudades</a></p>
+
+        <div class="city-container">
+            <p><strong>Nombre:</strong> <span th:text="${ciudad.nombre}"></span></p>
+            <p><strong>Tarifa:</strong> <span th:text="${ciudad.tarifa}"></span></p>
+
+            <p class="routes-title"><strong>Rutas Existentes:</strong></p>
+            <ul class="routes-list">
+                <li th:each="ruta : ${rutasLista}" th:if="${ruta.ciudad_origen == ciudad.nombre}">
+                    <strong>Origen:</strong> <span th:text="${ruta.ciudad_origen}"></span> - 
+                    <strong>Destino:</strong> <span th:text="${ruta.ciudad_destino}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>

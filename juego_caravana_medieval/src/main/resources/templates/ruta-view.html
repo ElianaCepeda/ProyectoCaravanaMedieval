@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaDefault.css">
     <title>Ruta</title>
 </head>
-<body>
-    <p><a th:href="@{/ruta/list}">Volver a la lista de rutas</a></p>
-    
-    <h1>Ruta</h1>
-    <p>Ciudad de Origen: <span th:text="${ciudadOrigen}"></span></p>
-    <p>Ciudad de Destino: <span th:text="${ciudadDestino}"></span></p>
-    <p>Descripción: <span th:text="${ruta.descripcion_dano}"></span></p>
-    <p>Cantidad de daño: <span th:text="${ruta.cantidad_dano}"></span></p>
+<body class="view-page">
+
+    <div class="foreground-image"></div>
+    <div class="foreground-text-aux"></div>
+
+    <div class="banner-container">
+        <h1 class="listTitle">Ruta</h1>
+    </div>
+
+    <div class="foreground-text">
+        <p><a th:href="@{/ruta-list}" class="subtitle_List">⬅ Volver a la lista de rutas</a></p>
+
+        <div class="route-container">
+            <p><strong>Ciudad de Origen:</strong> <span th:text="${ciudadOrigen}"></span></p>
+            <p><strong>Ciudad de Destino:</strong> <span th:text="${ciudadDestino}"></span></p>
+            <p><strong>Descripción:</strong> <span th:text="${ruta.descripcion_dano}"></span></p>
+            <p><strong>Cantidad de Daño:</strong> <span th:text="${ruta.cantidad_dano}"></span></p>
+        </div>
+    </div>
+
 </body>
 </html>

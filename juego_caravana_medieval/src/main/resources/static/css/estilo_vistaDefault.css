@@ -18,6 +18,11 @@ body {
                       url('/juego_caravana_medieval/src/main/resources/static/images/administrador.png');
 }
 
+.view-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url('/juego_caravana_medieval/src/main/resources/static/images/vistas.jpg');
+}
+
 .foreground-image {
     position: absolute;
     top: 0;
@@ -146,6 +151,31 @@ body {
     
 }
 
+.route-container {
+    
+    background: rgba(0, 0, 0, 0.75); 
+    padding: 25px;
+    border-radius: 12px;
+    width: 50%;
+    margin: 130px auto;
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #E3D4B6; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+}
 
 
+.city-container {
+    background: rgba(0, 0, 0, 0.75); 
+    padding: 25px;
+    border-radius: 12px;
+    width: 50%;
+    margin: 120px auto; 
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #E3D4B6; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+}
 
