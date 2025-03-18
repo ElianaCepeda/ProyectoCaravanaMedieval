@@ -1,55 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaCRUD.css">
-    <script defer src="/juego_caravana_medieval/src/main/resources/static/js/events.js"></script>
-    
+    <link rel="stylesheet" th:href="@{/css/estilo_vistaCRUD.css}">
+    <script defer th:src="@{/js/events.js}"></script>
     <title>Lista de Rutas</title>
 </head>
-<body>
 
-    <div class="foreground-image"></div>
-    <div class="foreground-text"></div>
+<body>
 
     <div class="banner-container">
         <h1 class="listTitle">Listado de Rutas</h1>
     </div>
-    <div class="foreground-text-aux"></div>
-   
-    <div class="foreground-text">
-        <p><a th:href="@{/ruta/create}" class="subtitle_List" id="ruta">Crear Nueva Ruta</a></p>
-        
-        <table class="table_Text">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Ruta</th>
-                    <th>Cantidad de Daño</th>
-                    <th>Ver</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="ruta : ${listaRutas}">
-                    <td th:text="${ruta.id}"></td>
-                    <td th:text="${ruta.ciudadOrigenNombre} + ' a ' + ${ruta.ciudadDestinoNombre}"></td>
-                    <td th:text="${ruta.cantidad_dano}"></td>
-                    <td>
-                        <a th:href="@{/ruta/view/{id}(id=${ruta.id})}">Ver</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/ruta/edit/{id}(id=${ruta.id})}">Editar</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/ruta/delete/{id}(id=${ruta.id})}">Borrar</a>
-                    </td>   
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <div class="foreground-text-aux" >
+        <div class="foreground-text">
+            <a th:href="@{/ruta/create}" class="subtitle_List" id="ruta">Crear Nueva Ruta</a>
+
+            <table class="table_Text">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ruta</th>
+                        <th>Cantidad de Daño</th>
+                        <th>Ver</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ruta : ${listaRutas}">
+                        <td th:text="${ruta.id}"></td>
+                        <td th:text="${ruta.ciudadOrigenNombre} + ' a ' + ${ruta.ciudadDestinoNombre}"></td>
+                        <td th:text="${ruta.cantidad_dano}"></td>
+                        <td><a th:href="@{/ruta/view/{id}(id=${ruta.id})}">Ver</a></td>
+                        <td><a th:href="@{/ruta/edit/{id}(id=${ruta.id})}">Editar</a></td>
+                        <td><a th:href="@{/ruta/delete/{id}(id=${ruta.id})}">Borrar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div> 
 
 </body>
+
 </html>

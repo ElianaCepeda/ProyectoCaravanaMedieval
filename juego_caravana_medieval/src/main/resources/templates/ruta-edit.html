@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Ruta</title>
+    <link rel="stylesheet" th:href="@{/css/estilo_vistaDefault.css}">
+    <title>Editar Ruta</title>
 </head>
-<body>
-    <form action="/ruta/save" method="post">
-        
-        <input type="hidden" name="id" th:value="${ruta.id}">
 
-        <label>Ciudad de Origen</label>
-        <select name="ciudadOrigenId" id="ciudadOrigenId" th:disabled="${ruta.ciudadOrigenId != null}">
-            <option value="" th:if="${ruta.ciudadOrigenId == null}">Seleccione una ciudad</option>
-            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}" 
-                    th:selected="${ciudad.id} == ${ruta.ciudadOrigenId}"></option>
-        </select>
-        <input type="hidden" name="ciudadOrigenId" th:value="${ruta.ciudadOrigenId}" th:if="${ruta.ciudadOrigenId != null}">
+<body class="admin-page">
 
-        <label>Ciudad de Destino</label>
-        <select name="ciudadDestinoId" id="ciudadDestinoId" th:disabled="${ruta.ciudadDestinoId != null}">
-            <option value="" th:if="${ruta.ciudadDestinoId == null}">Seleccione una ciudad</option>
-            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}" 
-                    th:selected="${ciudad.id} == ${ruta.ciudadDestinoId}"></option>
-        </select>
-        <input type="hidden" name="ciudadDestinoId" th:value="${ruta.ciudadDestinoId}" th:if="${ruta.ciudadDestinoId != null}">
+    <div class="foreground-image"></div>
+    <div class="foreground-text-aux add"></div>
 
-        <label>Descripción:</label>
-        <input type="text" id="descripcion_dano" name="descripcion_dano" th:value="${ruta.descripcion_dano}">
+    <div class="banner-container">
+        <h1 class="listTitle">Editar Ruta</h1>
+    </div>
 
-        <label>Cantidad de daño:</label>
-        <input type="text" id="cantidad_dano" name="cantidad_dano" th:value="${ruta.cantidad_dano}">
+    <div class="foreground-text">
+        <p><a th:href="@{/ruta/list}" class="subtitle_List">⬅ Volver a la lista de rutas</a></p>
 
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="ruta-list.html">Volver a la lista</a>
+        <div class="edit-container">
+            <form action="/ruta/save" method="post">
+                <input type="hidden" name="id" th:value="${ruta.id}">
+
+                <label for="ciudadOrigenId">Ciudad de Origen:</label>
+                <select name="ciudadOrigenId" id="ciudadOrigenId" th:disabled="${ruta.ciudadOrigenId != null}">
+                    <option value="" th:if="${ruta.ciudadOrigenId == null}">Seleccione una ciudad</option>
+                    <option th:each="ciudad : ${ciudades}" 
+                            th:value="${ciudad.id}" 
+                            th:text="${ciudad.nombre}" 
+                            th:selected="${ciudad.id} == ${ruta.ciudadOrigenId}"></option>
+                </select>
+                <input type="hidden" name="ciudadOrigenId" th:value="${ruta.ciudadOrigenId}" th:if="${ruta.ciudadOrigenId != null}">
+
+                <label for="ciudadDestinoId">Ciudad de Destino:</label>
+                <select name="ciudadDestinoId" id="ciudadDestinoId" th:disabled="${ruta.ciudadDestinoId != null}">
+                    <option value="" th:if="${ruta.ciudadDestinoId == null}">Seleccione una ciudad</option>
+                    <option th:each="ciudad : ${ciudades}" 
+                            th:value="${ciudad.id}" 
+                            th:text="${ciudad.nombre}" 
+                            th:selected="${ciudad.id} == ${ruta.ciudadDestinoId}"></option>
+                </select>
+                <input type="hidden" name="ciudadDestinoId" th:value="${ruta.ciudadDestinoId}" th:if="${ruta.ciudadDestinoId != null}">
+
+                <label for="descripcion_dano">Descripción:</label>
+                <input type="text" id="descripcion_dano" name="descripcion_dano" th:value="${ruta.descripcion_dano}" required>
+
+                <label for="cantidad_dano">Cantidad de Daño:</label>
+                <input type="text" id="cantidad_dano" name="cantidad_dano" th:value="${ruta.cantidad_dano}" required>
+
+                <button type="submit" class="save-btn">Guardar</button>
+            </form>
+        </div>
+    </div>
+
 </body>
+
 </html>

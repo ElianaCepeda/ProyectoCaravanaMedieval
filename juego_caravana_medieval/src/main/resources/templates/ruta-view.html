@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaDefault.css">
+    <link rel="stylesheet" th:href="@{/css/estilo_vistaDefault.css}">
+    <script defer th:src="@{/js/events.js}"></script>
     <title>Ruta</title>
 </head>
 <body class="view-page">
@@ -16,7 +17,7 @@
     </div>
 
     <div class="foreground-text">
-        <p><a th:href="@{/ruta-list}" class="subtitle_List">⬅ Volver a la lista de rutas</a></p>
+        <p><a th:href="@{/ruta/list}" class="subtitle_List">⬅ Volver a la lista de rutas</a></p>
 
         <div class="route-container">
             <p><strong>Ciudad de Origen:</strong> <span th:text="${ciudadOrigen}"></span></p>

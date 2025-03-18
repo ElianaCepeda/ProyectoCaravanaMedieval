@@ -3,51 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/juego_caravana_medieval/src/main/resources/static/css/estilo_vistaCRUD.css">
-    <script defer src="/juego_caravana_medieval/src/main/resources/static/js/events.js"></script>
+    <link rel="stylesheet" th:href="@{/css/estilo_vistaCRUD.css}">
+    <script defer th:src="@{/js/events.js}"></script>
     <title>Lista de Ciudades</title>
 </head>
 <body>
-
-    <div class="foreground-image"></div>
-    <div class="foreground-text"></div>
-
     <div class="banner-container">
         <h1 class="listTitle">Listado de Ciudades</h1>
     </div>
-    <div class="foreground-text-aux"></div>
-   
-    <div class="foreground-text">
-        <p><a th:href="@{/ciudad/create}" class="subtitle_List" id="ciudad">Crear una ciudad</a></p>
+
+    <div class="foreground-text-aux">
         
+        <div class="foreground-text">
+            <a th:href="@{/ciudad/create}" class="subtitle_List" id="ciudad">Crear una ciudad</a>
 
-        <table class="table_Text">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Ciudad</th>
-                    <th>Ver</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="ciudad : ${listaCiudades}">
-                    <td th:text="${ciudad.nombre}"></td>
-                    <td th:text="${ciudad.tarifa}"></td>
-                    <td>
-                        <a th:href="@{/ciudad/view/{id}(id=${ciudad.id})}">Ver</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/ciudad/edit/{id}(id=${ciudad.id})}">Editar</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/ciudad/delete/{id}(id=${ciudad.id})}">Eliminar</a>
-                    </td>
-            </tbody>
-        </table>
+            <table class="table_Text">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ciudad</th>
+                        <th>Ver</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ciudad : ${listaCiudades}">
+                        <td th:text="${ciudad.nombre}"></td>
+                        <td th:text="${ciudad.tarifa}"></td>
+                        <td><a th:href="@{/ciudad/view/{id}(id=${ciudad.id})}">Ver</a></td>
+                        <td><a th:href="@{/ciudad/edit/{id}(id=${ciudad.id})}">Editar</a></td>
+                        <td><a th:href="@{/ciudad/delete/{id}(id=${ciudad.id})}">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
     </div>
-
-    
 </body>
+
 </html>
