@@ -1,9 +1,5 @@
 package co.edu.javeriana.juego_caravana_medieval.Mapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
 import co.edu.javeriana.juego_caravana_medieval.DTO.RutaDTO;
 import co.edu.javeriana.juego_caravana_medieval.model.Ruta;
 import co.edu.javeriana.juego_caravana_medieval.service.CiudadService;
@@ -13,7 +9,7 @@ public class RutaMapper {
 
     private static CiudadService ciudadService;
 
-    @Autowired
+    
     public RutaMapper(CiudadService ciudadService) {
         RutaMapper.ciudadService = ciudadService;
     }

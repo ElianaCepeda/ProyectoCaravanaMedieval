@@ -1,0 +1,30 @@
+
+@base_url = http://localhost:8081
+
+###
+GET {{base_url}}/ciudad/list
+
+###
+GET {{base_url}}/ciudad/1
+
+###
+GET {{base_url}}/ciudad/1000
+
+###
+POST {{base_url}}/ciudad
+Content-Type: application/json
+
+{
+    "nombre": "epico",
+    "tarifa": 8
+}
+
+###
+PUT {{base_url}}/ciudad
+Content-Type: application/json
+
+{
+    "id": 1,
+    "nombre": "Burgo de Bogotá",
+    "tarifa": 8
+}

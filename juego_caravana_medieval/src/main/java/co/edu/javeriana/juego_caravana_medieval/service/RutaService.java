@@ -7,13 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
 import co.edu.javeriana.juego_caravana_medieval.DTO.RutaDTO;
-import co.edu.javeriana.juego_caravana_medieval.Mapper.CiudadMapper;
 import co.edu.javeriana.juego_caravana_medieval.Mapper.RutaMapper;
-import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 import co.edu.javeriana.juego_caravana_medieval.model.Ruta;
-import co.edu.javeriana.juego_caravana_medieval.repository.CiudadRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
 
 @Service
@@ -42,9 +38,15 @@ public class RutaService {
                 .collect(Collectors.toList());
     }
 
-    public void save (RutaDTO rutaDTO) {
+    public RutaDTO crearRuta (RutaDTO rutaDTO) {
+        rutaDTO.setId(null);
         Ruta ruta = RutaMapper.toEntity(rutaDTO);
-        rutaRepository.save(ruta);
+        return RutaMapper.toDTO(rutaRepository.save(ruta));
+    }
+
+    public RutaDTO acutalizarRuta(RutaDTO rutaDTO) {
+        Ruta ruta = RutaMapper.toEntity(rutaDTO);
+        return RutaMapper.toDTO(rutaRepository.save(ruta));
     }
 
     public void borrarRuta(Long id) {
