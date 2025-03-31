@@ -22,8 +22,6 @@
   background-attachment: local;
   background-size: 400px 550px;
   background-position: 50% -10px;
- 
-
     font-family: 'OptimusPrincepsSemiBold', sans-serif;
   color: #9E895A;
   text-align: center;
@@ -67,3 +65,5 @@
     0px 0px 20px #80672ff3;
   transform: translateY(30px) scale(1.1);
 }
+
+
