@@ -1,4 +1,5 @@
 <div class="banner-container">
+    <div class="icon-container"></div>
     <h1 class="listTitle">Crear caravana</h1>
 </div>
 <div class="foreground-text-aux"></div>
@@ -7,22 +8,30 @@
     <div class="character-image">
       <img [src]="currentCharacter.img" alt="character" />
     </div>
-  </div>
+</div>
+
+
+<div class="controls">
+  <button (click)="anterior()" class="arrow">
+    <img [src]="flechaImg" class="arrow-img flipped" alt="Flecha izquierda">
+  </button>
+  <button (click)="siguiente()" class="arrow">
+    <img [src]="flechaImg" class="arrow-img" alt="Flecha derecha">
+  </button>
+</div>
+
+
+<div class="confirm-container">
+  <button class="confirm">Confirmar</button>
+</div>
+
   
 
 <!--
 
-
-
-
-
 <div class="selector-overlay"></div>
 
 <div class="character-selector">
-  
-  
-
-
 
   <div class="banner">
     <img src="../../assets/img/creation/banner.png" class="banner-icon" alt="Icono">
@@ -50,11 +59,7 @@
   </div>
 
   
-  <div class="controls">
-    <button (click)="anterior()" class="arrow"></button>
-    <button class="confirm">Confirmar</button>
-    <button (click)="siguiente()" class="arrow"></button>
-  </div>
+  
 </div>
 
 

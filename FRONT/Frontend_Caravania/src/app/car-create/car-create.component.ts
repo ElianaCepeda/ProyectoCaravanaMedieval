@@ -6,13 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./car-create.component.css']
 })
 export class CarCreateComponent {
+
+  flechaImg = 'assets/img/creation/flecha.png';
+
   personajes = [
     {
-      img: '/assets/img/personaje1.png',
+      img: 'assets/img/creation/velocidad.png',
       stats: ['Fuerza: 10', 'Agilidad: 5', 'Resistencia: 8']
     },
     {
-      img: '/assets/img/personaje2.png',
+      img: 'assets/img/creation/realeza.png',
+      stats: ['Fuerza: 6', 'Agilidad: 9', 'Resistencia: 5']
+    },
+    {
+      img: 'assets/img/creation/capacidad.png',
       stats: ['Fuerza: 6', 'Agilidad: 9', 'Resistencia: 5']
     }
   ];
