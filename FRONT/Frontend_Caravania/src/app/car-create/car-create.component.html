@@ -5,8 +5,9 @@
 <div class="foreground-text-aux"></div>
 
 <div class="main-content">
+    <h2 class="caravana-name">{{ currentCaravana.clase }}</h2>
     <div class="character-image">
-      <img [src]="currentCharacter.img" alt="character" />
+      <img [src]="currentCaravana.img" alt="character" />
     </div>
 </div>
 
@@ -22,53 +23,33 @@
 
 
 <div class="confirm-container">
-  <button class="confirm">Confirmar</button>
+  <button class="button">Confirmar</button>
 </div>
 
-  
+<div class="return-container">
+  <button class="button">devolverse</button>
+</div>
 
-<!--
-
-<div class="selector-overlay"></div>
-
-<div class="character-selector">
-
-  <div class="banner">
-    <img src="../../assets/img/creation/banner.png" class="banner-icon" alt="Icono">
-    <span class="banner-text">Texto</span>
+<div class="stats">
+  <h3>Caravana Stats</h3>
+  <div class="listed">
+    <p></p>
+    <p>Salud: {{ currentCaravana.stats.salud }}</p>
+    <p>Velocidad: {{ currentCaravana.stats.velocidad }}</p>
+    <p>Capacidad: {{ currentCaravana.stats.capacidad }}</p>
+    <p>Dinero: {{ currentCaravana.stats.dinero }}</p>
   </div>
+</div>
+ 
+<div class="form-container">
+  <label class="input-label">Nombre del jugador</label>
+  <input type="text" class="custom-input" placeholder="Escribe tu nombre" />
 
-  
-  <div class="main-content">
-    
-    <div class="character-image">
-      <img [src]="currentCharacter.img" alt="character" />
-    </div>
-
-    
-    <div class="stats">
-      <h3>Caravania stats</h3>
-      <p *ngFor="let stat of currentCharacter.stats">si</p>
-    </div>
-
-    
-    <div class="info-form">
-      <p>Nombre: </p>
-      <p>Clase: </p>
-    </div>
-  </div>
-
-  
-  
+  <label class="input-label">Nombre de la caravana</label>
+  <input type="text" class="custom-input" placeholder="Escribe el nombre de la caravana" />
 </div>
 
 
 
 
-
-
-
-
-
--->
 

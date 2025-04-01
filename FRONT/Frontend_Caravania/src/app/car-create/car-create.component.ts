@@ -9,33 +9,53 @@ export class CarCreateComponent {
 
   flechaImg = '../../assets/img/creation/flecha_.png';
 
-  personajes = [
+  caravanas = [
     {
       img: '../../assets/img/creation/velocidad.png',
-      stats: ['Fuerza: 10', 'Agilidad: 5', 'Resistencia: 8']
+      clase: 'Tormenta Rápida',
+      stats: {
+        salud: 80,
+        velocidad: 10,
+        capacidad: 50,
+        dinero: 200
+      }
     },
     {
       img: '../../assets/img/creation/realeza.png',
-      stats: ['Fuerza: 6', 'Agilidad: 9', 'Resistencia: 5']
+      clase: 'Caravana Real',
+      stats: {
+        salud: 70,
+        velocidad: 6,
+        capacidad: 40,
+        dinero: 400
+      }
     },
     {
       img: '../../assets/img/creation/capacidad.png',
-      stats: ['Fuerza: 6', 'Agilidad: 9', 'Resistencia: 5']
+      clase: 'Gigante de Carga',
+      stats: {
+        salud: 90,
+        velocidad: 4,
+        capacidad: 80,
+        dinero: 150
+      }
     }
   ];
+  
+  
 
   currentIndex = 0;
 
-  get currentCharacter() {
-    return this.personajes[this.currentIndex];
+  get currentCaravana() {
+    return this.caravanas[this.currentIndex];
   }
 
   anterior(): void {
     this.currentIndex =
-      (this.currentIndex - 1 + this.personajes.length) % this.personajes.length;
+      (this.currentIndex - 1 + this.caravanas.length) % this.caravanas.length;
   }
 
   siguiente(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.personajes.length;
+    this.currentIndex = (this.currentIndex + 1) % this.caravanas.length;
   }
 }
