@@ -140,9 +140,7 @@
 
 .flipped {
   transform: scaleX(-1);
-  
 }
-
 
 .confirm-container {
   position: absolute;
@@ -151,7 +149,6 @@
   transform: translateX(-50%);
   z-index: 3;
 }
-
 
 .return-container {
   position: absolute;

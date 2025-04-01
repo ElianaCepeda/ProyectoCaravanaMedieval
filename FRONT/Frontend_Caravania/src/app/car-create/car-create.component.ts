@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-create',
   templateUrl: './car-create.component.html',
   styleUrls: ['./car-create.component.css']
 })
+
+
 export class CarCreateComponent {
+  
+  constructor(private router: Router) {}
 
   flechaImg = '../../assets/img/creation/flecha_.png';
+
+  btnClick() {
+    this.router.navigateByUrl('/welcome');
+  };
 
   caravanas = [
     {
