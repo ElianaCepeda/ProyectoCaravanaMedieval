@@ -15,7 +15,7 @@ export class CarCreateComponent {
   flechaImg = '../../assets/img/creation/flecha_.png';
 
   btnClick() {
-    this.router.navigateByUrl('/welcome');
+    this.router.navigate(['/loading'], { queryParams: { next: '/welcome' } });
   };
 
   caravanas = [

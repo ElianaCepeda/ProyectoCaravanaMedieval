@@ -12,7 +12,7 @@ export class WelcomePageComponent {
   constructor(private router: Router) {}
 
   btnClickNuevo() {
-    this.router.navigateByUrl('/loading');
+    this.router.navigate(['/loading'], { queryParams: { next: '/caravan-create' } });
   };
   
   menuOptions: string[] = ['Nuevo juego', 'Cerrar'];

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-loading-screen',
@@ -23,14 +23,17 @@ export class LoadingScreenComponent {
     }
   ];
 
-  constructor(private router: Router) {}
+  nextRoute: string = '';
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.nextRoute = this.route.snapshot.queryParamMap.get('next') || '/welcome';
+    
     setTimeout(() => {
-      this.router.navigateByUrl('/caravan-create');
-    }, 2000); 
+      this.router.navigateByUrl(this.nextRoute);
+    }, 3500);
   }
-  
 
 
 

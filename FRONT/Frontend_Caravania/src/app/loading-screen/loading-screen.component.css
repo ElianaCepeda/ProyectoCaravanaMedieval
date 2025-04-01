@@ -64,7 +64,7 @@
     background: linear-gradient(to bottom, #3f3217f3, #80672ff3);
     border-radius: 4px;
     z-index: 1;
-    animation: fillFromLeft 4s forwards ease-in-out;
+    animation: fillFromLeft 8s forwards ease-in-out;
 
     max-width: 24%;
   }
