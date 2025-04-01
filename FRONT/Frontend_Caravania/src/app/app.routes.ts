@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CarCreateComponent } from './car-create/car-create.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 export const routes: Routes = [
   {
@@ -10,5 +11,9 @@ export const routes: Routes = [
   {
     path: 'caravan-create', 
     component: CarCreateComponent
+  },
+  {
+    path: 'loading', 
+    component: LoadingScreenComponent
   }
 ];
