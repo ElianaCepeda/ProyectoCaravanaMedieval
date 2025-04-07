@@ -18,6 +18,11 @@ export class CarCreateComponent {
     this.router.navigate(['/loading'], { queryParams: { next: '/welcome' } });
   };
 
+  btnClick2() {
+    this.router.navigate(['/role']);
+
+  };
+
   caravanas = [
     {
       img: '../../assets/img/creation/velocidad.png',

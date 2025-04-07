@@ -36,8 +36,6 @@ export class LoadingScreenComponent implements OnInit {
     url('${randomImg}')
   `;
 
-
-
     this.nextRoute = this.route.snapshot.queryParamMap.get('next') || '/welcome';
 
     setTimeout(() => {

@@ -1,13 +1,13 @@
 <div class="banner-container">
     <div class="icon-container"></div>
-    <h1 class="listTitle">Crear caravana</h1>
+    <h1 class="listTitle">Seleccionar rol</h1>
 </div>
 <div class="foreground-text-aux"></div>
 
 <div class="main-content">
-    <h2 class="caravana-name">{{ currentCaravana.clase }}</h2>
+    <h2 class="caravana-name">{{ currentPersonaje.clase }}</h2>
     <div class="character-image">
-      <img [src]="currentCaravana.img" alt="character" />
+      <img [src]="currentPersonaje.img" alt="character" />
     </div>
 </div>
 
@@ -23,7 +23,7 @@
 
 
 <div class="confirm-container">
-  <button class="button" (click)="btnClick2()">Confirmar</button>
+  <button class="button">Confirmar</button>
 </div>
 
 <div class="return-container">
@@ -31,20 +31,14 @@
 </div>
 
 <div class="stats">
-  <h3>Caravana Stats</h3>
+  <h3>Historia</h3>
   <div class="listed">
     <p></p>
-    <p>Salud: {{ currentCaravana.stats.salud }}</p>
-    <p>Velocidad: {{ currentCaravana.stats.velocidad }}</p>
-    <p>Capacidad: {{ currentCaravana.stats.capacidad }}</p>
-    <p>Dinero: {{ currentCaravana.stats.dinero }}</p>
+    <p>{{ currentPersonaje.stats }}</p>
   </div>
 </div>
  
-<div class="form-container">
-  <label class="input-label">Nombre de la caravana</label>
-  <input type="text" class="custom-input" placeholder="Escribe el nombre de la caravana" />
-</div>
+
 
 
 
