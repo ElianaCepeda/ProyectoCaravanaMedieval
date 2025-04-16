@@ -7,6 +7,13 @@ declare var OpenSeadragon: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit {
+
+  dineroImg = '../../assets/img/map/dinero.png';
+  barraImg = '../../assets/img/map/barra-salud.png';
+  corazonImg = '../../assets/img/map/corazon.png';
+
+  vidaActual = 100;
+
   ngAfterViewInit(): void {
     const viewer = OpenSeadragon({
       id: "opensea-container",

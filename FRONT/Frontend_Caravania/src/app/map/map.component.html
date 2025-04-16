@@ -3,3 +3,17 @@
 
 <!-- Div que representa el marcador (la ciudad) -->
 <div id="ciudad-marcador" class="ciudad-marcador"></div>
+
+<div class="money-bar">
+    <img [src]="dineroImg" class="money-icon" alt="money-icon">
+    <span class="money-amount">9999</span>
+</div>
+
+<div class="health-bar-container">
+    <div class="health-bar-outer">
+        <div class="health-fill" [style.width.%]="vidaActual"></div>
+      </div>      
+    <img [src]="corazonImg" class="health-icon" alt="icono de corazón">
+  </div>
+  
+  
