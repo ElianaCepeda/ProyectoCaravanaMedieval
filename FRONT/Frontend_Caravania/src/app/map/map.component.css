@@ -1,0 +1,33 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: #E0E4CC; /* Fondo beige */
+  overflow: hidden;
+  font-family: 'OptimusPrincepsSemiBold', sans-serif;
+}
+
+#opensea-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #E0E4CC; /* Fondo beige */
+  z-index: 1;
+}
+
+/* Estilo del marcador (ciudad) */
+.ciudad-marcador {
+  width: 6px;
+  height: 6px;
+  background-color: #C44536;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  z-index: 4;
+  
+}

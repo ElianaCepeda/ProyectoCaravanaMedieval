@@ -3,6 +3,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CarCreateComponent } from './car-create/car-create.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { RoleSelectComponent } from './role-select/role-select.component';
+import { MapComponent } from './map/map.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'role', 
     component: RoleSelectComponent
+  },
+  {
+    path: 'mapCaravania', 
+    component: MapComponent
   }
 ];
