@@ -13,6 +13,8 @@ export class MapComponent implements AfterViewInit {
   corazonImg = '../../assets/img/map/corazon.png';
 
   vidaActual = 100;
+  showPopup = false; 
+
 
   ngAfterViewInit(): void {
     const viewer = OpenSeadragon({
@@ -29,7 +31,8 @@ export class MapComponent implements AfterViewInit {
       immediateRender: false,
       blendTime: 0.15,
       imageSmoothingEnabled: true,    // suaviza tiles al escalar
-      maxImageCacheCount: 200
+      maxImageCacheCount: 300,
+      springStiffness: 5.0
     });
 
     // Cuando se abra el tile source, agregamos el overlay utilizando el div ya existente
@@ -47,6 +50,11 @@ export class MapComponent implements AfterViewInit {
           location: coords,
           placement: OpenSeadragon.Placement.CENTER
         });
+
+        markerEl.addEventListener('click', () => {
+          this.showPopup = true;
+        });
+        
       } else {
         console.error("No se encontró el elemento con id 'ciudad-marcador'.");
       }
