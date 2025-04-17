@@ -25,15 +25,20 @@ export class MapComponent implements AfterViewInit {
       defaultZoomLevel: 1,
       maxZoomPixelRatio: 2,
       constrainDuringPan: true,
-      visibilityRatio: 0.95,
-      immediateRender: true,
-      blendTime: 0
+      visibilityRatio: 0.96,
+      immediateRender: false,
+      blendTime: 0.15,
+      imageSmoothingEnabled: true,    // suaviza tiles al escalar
+      maxImageCacheCount: 200
     });
 
     // Cuando se abra el tile source, agregamos el overlay utilizando el div ya existente
     viewer.addHandler('open', () => {
       const markerEl = document.getElementById("ciudad-marcador");
+
       if (markerEl) {
+
+        markerEl.setAttribute('data-name', 'Ciudad Quemada');
         // Coordenadas en la imagen original (ajusta estos valores según necesites)
         const coords = viewer.viewport.imageToViewportCoordinates(14500, 7000);
         console.log("Coordenadas del marcador:", coords);

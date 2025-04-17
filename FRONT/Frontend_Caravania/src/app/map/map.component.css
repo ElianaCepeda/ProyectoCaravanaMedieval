@@ -1,3 +1,6 @@
+@import url('https://fonts.cdnfonts.com/css/optimus-princeps');
+@import url('https://fonts.cdnfonts.com/css/drukaatie-burti');
+
 :host {
   position: fixed;
   top: 0;
@@ -7,7 +10,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  background-color: #E0E4CC; /* Fondo beige */
+  background-color: #23201A; /* Fondo beige */
   overflow: hidden;
   font-family: 'OptimusPrincepsSemiBold', sans-serif;
 }
@@ -15,14 +18,14 @@
 #opensea-container {
   width: 100vw;
   height: 100vh;
-  background-color: #E0E4CC;
+  background-color: #23201A;
   z-index: 1;
 }
 
 /* Marcador de ciudad */
 .ciudad-marcador {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background-color: #C44536;
   border: 2px solid white;
   border-radius: 50%;
@@ -31,11 +34,29 @@
   z-index: 4;
 }
 
+.ciudad-marcador[data-name]:hover::after {
+  content: attr(data-name);
+  position: absolute;
+  top: -4px;                /* justo encima del punto */
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  color: #a5a4a3;
+  font-family: 'Drukaatie burti', sans-serif;
+  z-index: 10;
+}
+
 
 .money-bar {
   position: absolute;
-  bottom: 20px;  /* Ajusta la distancia al borde inferior */
-  right: 20px;   /* Ajusta la distancia al borde derecho */
+  bottom: 45px;  /* Ajusta la distancia al borde inferior */
+  right: 35px;   /* Ajusta la distancia al borde derecho */
   background-color: rgba(0, 0, 0, 0.6); /* fondo semi-transparente */
   padding: 8px 24px;
   border-radius: 8px;
@@ -58,8 +79,8 @@
 
 .health-bar-container {
   position: absolute;
-  top: 55px;
-  left: 15px;
+  top: 45px;
+  left: 25px;
   height: 30px;
   width: 280px; /* ancho total de la sección */
   display: flex;
