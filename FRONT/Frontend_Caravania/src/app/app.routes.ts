@@ -10,6 +10,7 @@ import { ProductsComponent } from './products/products.component';
 
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   {
     path: 'welcome', 
     component: WelcomePageComponent
