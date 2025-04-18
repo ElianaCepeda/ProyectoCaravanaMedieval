@@ -5,6 +5,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
 import { RoleSelectComponent } from './role-select/role-select.component';
 import { MapComponent } from './map/map.component';
 import { ServicesComponent } from './services/services.component';
+import { CommerceComponent } from './commerce/commerce.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +31,9 @@ export const routes: Routes = [
   { 
     path: 'services',
     component: ServicesComponent
+  },
+  { 
+    path: 'commerce',
+    component: CommerceComponent
   }
 ];

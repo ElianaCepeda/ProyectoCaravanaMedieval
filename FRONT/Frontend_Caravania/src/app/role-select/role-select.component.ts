@@ -16,6 +16,11 @@ export class RoleSelectComponent {
   btnClick() {
     this.router.navigate(['/caravan-create']);
 
+
+  };
+
+  btnClickNuevo() {
+    this.router.navigate(['/loading'], { queryParams: { next: '/mapCaravania' } });
   };
 
   personajes = [

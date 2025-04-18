@@ -3,16 +3,15 @@ import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 
-
 @Component({
-  selector: 'app-services',
+  selector: 'app-commerce',
   standalone: true,
   imports: [CommonModule, RouterModule, PlayerUiComponent],
-  templateUrl: './services.component.html',
-  styleUrls:   ['./services.component.css']
+  templateUrl: './commerce.component.html',
+  styleUrl: './commerce.component.css'
 })
-export class ServicesComponent {
-  
+export class CommerceComponent {
+
   constructor(private router: Router) {}
 
   vidaActual = 100;
@@ -27,7 +26,12 @@ export class ServicesComponent {
     { nombre: 'Reparar', valor: '20 monedas' },
     { nombre: 'Mejorar capacidad', valor: '20 monedas' },
     { nombre: 'Mejorar velocidad', valor: '20 monedas' },
-    { nombre: 'Guardias', valor: '20 monedas' }
+    { nombre: 'Guardias', valor: '20 monedas' },
+    { nombre: 'Mejorar vida', valor: '20 monedas' },
+    { nombre: 'Mejorar defensa', valor: '20 monedas' },
+    { nombre: 'Mejorar ataque', valor: '20 monedas' },
+    { nombre: 'Mejorar suerte', valor: '20 monedas' },
+    { nombre: 'Mejorar magia', valor: '20 monedas' }
   ];
   
   consultar(servicio: any) {

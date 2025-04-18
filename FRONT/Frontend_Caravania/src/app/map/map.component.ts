@@ -17,8 +17,6 @@ export class MapComponent implements AfterViewInit {
   constructor(private router: Router) {}
 
   
-  dineroImg  = '../../assets/img/global/dinero.png';
-  corazonImg = '../../assets/img/global/corazon.png';
   vidaActual = 100;
   dineroActual = 9999;
 
@@ -69,13 +67,13 @@ export class MapComponent implements AfterViewInit {
       
     });
   }
-  goWelcome() {
-    this.router.navigate(['/welcome']);
+  goCommerce() {
+    this.router.navigate(['/commerce']);
   }
-  goCreate() {
-    this.router.navigate(['/caravan-create']);
+  goService() {
+    this.router.navigate(['/services']);
   }
-  goRole() {
+  goTravel() {
     this.router.navigate(['/role']);
   }
 }
