@@ -2,18 +2,36 @@
 <div id="opensea-container"></div>
 
 <!-- Div que representa el marcador (la ciudad) -->
-<div id="ciudad-marcador" class="ciudad-marcador"></div>
-
-<div class="money-bar">
-    <img [src]="dineroImg" class="money-icon" alt="money-icon">
-    <span class="money-amount">9999</span>
+<div id="ciudad-marcador" class="ciudad-marcador">
+  <div class="ciudad-tooltip">
+    {{ cityName }}
+  </div>
 </div>
 
-<div class="health-bar-container">
+
+
+<div class="floating-ui top-left">
+  <div class="health-bar-container">
     <div class="health-bar-outer">
-        <div class="health-fill" [style.width.%]="vidaActual"></div>
-      </div>      
+      <div class="health-fill" [style.width.%]="vidaActual"></div>
+    </div>
     <img [src]="corazonImg" class="health-icon" alt="icono de corazón">
   </div>
-  
+</div>
+
+<div class="floating-ui bottom-right">
+  <div class="money-bar">
+    <span class="money-amount">{{ dineroActual }}</span>
+    <img [src]="dineroImg" class="money-icon" alt="money-icon" />
+  </div>
+</div>
+
+
+
+
+  <div class="action-buttons">
+    <button class="action-btn" (click)="goWelcome()">Comerciar</button>
+    <button class="action-btn" (click)="goCreate()">Servicios</button>
+    <button class="action-btn" (click)="goRole()">Viajar</button>
+  </div>
   

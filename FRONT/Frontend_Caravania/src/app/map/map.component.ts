@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 declare var OpenSeadragon: any;
 
 @Component({
@@ -8,12 +9,15 @@ declare var OpenSeadragon: any;
 })
 export class MapComponent implements AfterViewInit {
 
-  dineroImg = '../../assets/img/map/dinero.png';
-  barraImg = '../../assets/img/map/barra-salud.png';
-  corazonImg = '../../assets/img/map/corazon.png';
+  cityName = 'Ciudad Quemada';  
+  constructor(private router: Router) {}
 
+  
+  dineroImg  = '../../assets/img/map/dinero.png';
+  barraImg   = '../../assets/img/map/barra-salud.png';
+  corazonImg = '../../assets/img/map/corazon.png';
   vidaActual = 100;
-  showPopup = false; 
+  dineroActual = 9999;
 
 
   ngAfterViewInit(): void {
@@ -29,35 +33,46 @@ export class MapComponent implements AfterViewInit {
       constrainDuringPan: true,
       visibilityRatio: 0.96,
       immediateRender: false,
-      blendTime: 0.15,
-      imageSmoothingEnabled: true,    // suaviza tiles al escalar
+      blendTime: 0.1,
+      imageSmoothingEnabled: true,
       maxImageCacheCount: 300,
-      springStiffness: 5.0
+      springStiffness: 5.0,
+
+      
+      gestureSettingsMouse: {
+        clickToZoom: false,
+        dblClickToZoom: true,
+        scrollToZoom: true,
+        pinchToZoom: true
+      },
+      
     });
 
-    // Cuando se abra el tile source, agregamos el overlay utilizando el div ya existente
     viewer.addHandler('open', () => {
       const markerEl = document.getElementById("ciudad-marcador");
+      if (!markerEl) {
+        console.error("No se encontró el marcador.");
+        return;
+      } 
+      
+      const coords = viewer.viewport.imageToViewportCoordinates(16500, 7000);      
 
-      if (markerEl) {
+      viewer.addOverlay({
+        element: markerEl,
+        location: coords,
+        placement: OpenSeadragon.Placement.CENTER
+      });
 
-        markerEl.setAttribute('data-name', 'Ciudad Quemada');
-        // Coordenadas en la imagen original (ajusta estos valores según necesites)
-        const coords = viewer.viewport.imageToViewportCoordinates(14500, 7000);
-        console.log("Coordenadas del marcador:", coords);
-        viewer.addOverlay({
-          element: markerEl,
-          location: coords,
-          placement: OpenSeadragon.Placement.CENTER
-        });
-
-        markerEl.addEventListener('click', () => {
-          this.showPopup = true;
-        });
-        
-      } else {
-        console.error("No se encontró el elemento con id 'ciudad-marcador'.");
-      }
+      
     });
+  }
+  goWelcome() {
+    this.router.navigate(['/welcome']);
+  }
+  goCreate() {
+    this.router.navigate(['/caravan-create']);
+  }
+  goRole() {
+    this.router.navigate(['/role']);
   }
 }

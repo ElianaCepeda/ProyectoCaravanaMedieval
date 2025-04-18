@@ -1,0 +1,51 @@
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #23201A;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  /* cuadro centrado */
+  .center-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 3px;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 1250px;
+    height: 75%;
+    max-height: 700px;
+    background-color: #171612;
+    border: 2px solid #5E523B;
+    box-shadow: 0 0 0 4px #8D7A56;
+    box-sizing: border-box;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* placeholders de las imágenes */
+  .image-placeholder {
+    width: 100%;
+    height: 40px;         /* ajusta la altura que necesites */
+    border-radius: 4px;
+  }
+  
+  /* ejemplo de estilos distintos para cada uno */
+  .image-placeholder.red {
+    background-color: #C44536;
+  }
+  
+  .image-placeholder.orange {
+    background-color: #E4922E;
+  }
+  

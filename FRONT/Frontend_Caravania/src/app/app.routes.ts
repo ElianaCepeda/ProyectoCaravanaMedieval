@@ -4,7 +4,7 @@ import { CarCreateComponent } from './car-create/car-create.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { RoleSelectComponent } from './role-select/role-select.component';
 import { MapComponent } from './map/map.component';
-import { CityPopupComponent } from './city-popup/city-popup.component';
+import { ServicesComponent } from './services/services.component';
 
 export const routes: Routes = [
   {
@@ -27,7 +27,8 @@ export const routes: Routes = [
     path: 'mapCaravania', 
     component: MapComponent
   },
-  { path: 'city',
-    component: CityPopupComponent
+  { 
+    path: 'services',
+    component: ServicesComponent
   }
 ];
