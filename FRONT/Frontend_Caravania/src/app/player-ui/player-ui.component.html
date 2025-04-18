@@ -1,0 +1,14 @@
+<!-- SOLO se muestra si mostrarVida es true -->
+<div *ngIf="mostrarVida" class="health-bar-container">
+    <div class="health-bar-outer">
+      <div class="health-fill" [style.width.%]="vida"></div>
+    </div>
+    <img [src]="corazonImg" class="health-icon" alt="icono de corazón" />
+  </div>
+  
+  <!-- SOLO se muestra si mostrarDinero es true -->
+  <div *ngIf="mostrarDinero" class="money-bar">
+    <span class="money-amount">{{ dinero }}</span>
+    <img [src]="dineroImg" class="money-icon" alt="money-icon" />
+  </div>
+  

@@ -1,9 +1,13 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { PlayerUiComponent } from '../player-ui/player-ui.component';
 declare var OpenSeadragon: any;
 
 @Component({
   selector: 'app-map',
+  standalone: true,
+  imports: [CommonModule, RouterModule, PlayerUiComponent],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
@@ -13,9 +17,8 @@ export class MapComponent implements AfterViewInit {
   constructor(private router: Router) {}
 
   
-  dineroImg  = '../../assets/img/map/dinero.png';
-  barraImg   = '../../assets/img/map/barra-salud.png';
-  corazonImg = '../../assets/img/map/corazon.png';
+  dineroImg  = '../../assets/img/global/dinero.png';
+  corazonImg = '../../assets/img/global/corazon.png';
   vidaActual = 100;
   dineroActual = 9999;
 

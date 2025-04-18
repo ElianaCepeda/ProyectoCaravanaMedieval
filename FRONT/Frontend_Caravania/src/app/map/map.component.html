@@ -11,19 +11,11 @@
 
 
 <div class="floating-ui top-left">
-  <div class="health-bar-container">
-    <div class="health-bar-outer">
-      <div class="health-fill" [style.width.%]="vidaActual"></div>
-    </div>
-    <img [src]="corazonImg" class="health-icon" alt="icono de corazón">
-  </div>
+  <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
 </div>
 
 <div class="floating-ui bottom-right">
-  <div class="money-bar">
-    <span class="money-amount">{{ dineroActual }}</span>
-    <img [src]="dineroImg" class="money-icon" alt="money-icon" />
-  </div>
+  <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
 </div>
 
 
