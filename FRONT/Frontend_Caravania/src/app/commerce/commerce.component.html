@@ -1,20 +1,36 @@
 <div class="center-box">
-    <h2 class="title-header">Productos disponibles</h2>
-    <div class="return-container">
-        <button class="button" (click)="btnClick()">devolverse</button>
-        <button class="button" (click)="btnClick()">otro botón</button>
+  <h2 class="title-header">Productos disponibles</h2>
+
+  <!-- UI flotante arriba derecha -->
+  <div class="top-ui">
+    <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
+    <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
+  </div>
+
+  <!-- Contenedor dinámico -->
+  <div class="table-scroll" [class.no-scroll]="productoSeleccionado">
+
+    <ng-container *ngIf="productoSeleccionado; else listaProductos">
+      <div class="detalle-producto-emergente">
+        <div class="detalle-cuerpo">
+          <div class="info-izquierda">
+            <div class="titulo-producto">{{ productoSeleccionado.nombre }}</div>
+          </div>
+          <div class="info-derecha">
+            <p><strong>Cantidad disponible:</strong> {{ productoSeleccionado.cantidad }}</p>
+            <label>
+              <strong>Cantidad:</strong>
+              <input type="number" [value]="cantidadAComprar" min="1" [max]="productoSeleccionado.cantidad"
+                     (input)="cantidadAComprar = $any($event.target).value">
+            </label>
+            <p><strong>Precio calculado:</strong> {{ calcularPrecio(productoSeleccionado) }} monedas</p>
+            <button class="button2" (click)="comprar(productoSeleccionado)">Comprar</button>
+          </div>
+        </div>
       </div>
-      
-      
-  
-    <!-- UI flotante arriba derecha -->
-    <div class="top-ui">
-      <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
-      <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
-    </div>
-  
-    <!-- Contenedor de tabla scrollable -->
-    <div class="table-scroll">
+    </ng-container>
+
+    <ng-template #listaProductos>
       <table class="service-table">
         <thead>
           <tr>
@@ -34,8 +50,12 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </ng-template>
   </div>
-  
-  
-  
+
+  <!-- Botones inferiores -->
+  <div class="return-container">
+    <button class="button" (click)="btn2Click()">Vender</button>
+    <button class="button" (click)="btnClick()">devolverse</button>
+  </div>
+</div>

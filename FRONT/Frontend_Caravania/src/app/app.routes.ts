@@ -6,6 +6,8 @@ import { RoleSelectComponent } from './role-select/role-select.component';
 import { MapComponent } from './map/map.component';
 import { ServicesComponent } from './services/services.component';
 import { CommerceComponent } from './commerce/commerce.component';
+import { ProductsComponent } from './products/products.component';
+
 
 export const routes: Routes = [
   {
@@ -35,5 +37,11 @@ export const routes: Routes = [
   { 
     path: 'commerce',
     component: CommerceComponent
+  },
+  { 
+    path: 'inventory',
+    component: ProductsComponent
   }
+  
+
 ];

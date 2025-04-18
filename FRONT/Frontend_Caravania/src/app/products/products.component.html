@@ -1,1 +1,38 @@
-<p>products works!</p>
+<div class="center-box">
+  <h2 class="title-header">Tus productos</h2>
+
+  <!-- UI flotante arriba derecha -->
+  <div class="top-ui">
+    <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
+    <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
+  </div>
+
+  <div class="return-container">
+    <button class="button" (click)="btnClick()">devolverse</button>
+
+  </div>
+
+  <!-- Contenedor de tabla scrollable -->
+  <div class="table-scroll">
+    <table class="service-table">
+      <thead>
+        <tr>
+          <th>PRODUCTO</th>
+          <th>VALOR</th>
+          <th>CANTIDAD</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servicio of servicios">
+          <td><strong>{{ servicio.nombre }}</strong></td>
+          <td>{{ servicio.valor }}</td>
+          <td>{{ servicio.valor }}</td>
+          <td>
+            <button class="button2" (click)="consultar(servicio)">Vender</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

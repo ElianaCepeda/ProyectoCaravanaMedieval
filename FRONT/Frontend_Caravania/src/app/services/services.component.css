@@ -146,3 +146,52 @@
   z-index: 10;
 }
 
+/* Caja emergente del producto */
+.detalle-producto-emergente {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ddd;
+  border-radius: 12px;
+  border: 3px solid #888;
+  padding: 20px 30px;
+  width: 700px;
+  box-shadow: 0 0 20px #000;
+  z-index: 20;
+  font-family: 'OptimusPrinceps', serif;
+}
+
+/* Cuerpo interno de la caja */
+.detalle-cuerpo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info-izquierda {
+  background-color: white;
+  width: 250px;
+  height: 250px;
+  border: 2px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #111;
+}
+.info-derecha {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  color: #111;
+}
+.info-derecha input {
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 2px solid #595856;
+  width: 100px;
+}

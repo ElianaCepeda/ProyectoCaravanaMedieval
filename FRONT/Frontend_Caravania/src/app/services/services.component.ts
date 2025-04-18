@@ -19,9 +19,12 @@ export class ServicesComponent {
   dineroActual = 9999;
 
   btnClick() {
-    this.router.navigate(['/mapCaravania']);
-
-  };
+    if (this.productoSeleccionado) {
+      this.productoSeleccionado = null; // Cierra el detalle
+    } else {
+      this.router.navigate(['/mapCaravania']); // Vuelve al menú si ya estaba en la lista
+    }
+  }
 
   servicios = [
     { nombre: 'Reparar', valor: '20 monedas' },
@@ -30,13 +33,21 @@ export class ServicesComponent {
     { nombre: 'Guardias', valor: '20 monedas' }
   ];
   
-  consultar(servicio: any) {
-    console.log('Consultar:', servicio.nombre);
-  }
-  
-  comprar(servicio: any) {
-    console.log('Comprar:', servicio.nombre);
-  }
-  
+  productoSeleccionado: any = null;
+  cantidadAComprar: number = 1;
+
+consultar(servicio: any) {
+  this.productoSeleccionado = { ...servicio, cantidad: 8 }; // o carga dinámica si tienes backend
+  this.cantidadAComprar = 1;
+}
+
+calcularPrecio(producto: any): number {
+  const valor = parseInt(producto.valor);
+  return this.cantidadAComprar * (isNaN(valor) ? 0 : valor);
+}
+
+comprar(servicio: any) {
+  console.log(`Comprando ${this.cantidadAComprar} de ${servicio.nombre}`);
+}
 
 }
