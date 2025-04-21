@@ -73,6 +73,14 @@ public class Ciudad {
         return rutas;
     }
 
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
     
 
 }

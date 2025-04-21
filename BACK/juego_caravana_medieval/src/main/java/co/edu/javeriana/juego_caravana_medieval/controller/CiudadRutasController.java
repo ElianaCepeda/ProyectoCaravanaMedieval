@@ -1,6 +1,7 @@
 package co.edu.javeriana.juego_caravana_medieval.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import co.edu.javeriana.juego_caravana_medieval.service.RutaService;
 
 @RestController
 @RequestMapping("/ciudad/rutas")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class CiudadRutasController {
     @Autowired
     private RutaService rutaService;

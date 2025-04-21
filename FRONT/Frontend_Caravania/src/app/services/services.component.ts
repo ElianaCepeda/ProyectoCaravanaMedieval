@@ -2,6 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
+import { FunctionsService } from '../services-back/functions.service';
+import { Servicio } from '../Models/servicio';
 
 
 @Component({
@@ -12,8 +14,22 @@ import { PlayerUiComponent } from '../player-ui/player-ui.component';
   styleUrls:   ['./services.component.css']
 })
 export class ServicesComponent {
+
+  servicios: Servicio[] = [];
   
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private functionsService: FunctionsService
+  ) {}
+
+  ngOnInit() {
+    this.functionsService.obtenerServicios(1).subscribe((data: any) => {
+      console.log(data);
+      this.servicios = data;
+    }, (error) => {
+      console.error('Error al obtener los servicios:', error);
+    });
+  }
+
 
   vidaActual = 100;
   dineroActual = 9999;
@@ -26,13 +42,7 @@ export class ServicesComponent {
     }
   }
 
-  servicios = [
-    { nombre: 'Reparar', valor: '20 monedas' },
-    { nombre: 'Mejorar capacidad', valor: '20 monedas' },
-    { nombre: 'Mejorar velocidad', valor: '20 monedas' },
-    { nombre: 'Guardias', valor: '20 monedas' }
-  ];
-  
+ 
   productoSeleccionado: any = null;
   cantidadAComprar: number = 1;
 

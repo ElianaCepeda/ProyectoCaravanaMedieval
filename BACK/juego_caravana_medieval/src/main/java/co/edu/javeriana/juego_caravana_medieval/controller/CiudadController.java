@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
 import co.edu.javeriana.juego_caravana_medieval.service.CiudadService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/ciudad")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CiudadController {
     
     @Autowired
@@ -34,19 +37,19 @@ public class CiudadController {
 
    
 
-    @PostMapping
-    public CiudadDTO crearCiudad(@RequestBody CiudadDTO ciudadDTO){
-        return ciudadService.crearCiudad(ciudadDTO);
-    }
+        @PostMapping
+        public CiudadDTO crearCiudad(@RequestBody CiudadDTO ciudadDTO){
+            return ciudadService.crearCiudad(ciudadDTO);
+        }
 
-    @PutMapping
-    public CiudadDTO actualizarCiudad(@RequestBody CiudadDTO ciudadDTO){
-        return ciudadService.actualizarCiudad(ciudadDTO);
-    }
+        @PutMapping
+        public CiudadDTO actualizarCiudad(@RequestBody CiudadDTO ciudadDTO){
+            return ciudadService.actualizarCiudad(ciudadDTO);
+        }
 
-    @DeleteMapping("{idCiudad}")
-    public void eliminarCiudad(@PathVariable Long idCiudad){
-        ciudadService.borrarCiudad(idCiudad);
-    }
+        @DeleteMapping("{idCiudad}")
+        public void eliminarCiudad(@PathVariable Long idCiudad){
+            ciudadService.borrarCiudad(idCiudad);
+        }
     
 }

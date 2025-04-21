@@ -23,14 +23,16 @@ public class Ruta {
 
 
     private int cantidad_dano;
+    private float distancia;
     private String descripcion_dano;
+    
 
     public Ruta() {
     } 
 
-    public Ruta(int cantidad_dano, String descripcion_dano) {
-        this.cantidad_dano = cantidad_dano;
-        this.descripcion_dano = descripcion_dano;
+public Ruta(Ciudad ciudad_origen, Ciudad ciudad_destino) {
+        this.ciudad_origen = ciudad_origen;
+        this.ciudad_destino = ciudad_destino;
     }
 
     public Ruta(Ciudad ciudad_origen, Ciudad ciudad_destino, int cantidad_dano, String descripcion_dano) {
@@ -38,6 +40,20 @@ public class Ruta {
         this.ciudad_destino = ciudad_destino;
         this.cantidad_dano = cantidad_dano;
         this.descripcion_dano = descripcion_dano;
+    }
+
+    public Ruta(Ciudad ciudad_origen, Ciudad ciudad_destino, int cantidad_dano, float distancia, String descripcion_dano) {
+        this.ciudad_origen = ciudad_origen;
+        this.ciudad_destino = ciudad_destino;
+        this.cantidad_dano = cantidad_dano;
+        this.distancia = distancia;
+        this.descripcion_dano = descripcion_dano;
+    }
+    public float getDistancia() {
+        return distancia;
+    }
+    public void setDistancia(float distancia) {
+        this.distancia = distancia;
     }
 
     

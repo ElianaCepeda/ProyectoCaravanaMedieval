@@ -19,7 +19,9 @@ public class Caravana {
     private Ciudad ciudad;
 
     @OneToMany (mappedBy = "caravana")
-    private List<StockCaravana> sotck;
+    private List<StockCaravana> stock;
+
+    
 
     private String nombre;
     private int velocidad_actual;
@@ -105,6 +107,15 @@ public class Caravana {
     public void setVidas(int vidas) {
         this.vidas = vidas;
     }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+    
 
     
 

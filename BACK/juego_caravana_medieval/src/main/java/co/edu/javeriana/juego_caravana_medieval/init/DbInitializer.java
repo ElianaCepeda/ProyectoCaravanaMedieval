@@ -12,9 +12,11 @@ import co.edu.javeriana.juego_caravana_medieval.model.Caravana;
 import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 import co.edu.javeriana.juego_caravana_medieval.model.Producto;
 import co.edu.javeriana.juego_caravana_medieval.model.Ruta;
+import co.edu.javeriana.juego_caravana_medieval.model.Servicio;
 import co.edu.javeriana.juego_caravana_medieval.repository.CaravanaRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.ProductoRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
+import co.edu.javeriana.juego_caravana_medieval.repository.ServicioRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.CiudadRepository;
 //import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
 
@@ -32,6 +34,9 @@ public class DbInitializer implements CommandLineRunner {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -174,57 +179,68 @@ public class DbInitializer implements CommandLineRunner {
 rutaRepository.saveAll(rutas);
 System.out.println("Rutas iniciales insertadas.");
     
+        // Crear servicios
+        servicioRepository.save(new Servicio("Reparación de Caravana", 100, "Repara la caravana y la deja como nueva."));
+        servicioRepository.save(new Servicio("Mejora de Capacidad", 200, "Aumenta la capacidad de carga de la caravana."));
+        servicioRepository.save(new Servicio("Mejora de Velocidad", 300, "Aumenta la velocidad de la caravana."));
+        servicioRepository.save(new Servicio("Contratación de Guardias", 400, "Contrata guardias para proteger la caravana."));
+        
+        
         // Crear productos
-        productoRepository.save(new Producto("Elixir de vida", 500));
-        productoRepository.save(new Producto("Espada de fuego", 1200));
-        productoRepository.save(new Producto("Armadura de hierro", 2500));
-        productoRepository.save(new Producto("Pan de centeno", 50));
-        productoRepository.save(new Producto("Barril de cerveza", 300));
-        productoRepository.save(new Producto("Cuero Curtido", 150));
-        productoRepository.save(new Producto("Poción de maná", 450));
-        productoRepository.save(new Producto("Daga encantada", 900));
-        productoRepository.save(new Producto("Yelmo de Mithril", 3200));
+        productoRepository.save(new Producto("Elixir de vida", 50));
+        productoRepository.save(new Producto("Espada de fuego", 120));
+        productoRepository.save(new Producto("Armadura de hierro", 250));
+        productoRepository.save(new Producto("Pan de centeno", 5));
+        productoRepository.save(new Producto("Barril de cerveza", 30));
+        productoRepository.save(new Producto("Cuero Curtido", 15));
+        productoRepository.save(new Producto("Poción de maná", 45));
+        productoRepository.save(new Producto("Daga encantada", 90));
+        productoRepository.save(new Producto("Yelmo de Mithril", 320));
         productoRepository.save(new Producto("Pata de jabalí asada", 80));
-        productoRepository.save(new Producto("Bolsa de especias exóticas", 600));
-        productoRepository.save(new Producto("Carne de venado", 200));
-        productoRepository.save(new Producto("Anillo de invisibilidad", 5000));
-        productoRepository.save(new Producto("Varita de roble mágico", 1500));
-        productoRepository.save(new Producto("Piedra de afilar rúnica", 350));
-        productoRepository.save(new Producto("Tomo de hechizos antiguos", 2200));
-        productoRepository.save(new Producto("Escudo de dragón", 2800));
-        productoRepository.save(new Producto("Barril de hidromiel", 450));
-        productoRepository.save(new Producto("Queso curado de cabra", 120));
-        productoRepository.save(new Producto("Botas de sigilo", 1700));
-        productoRepository.save(new Producto("Cristal de energía arcana", 1300));
-        productoRepository.save(new Producto("Flechas de plata", 700));
-        productoRepository.save(new Producto("Guantes de fuerza titánica", 2100));
-        productoRepository.save(new Producto("Miel de flores salvajes", 180));
-        productoRepository.save(new Producto("Pergamino de teletransporte", 800));
-        productoRepository.save(new Producto("Manzana dorada", 999));
-        productoRepository.save(new Producto("Reloj de arena del tiempo", 3500));
-        productoRepository.save(new Producto("Cerveza negra enana", 250));
-        productoRepository.save(new Producto("Capa de sombras", 2000));
-        productoRepository.save(new Producto("Espada corta de acero valyrio", 4000));
-        productoRepository.save(new Producto("Piedra filosofal", 10000));
-        productoRepository.save(new Producto("Grimorio de conjuros oscuros", 2700));
-        productoRepository.save(new Producto("Lanza de trueno", 2900));
+        productoRepository.save(new Producto("Bolsa de especias exóticas", 60));
+        productoRepository.save(new Producto("Carne de venado", 20));
+        productoRepository.save(new Producto("Anillo de invisibilidad", 500));
+        productoRepository.save(new Producto("Varita de roble mágico", 150));
+        productoRepository.save(new Producto("Piedra de afilar rúnica", 35));
+        productoRepository.save(new Producto("Tomo de hechizos antiguos", 220));
+        productoRepository.save(new Producto("Escudo de dragón", 280));
+        productoRepository.save(new Producto("Barril de hidromiel", 45));
+        productoRepository.save(new Producto("Queso curado de cabra", 12));
+        productoRepository.save(new Producto("Botas de sigilo", 170));
+        productoRepository.save(new Producto("Cristal de energía arcana", 130));
+        productoRepository.save(new Producto("Flechas de plata", 70));
+        productoRepository.save(new Producto("Guantes de fuerza titánica", 210));
+        productoRepository.save(new Producto("Miel de flores salvajes", 18));
+        productoRepository.save(new Producto("Pergamino de teletransporte", 80));
+        productoRepository.save(new Producto("Manzana dorada", 99));
+        productoRepository.save(new Producto("Reloj de arena del tiempo", 350));
+        productoRepository.save(new Producto("Cerveza negra enana", 25));
+        productoRepository.save(new Producto("Capa de sombras", 200));
+        productoRepository.save(new Producto("Espada corta de acero valyrio", 400));
+        productoRepository.save(new Producto("Piedra filosofal", 1000));
+        productoRepository.save(new Producto("Grimorio de conjuros oscuros", 270));
+        productoRepository.save(new Producto("Lanza de trueno", 290));
         productoRepository.save(new Producto("Aceite de antorcha", 75));
         productoRepository.save(new Producto("Pez salado ahumado", 90));
-        productoRepository.save(new Producto("Cinturón de gigante", 3400));
-        productoRepository.save(new Producto("Amuleto de protección sagrada", 1500));
-        productoRepository.save(new Producto("Botella de vino élfico", 800));
-        productoRepository.save(new Producto("Casco de obsidiana", 3100));
+        productoRepository.save(new Producto("Cinturón de gigante", 340));
+        productoRepository.save(new Producto("Amuleto de protección sagrada", 150));
+        productoRepository.save(new Producto("Botella de vino élfico", 80));
+        productoRepository.save(new Producto("Casco de obsidiana", 310));
         productoRepository.save(new Producto("Saco de harina de trigo", 60));
-        productoRepository.save(new Producto("Espada bastarda", 1700));
-        productoRepository.save(new Producto("Lágrima de sirena", 2500));
-        productoRepository.save(new Producto("Orbe de visión profética", 5000));
-        productoRepository.save(new Producto("Llama eterna en frasco", 4000));
-        productoRepository.save(new Producto("Diente de basilisco", 2200));
-        productoRepository.save(new Producto("Collar de perlas negras", 1200));
-        productoRepository.save(new Producto("Cetro de reyes", 4500));
-        productoRepository.save(new Producto("Martillo de los dioses", 6000));
+        productoRepository.save(new Producto("Espada bastarda", 170));
+        productoRepository.save(new Producto("Lágrima de sirena", 250));
+        productoRepository.save(new Producto("Orbe de visión profética", 500));
+        productoRepository.save(new Producto("Llama eterna en frasco", 400));
+        productoRepository.save(new Producto("Diente de basilisco", 220));
+        productoRepository.save(new Producto("Collar de perlas negras", 120));
+        productoRepository.save(new Producto("Cetro de reyes", 450));
+        productoRepository.save(new Producto("Martillo de los dioses", 600));
     
         System.out.println("Productos iniciales insertados.");
     }
+
+
+
+    
 
 }

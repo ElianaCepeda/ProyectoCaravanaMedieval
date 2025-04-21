@@ -2,6 +2,11 @@ import { Component, AfterViewInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
+import { Servicio } from '../Models/servicio';
+import { FunctionsService } from '../services-back/functions.service';
+import { Producto } from '../Models/producto';
+
+
 
 @Component({
   selector: 'app-commerce',
@@ -12,7 +17,22 @@ import { PlayerUiComponent } from '../player-ui/player-ui.component';
 })
 export class CommerceComponent {
 
-  constructor(private router: Router) {}
+  productos: Producto[] = []
+
+  
+
+  constructor(private router: Router,
+   private functionsService: FunctionsService
+  ) {}
+
+  ngOnInit() {
+    this.functionsService.obtenerProductos().subscribe((data: any) => {
+      console.log(data);
+      this.productos = data;
+    }, (error) => {
+      console.error('Error al obtener los servicios:', error);
+    });
+  }
 
   vidaActual = 100;
   dineroActual = 9999;
@@ -29,17 +49,6 @@ export class CommerceComponent {
 
   };
 
-  servicios = [
-    { nombre: 'Reparar', valor: '20 monedas' },
-    { nombre: 'Mejorar capacidad', valor: '20 monedas' },
-    { nombre: 'Mejorar velocidad', valor: '20 monedas' },
-    { nombre: 'Guardias', valor: '20 monedas' },
-    { nombre: 'Mejorar vida', valor: '20 monedas' },
-    { nombre: 'Mejorar defensa', valor: '20 monedas' },
-    { nombre: 'Mejorar ataque', valor: '20 monedas' },
-    { nombre: 'Mejorar suerte', valor: '20 monedas' },
-    { nombre: 'Mejorar magia', valor: '20 monedas' }
-  ];
   
   productoSeleccionado: any = null;
   cantidadAComprar: number = 1;

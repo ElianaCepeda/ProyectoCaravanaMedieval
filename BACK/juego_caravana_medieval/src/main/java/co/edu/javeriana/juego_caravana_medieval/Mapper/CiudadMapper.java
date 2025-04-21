@@ -4,6 +4,7 @@ import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
 import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 
 public class CiudadMapper {
+
     public static CiudadDTO toDTO(Ciudad ciudad) {
         
         CiudadDTO ciudadDTO = new CiudadDTO();
