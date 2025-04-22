@@ -1,48 +1,38 @@
 <!-- Contenedor del visor OpenSeadragon -->
 <div id="opensea-container"></div>
 
-<!-- Div que representa el marcador (la ciudad) -->
 <!-- Ciudad actual -->
-<div
-  id="ciudad-actual"
-  class="ciudad-marcador ciudad-actual"
->
-  <div class="ciudad-tooltip">{{ cityName }}</div>
+<div id="ciudad-actual" class="ciudad-marcador ciudad-actual">
+  <div class="ciudad-tooltip">
+    {{ actualCity?.nombre }} (Tarifa: {{ actualCity?.tarifa }})
+  </div>
 </div>
 
-<!-- Una etiqueta por cada ciudad adyacente -->
-<!-- Ciudad adyacente -->
-<!-- Ciudad adyacente -->
+<!-- Ciudades adyacentes -->
 <div
   *ngFor="let city of adjacentCities; let i = index"
   [id]="'ciudad-adyacente-' + i"
   class="ciudad-marcador ciudad-adyacente"
 >
   <div class="ciudad-menu">
-    <div class="city-title">{{ city.name }}</div>
+    <div class="city-title">{{ city.nombre }}</div>
     <div class="city-info">
       <p><strong>Tarifa:</strong> {{ city.tarifa }}</p>
-      <!-- si quieres más datos, aquí van -->
     </div>
   </div>
 </div>
 
-
-
-
-
-
+<!-- Barra flotante de vida/dinero -->
 <div class="floating-ui top-left">
   <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
 </div>
-
 <div class="floating-ui bottom-right">
   <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
 </div>
 
-  <div class="action-buttons">
-    <button class="action-btn" (click)="goCommerce()">Comerciar</button>
-    <button class="action-btn" (click)="goService()">Servicios</button>
-    <button class="action-btn" (click)="goTravel()">Viajar</button>
-  </div>
-  
+<!-- Botones de navegación -->
+<div class="action-buttons">
+  <button class="action-btn" (click)="goCommerce()">Comerciar</button>
+  <button class="action-btn" (click)="goService()">Servicios</button>
+  <button class="action-btn" (click)="goTravel()">Viajar</button>
+</div>
