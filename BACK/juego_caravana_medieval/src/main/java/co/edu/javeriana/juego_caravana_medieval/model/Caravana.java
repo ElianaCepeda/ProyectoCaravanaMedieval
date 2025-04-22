@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 
 @Entity
-public class Caravana {
+public class    Caravana {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,11 +30,12 @@ public class Caravana {
     private int capacidad_maxima;
     private int dinero;
     private int vidas;
+    private boolean guardias=false;
 
     public Caravana() {
     }
 
-    public Caravana(String nombre, int velocidad_actual, int capacidad_actual, int dinero, int vidas) {
+    public Caravana(String nombre, int velocidad_actual, int capacidad_actual, int dinero, int vidas, boolean guardias) {
         this.nombre = nombre;
         this.velocidad_actual = velocidad_actual*2;
         this.velocidad_maxima = (int) (this.velocidad_actual * 1.5) ;
@@ -42,6 +43,7 @@ public class Caravana {
         this.capacidad_maxima = capacidad_actual*4;
         this.dinero = dinero;
         this.vidas = vidas;
+        this.guardias = guardias;
     }
 
     public Long getId() {
@@ -116,8 +118,13 @@ public class Caravana {
         this.ciudad = ciudad;
     }
     
+    public boolean isGuardias() {
+        return guardias;
+    }
 
-    
+    public void setGuardias(boolean guardias) {
+        this.guardias = guardias;
+    }
 
     
 

@@ -13,7 +13,9 @@ public class CaravanaMapper {
             caravana.getCapacidad_actual(),
             caravana.getCapacidad_maxima(),
             caravana.getDinero(),
-            caravana.getVidas()
+            caravana.getVidas(),
+            caravana.isGuardias()
+
         );
     }
 
@@ -27,6 +29,7 @@ public class CaravanaMapper {
         caravana.setCapacidad_maxima(caravanaDTO.getCapacidad_maxima());
         caravana.setDinero(caravanaDTO.getDinero());
         caravana.setVidas(caravanaDTO.getVidas());
+        caravana.setGuardias(caravanaDTO.isGuardias());
 
         return caravana;
   

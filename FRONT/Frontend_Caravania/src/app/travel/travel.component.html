@@ -1,6 +1,12 @@
 
 <div class="center-box">
   <h2 class="title-header">Viajar desde:</h2>
+
+  <div class="top-ui">
+    <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
+    <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
+  </div>
+
   <div class="city-card actual" *ngIf="actualCity">
     <div class="city-card-header">{{ actualCity.nombre }}</div>
     <div class="city-card-body">

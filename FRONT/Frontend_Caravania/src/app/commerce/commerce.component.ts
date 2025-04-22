@@ -5,6 +5,7 @@ import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { Servicio } from '../Models/servicio';
 import { FunctionsService } from '../services-back/functions.service';
 import { Producto } from '../Models/producto';
+import { CaravanaService } from '../services-back/caravana.service';
 
 
 
@@ -19,10 +20,12 @@ export class CommerceComponent {
 
   productos: Producto[] = []
 
-  
+  vidaActual! : number;
+  dineroActual! : number;
 
   constructor(private router: Router,
-   private functionsService: FunctionsService
+   private functionsService: FunctionsService,
+   private caravanaService: CaravanaService
   ) {}
 
   ngOnInit() {
@@ -32,10 +35,17 @@ export class CommerceComponent {
     }, (error) => {
       console.error('Error al obtener los servicios:', error);
     });
+
+    
+    this.caravanaService.obtenerCaravana(1).subscribe({
+      next: (caravana) => {
+        this.vidaActual = caravana.vidas;
+        this.dineroActual = caravana.dinero;
+      }
+    }); 
   }
 
-  vidaActual = 100;
-  dineroActual = 9999;
+ 
 
   btnClick() {
     if (this.productoSeleccionado) {

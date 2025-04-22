@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { CiudadService } from '../services-back/ciudad.service';
 import { Ciudad } from '../Models/ciudad';
+import { CaravanaService } from '../services-back/caravana.service';
 declare var OpenSeadragon: any;
 
 @Component({
@@ -16,15 +17,16 @@ declare var OpenSeadragon: any;
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  vidaActual = 100;
-  dineroActual = 9999;
+vidaActual! :number
+dineroActual! :number
 
   actualCity: (Ciudad & { x: number; y: number }) | null = null;
   adjacentCities: Array<Ciudad & { x: number; y: number }> = [];
 
   constructor(
     private router: Router,
-    private ciudadService: CiudadService
+    private ciudadService: CiudadService,
+    private caravanaService: CaravanaService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,13 @@ export class MapComponent implements OnInit, AfterViewInit {
       },
       error: err => console.error('No se pudieron cargar ciudades:', err)
     });
+
+    this.caravanaService.obtenerCaravana(1).subscribe({
+      next: (caravana) => {
+        this.vidaActual = caravana.vidas;
+        this.dineroActual = caravana.dinero;
+      }
+    }); 
   }
 
   ngAfterViewInit(): void {
@@ -109,6 +118,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/travel'], {
       queryParams: { origen: this.actualCity.id }
     });
+  }
+
+  goCaravan(): void {
+    this.router.navigate(['/caravan']);
   }
 
 }

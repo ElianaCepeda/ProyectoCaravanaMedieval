@@ -86,7 +86,12 @@
 /* Cuerpo con botones */
 .city-card-body {
   display: flex;
+  top: 10px;
   flex-direction: column;
+  color: #a5a4a3;
+  font-family: 'Drukaatie burti', sans-serif;
+  align-items: center;
+  font-size: 25px;
   gap: 8px;
 }
 

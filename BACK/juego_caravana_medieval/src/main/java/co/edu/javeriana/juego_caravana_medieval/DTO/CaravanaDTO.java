@@ -9,11 +9,12 @@ public class CaravanaDTO {
     private int capacidad_maxima;
     private int dinero;
     private int vidas;
+    private boolean guardias=false;
 
     public CaravanaDTO() {
     }
 
-    public CaravanaDTO(Long id, String nombre, int velocidad_actual, int velocidad_maxima, int capacidad_actual, int capacidad_maxima, int dinero, int vidas) {
+    public CaravanaDTO(Long id, String nombre, int velocidad_actual, int velocidad_maxima, int capacidad_actual, int capacidad_maxima, int dinero, int vidas, boolean guardias) {
         this.id = id;
         this.nombre = nombre;
         this.velocidad_actual = velocidad_actual;
@@ -22,6 +23,7 @@ public class CaravanaDTO {
         this.capacidad_maxima = capacidad_maxima;
         this.dinero = dinero;
         this.vidas = vidas;
+        this.guardias = guardias;
     }
 
     public Long getId() {
@@ -73,5 +75,12 @@ public class CaravanaDTO {
         this.vidas = vidas;
     }
 
-    
+    public boolean isGuardias() {
+        return guardias;
+    }
+    public void setGuardias(boolean guardias) {
+        this.guardias = guardias;
+
+    }
+
 }

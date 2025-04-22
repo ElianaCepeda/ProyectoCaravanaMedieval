@@ -7,6 +7,7 @@ export interface Caravana {
     capacidad_maxima: number;
     dinero: number;
     vidas: number;
+    guardias: boolean;
 
 }
 

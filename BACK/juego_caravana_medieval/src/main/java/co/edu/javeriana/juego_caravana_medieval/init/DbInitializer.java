@@ -40,10 +40,10 @@ public class DbInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Caravana caravana = new Caravana("nombre1", 3, 4, 30, 5);
+        Caravana caravana = new Caravana("Destructor de Pueblos", 5, 5, 1200, 80, false);
         caravanaRepository.save(caravana);
 
-        // Crear ciudades
+        // Crear ciudades 
         List<Ciudad> ciudades = List.of(
                 new Ciudad("Burgo de Alba", 8, generarX(), generarY()),
                 new Ciudad("Villa del Roble", 10, generarX(), generarY()),

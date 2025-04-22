@@ -45,13 +45,16 @@ public class CaravanaController {
         return caravanaService.crearCaravana(caravanaDTO);
     }
 
-    @PutMapping
-    public CaravanaDTO actualizarCaravana(@RequestBody CaravanaDTO caravanaDTO) {
-        return caravanaService.actualizarCaravana(caravanaDTO);
+    @PutMapping("/update/{idCaravana}")
+    public CaravanaDTO actualizarCaravana(@RequestBody CaravanaDTO caravanaDTO, @PathVariable Long idCaravana) {
+        caravanaService.actualizarCaravana(caravanaDTO, idCaravana);
+        return caravanaDTO;
     }
 
     @DeleteMapping("{idCaravana}")
     public void eliminarCaravana(@PathVariable Long idCaravana) {
         caravanaService.borrarCaravana(idCaravana);
     }
+
+    
 }

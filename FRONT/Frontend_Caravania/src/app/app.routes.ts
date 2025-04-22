@@ -8,6 +8,7 @@ import { ServicesComponent } from './services/services.component';
 import { ProductsComponent } from './products/products.component';
 import { CommerceComponent } from './commerce/commerce.component';
 import { TravelComponent } from './travel/travel.component';
+import { CaravanComponent } from './caravan/caravan.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -46,6 +47,10 @@ export const routes: Routes = [
   { 
     path: 'travel',
     component: TravelComponent
+  },
+  { 
+    path: 'caravan',
+    component: CaravanComponent
   }
   
 

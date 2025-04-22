@@ -42,8 +42,26 @@ public class CaravanaService {
         return CaravanaMapper.toDTO(caravanaRepository.save(CaravanaMapper.toEntity(caravanaDTO)));
     }
 
-    public CaravanaDTO actualizarCaravana(CaravanaDTO caravanaDTO) {
-        return CaravanaMapper.toDTO(caravanaRepository.save(CaravanaMapper.toEntity(caravanaDTO)));
+    public void actualizarCaravana(CaravanaDTO caravanaDTO, Long idCaravana) {
+
+        Caravana caravana = caravanaRepository.findById(idCaravana)
+                .orElseThrow(() -> new IllegalArgumentException("Caravana no encontrada"));
+        
+        // Actualizar los campos de la caravana
+        caravana.setNombre(caravanaDTO.getNombre());
+        caravana.setDinero(caravanaDTO.getDinero());
+        caravana.setVelocidad_actual(caravanaDTO.getVelocidad_actual());
+        caravana.setVidas(caravanaDTO.getVidas());
+        caravana.setCapacidad_actual(caravanaDTO.getCapacidad_actual());
+        caravana.setGuardias(caravanaDTO.isGuardias());
+       
+        // Guardar los cambios en la base de datos
+        caravanaRepository.save(caravana);
+
+  
+      
+      
+
     }
 
     public void borrarCaravana(Long id) {

@@ -78,3 +78,270 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/FAM-BAR
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 59 more
+2025-04-22 12:15:29.441398-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "RUTA" no encontrada
+Table "RUTA" not found; SQL statement:
+select r1_0.id,r1_0.cantidad_dano,c1_0.id,c1_0.nombre,c1_0.tarifa,c1_0.x,c1_0.y,r2_0.ciudad_origen_id,r2_0.id,r2_0.cantidad_dano,r2_0.ciudad_destino_id,r2_0.descripcion_dano,r2_0.distancia,c4_0.id,c4_0.nombre,c4_0.tarifa,c4_0.x,c4_0.y,r1_0.descripcion_dano,r1_0.distancia from ruta r1_0 left join ciudad c1_0 on c1_0.id=r1_0.ciudad_destino_id left join ruta r2_0 on c1_0.id=r2_0.ciudad_origen_id left join ciudad c4_0 on c4_0.id=r1_0.ciudad_origen_id where r1_0.id=? [42102-232]
+2025-04-22 12:15:31.663311-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CIUDAD" ya existe
+Table "HTE_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_ciudad(rn_ integer not null, tarifa integer, x integer, y integer, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.668313-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_RUTA" ya existe
+Table "HTE_RUTA" already exists; SQL statement:
+create global temporary table HTE_ruta(cantidad_dano integer, distancia float(24), rn_ integer not null, ciudad_destino_id bigint, ciudad_origen_id bigint, id bigint, descripcion_dano varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.672309-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_SERVICIO" ya existe
+Table "HTE_SERVICIO" already exists; SQL statement:
+create global temporary table HTE_servicio(precio integer, rn_ integer not null, id bigint, descripción varchar(255), nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.676311-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CARAVANA" ya existe
+Table "HTE_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_caravana(capacidad_actual integer, capacidad_maxima integer, dinero integer, rn_ integer not null, velocidad_actual integer, velocidad_maxima integer, vidas integer, ciudad_id bigint, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.680309-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CARAVANA" ya existe
+Table "HTE_STOCK_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_stock_caravana(cantidad integer, rn_ integer not null, caravana_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.683312-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CIUDAD" ya existe
+Table "HTE_STOCK_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_stock_ciudad(cantidad integer, factor_demanada integer, factor_oferta integer, rn_ integer not null, ciudad_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:15:31.693316-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_PRODUCTO" ya existe
+Table "HTE_PRODUCTO" already exists; SQL statement:
+create global temporary table HTE_producto(precio integer, rn_ integer not null, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:56.338908-05:00 jdbc[23]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-232]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:217)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:134)
+	at org.h2.Driver.connect(Driver.java:59)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:126)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:467)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:320)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:129)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:81)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:226)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:194)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1859)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1808)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:346)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at co.edu.javeriana.juego_caravana_medieval.CaravanaMedievalApplication.main(CaravanaMedievalApplication.java:10)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 56 more
+2025-04-22 12:16:57.212588-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CIUDAD" ya existe
+Table "HTE_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_ciudad(rn_ integer not null, tarifa integer, x integer, y integer, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.226595-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_RUTA" ya existe
+Table "HTE_RUTA" already exists; SQL statement:
+create global temporary table HTE_ruta(cantidad_dano integer, distancia float(24), rn_ integer not null, ciudad_destino_id bigint, ciudad_origen_id bigint, id bigint, descripcion_dano varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.239592-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_SERVICIO" ya existe
+Table "HTE_SERVICIO" already exists; SQL statement:
+create global temporary table HTE_servicio(precio integer, rn_ integer not null, id bigint, descripción varchar(255), nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.288542-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CARAVANA" ya existe
+Table "HTE_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_caravana(capacidad_actual integer, capacidad_maxima integer, dinero integer, rn_ integer not null, velocidad_actual integer, velocidad_maxima integer, vidas integer, ciudad_id bigint, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.321547-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CARAVANA" ya existe
+Table "HTE_STOCK_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_stock_caravana(cantidad integer, rn_ integer not null, caravana_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.339544-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CIUDAD" ya existe
+Table "HTE_STOCK_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_stock_ciudad(cantidad integer, factor_demanada integer, factor_oferta integer, rn_ integer not null, ciudad_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.349546-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_PRODUCTO" ya existe
+Table "HTE_PRODUCTO" already exists; SQL statement:
+create global temporary table HTE_producto(precio integer, rn_ integer not null, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.467246-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CIUDAD" ya existe
+Table "HTE_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_ciudad(rn_ integer not null, tarifa integer, x integer, y integer, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.473232-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_RUTA" ya existe
+Table "HTE_RUTA" already exists; SQL statement:
+create global temporary table HTE_ruta(cantidad_dano integer, distancia float(24), rn_ integer not null, ciudad_destino_id bigint, ciudad_origen_id bigint, id bigint, descripcion_dano varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.477236-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_SERVICIO" ya existe
+Table "HTE_SERVICIO" already exists; SQL statement:
+create global temporary table HTE_servicio(precio integer, rn_ integer not null, id bigint, descripción varchar(255), nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.481238-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_CARAVANA" ya existe
+Table "HTE_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_caravana(capacidad_actual integer, capacidad_maxima integer, dinero integer, rn_ integer not null, velocidad_actual integer, velocidad_maxima integer, vidas integer, ciudad_id bigint, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.493340-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CARAVANA" ya existe
+Table "HTE_STOCK_CARAVANA" already exists; SQL statement:
+create global temporary table HTE_stock_caravana(cantidad integer, rn_ integer not null, caravana_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.498244-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_STOCK_CIUDAD" ya existe
+Table "HTE_STOCK_CIUDAD" already exists; SQL statement:
+create global temporary table HTE_stock_ciudad(cantidad integer, factor_demanada integer, factor_oferta integer, rn_ integer not null, ciudad_id bigint, id bigint, producto_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.509238-05:00 jdbc[30]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "HTE_PRODUCTO" ya existe
+Table "HTE_PRODUCTO" already exists; SQL statement:
+create global temporary table HTE_producto(precio integer, rn_ integer not null, id bigint, nombre varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 12:16:57.612861-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CARAVANA" no encontrada
+Table "CARAVANA" not found; SQL statement:
+alter table if exists stock_caravana add constraint FKc47qpqsukojoepghtk91qgqx2 foreign key (caravana_id) references caravana [42102-232]
+2025-04-22 12:17:00.563456-05:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Sequence "RUTA_SEQ" no encontrado
+Sequence "RUTA_SEQ" not found; SQL statement:
+select next value for ruta_seq [90036-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readSequence(Parser.java:8018)
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5278)
+	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5148)
+	at org.h2.command.Parser.readTerm(Parser.java:4828)
+	at org.h2.command.Parser.readFactor(Parser.java:3323)
+	at org.h2.command.Parser.readSum(Parser.java:3310)
+	at org.h2.command.Parser.readConcat(Parser.java:3275)
+	at org.h2.command.Parser.readCondition(Parser.java:3065)
+	at org.h2.command.Parser.readExpression(Parser.java:2985)
+	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2785)
+	at org.h2.command.Parser.parseSelect(Parser.java:2803)
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2692)
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2547)
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2526)
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2519)
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2512)
+	at org.h2.command.Parser.parseQuery(Parser.java:2479)
+	at org.h2.command.Parser.parsePrepared(Parser.java:610)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:328)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$1.doPrepare(StatementPreparerImpl.java:96)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:180)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareStatement(StatementPreparerImpl.java:81)
+	at org.hibernate.id.enhanced.SequenceStructure$1.getNextValue(SequenceStructure.java:100)
+	at org.hibernate.id.enhanced.PooledOptimizer.generate(PooledOptimizer.java:95)
+	at org.hibernate.id.enhanced.SequenceStyleGenerator.generate(SequenceStyleGenerator.java:585)
+	at org.hibernate.id.IdentifierGenerator.generate(IdentifierGenerator.java:135)
+	at org.hibernate.event.internal.AbstractSaveEventListener.generateId(AbstractSaveEventListener.java:155)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:126)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:177)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:95)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:79)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:55)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:761)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:745)
+	at jdk.internal.reflect.GeneratedMethodAccessor24.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:320)
+	at jdk.proxy7/jdk.proxy7.$Proxy157.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:636)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.saveAll(SimpleJpaRepository.java:662)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:752)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy7/jdk.proxy7.$Proxy162.saveAll(Unknown Source)
+	at co.edu.javeriana.juego_caravana_medieval.init.DbInitializer.run(DbInitializer.java:176)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at co.edu.javeriana.juego_caravana_medieval.CaravanaMedievalApplication.main(CaravanaMedievalApplication.java:10)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
