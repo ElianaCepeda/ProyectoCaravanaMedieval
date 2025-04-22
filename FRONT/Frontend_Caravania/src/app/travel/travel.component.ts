@@ -1,6 +1,5 @@
-// src/app/travel/travel.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router'; // ← RouterModule
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { CiudadService } from '../services-back/ciudad.service';
@@ -15,7 +14,11 @@ interface Adjacent {
 @Component({
   selector: 'app-travel',
   standalone: true,
-  imports: [CommonModule, PlayerUiComponent],
+  imports: [
+    CommonModule,
+    RouterModule,        // ← en lugar de Router o ActivatedRoute
+    PlayerUiComponent
+  ],
   templateUrl: './travel.component.html',
   styleUrls: ['./travel.component.css']
 })
@@ -47,7 +50,7 @@ export class TravelComponent implements OnInit {
       this.ciudadService.obtenerCiudad(id).subscribe({
         next: ciudad => {
           this.actualCity = ciudad;
-          // 2) Carga las rutas y filtra las adyacentes
+          // 2) Carga rutas y filtra adyacentes
           this.loadAdjacent();
         },
         error: () => console.error('No se pudo cargar ciudad actual')
@@ -62,8 +65,7 @@ export class TravelComponent implements OnInit {
         rutas
           .filter(r => r.ciudadOrigen.id === this.originCityId)
           .forEach(r => {
-            this.ciudadService
-              .obtenerCiudad(r.ciudadDestino.id)
+            this.ciudadService.obtenerCiudad(r.ciudadDestino.id)
               .subscribe(ciudadDestino => {
                 this.adjacent.push({ city: ciudadDestino, route: r });
               });
@@ -75,7 +77,6 @@ export class TravelComponent implements OnInit {
 
   travelTo(routeId: number) {
     console.log('Viajando por ruta', routeId);
-    // Aquí disparas tu lógica de viaje…
   }
 
   commerceTo(cityId: number) {

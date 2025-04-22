@@ -22,8 +22,5 @@ export class FunctionsService {
     return this.http.get<Producto[]>(`${this.baseUrl}/productos`);
   }
 
-  // Si tienes un endpoint para confirmar compra, descomenta:
-  // comprarServicio(id: number): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/comprarServicio/${id}`, {});
-  // }
+  
 }

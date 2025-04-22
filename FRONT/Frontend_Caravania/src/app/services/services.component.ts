@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router'; // <-- RouterModule
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { FunctionsService } from '../services-back/functions.service';
@@ -8,7 +8,11 @@ import { Servicio } from '../Models/servicio';
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, Router, PlayerUiComponent],
+  imports: [
+    CommonModule,
+    RouterModule,        // ← en lugar de Router
+    PlayerUiComponent
+  ],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css']
 })
@@ -17,7 +21,6 @@ export class ServicesComponent implements OnInit {
   vidaActual = 100;
   dineroActual = 9999;
 
-  // Para mostrar detalle de un servicio
   servicioSeleccionado: Servicio | null = null;
 
   constructor(
@@ -27,9 +30,7 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     this.functionsService.obtenerServicios(1).subscribe({
-      next: (data: Servicio[]) => {
-        this.servicios = data;
-      },
+      next: (data: Servicio[]) => this.servicios = data,
       error: err => console.error('Error al obtener los servicios:', err)
     });
   }
@@ -41,13 +42,7 @@ export class ServicesComponent implements OnInit {
   comprar(servicio: Servicio) {
     const precio = servicio.precio;
     if (this.dineroActual >= precio) {
-      // 1) Descontar el precio del oro
       this.dineroActual -= precio;
-
-      // 2) (Opcional) llamar al backend para procesar la compra
-      // this.functionsService.comprarServicio(servicio.id).subscribe();
-
-      // 3) Cerrar detalle si estaba abierto
       this.servicioSeleccionado = null;
       console.log(`Comprado "${servicio.nombre}" por ${precio} monedas.`);
     } else {
