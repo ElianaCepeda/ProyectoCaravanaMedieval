@@ -26,7 +26,7 @@
   position: relative;
   width: 8px;
   height: 8px;
-  background-color: #C44536;
+  background-color: #C44536; /* rojo por defecto */
   border: 2px solid white;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0,0,0,0.4);
@@ -34,6 +34,16 @@
   z-index: 4;
   pointer-events: auto;
 }
+
+.ciudad-actual {
+  background-color: #C44536; /* rojo */
+}
+
+.ciudad-adyacente {
+  background-color: #3A6EA5; /* azul */
+}
+
+
 
 .ciudad-tooltip {
   display: none;

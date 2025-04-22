@@ -2,11 +2,23 @@
 <div id="opensea-container"></div>
 
 <!-- Div que representa el marcador (la ciudad) -->
-<div id="ciudad-marcador" class="ciudad-marcador">
-  <div class="ciudad-tooltip">
-    {{ cityName }}
-  </div>
+<!-- Ciudad actual -->
+<div
+  id="ciudad-actual"
+  class="ciudad-marcador ciudad-actual"
+>
+  <div class="ciudad-tooltip">{{ cityName }}</div>
 </div>
+
+<!-- Una etiqueta por cada ciudad adyacente -->
+<div
+  *ngFor="let city of adjacentCities; let i = index"
+  [id]="'ciudad-adyacente-' + i"
+  class="ciudad-marcador ciudad-adyacente"
+>
+  <div class="ciudad-tooltip">{{ city.name }}</div>
+</div>
+
 
 
 

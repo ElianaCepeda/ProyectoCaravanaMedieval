@@ -1,6 +1,6 @@
 export interface Ciudad{
-id : number;
-nombre: string;
-tarifa: number;
+    id : number;
+    nombre: string;
+    tarifa: number;
 }
 

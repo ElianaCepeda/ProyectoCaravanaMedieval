@@ -13,7 +13,14 @@ declare var OpenSeadragon: any;
 })
 export class MapComponent implements AfterViewInit {
 
-  cityName = 'Ciudad Quemada';  
+  cityName = 'Ciudad Quemada';
+  
+  adjacentCities = [
+    { name: 'Ciudad A', x: 16000, y: 7200 },
+    { name: 'Ciudad B', x: 16200, y: 7100 },
+    // …más ciudades
+  ];
+  
   constructor(private router: Router) {}
 
   
@@ -50,21 +57,16 @@ export class MapComponent implements AfterViewInit {
     });
 
     viewer.addHandler('open', () => {
-      const markerEl = document.getElementById("ciudad-marcador");
-      if (!markerEl) {
-        console.error("No se encontró el marcador.");
-        return;
-      } 
-      
-      const coords = viewer.viewport.imageToViewportCoordinates(16500, 7000);      
+      const actualEl = document.getElementById('ciudad-actual')!;
+      const coord0 = viewer.viewport.imageToViewportCoordinates(16500, 7000);
+      viewer.addOverlay({ element: actualEl, location: coord0, placement: OpenSeadragon.Placement.CENTER });
 
-      viewer.addOverlay({
-        element: markerEl,
-        location: coords,
-        placement: OpenSeadragon.Placement.CENTER
+      // 2) Ciudad(es) adyacente(s)
+      this.adjacentCities.forEach((city, i) => {
+        const el = document.getElementById(`ciudad-adyacente-${i}`)!;
+        const coords = viewer.viewport.imageToViewportCoordinates(city.x, city.y);
+        viewer.addOverlay({ element: el, location: coords, placement: OpenSeadragon.Placement.CENTER });
       });
-
-      
     });
   }
   goCommerce() {
