@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./caravan.component.css']
 })
 export class CaravanComponent implements OnInit, OnDestroy {
+  caravanaImg = '../../assets/img/creation/velocidad.png';
+  
   vidaActual   = 0;
   dineroActual = 0;
   currentCaravana!: Caravana;

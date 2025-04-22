@@ -95,6 +95,9 @@
   gap: 8px;
 }
 
+.city-card-body2 {
+  font-size: 10px;
+}
 /* Botones de acción */
 .city-action-btn {
   font-family: 'Drukaatie burti', sans-serif;
@@ -110,6 +113,63 @@
 .city-action-btn:hover {
   background-color: #eee;
 }
+
+/* ─── Tarjeta de ciudad adyacente ───────────────────────────── */
+.city-card.adjacent {
+  width: 260px;             /* antes 200px */
+  height: auto;             /* ajusta altura a contenido */
+  min-height: 260px;        /* para consistencia */
+  padding: 16px;
+  gap: 16px;
+}
+
+/* Cabecera: igual, pero un poco más grande */
+.city-card.adjacent .city-card-header {
+  font-size: 24px;
+  padding-bottom: 8px;
+}
+
+/* Cuerpo: flex columna con separación */
+.city-card.adjacent .city-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Info y descripción */
+.city-card-body .city-info {
+  font-size: 16px;
+  color: #d4cbb6;
+  margin-bottom: 8px;
+}
+
+.city-card-body .city-desc {
+  font-size: 14px;
+  color: #b8b29b;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Botón centrado y con mayor padding */
+.city-card-body .city-action-btn {
+  align-self: center;
+  width: 100%;
+  max-width: 180px;
+  padding: 10px 0;
+  font-size: 18px;
+  border-radius: 6px;
+  background: #C5BFB5;
+  color: #23201A;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.city-card-body .city-action-btn:hover {
+  background-color: #e0dbd3;
+  transform: scale(1.05);
+}
+
 
 /* ─── Botón de regreso ───────────────────────────────────── */
 .return-container {

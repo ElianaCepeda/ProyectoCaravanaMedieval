@@ -1,15 +1,16 @@
+// src/app/services-back/rutas.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ciudad } from '../Models/ciudad';
 
-export interface Ruta {
-  id: number;
-  dano: number;
-  distancia: number;
+export interface RutaDTO {
+  id:               number;
+  cantidad_dano:    number;
   descripcion_dano: string;
-  ciudadOrigen: Ciudad;
-  ciudadDestino: Ciudad;
+  ciudadOrigenId:   number;
+  ciudadDestinoId:  number;
+  ciudadOrigenNombre:  string;
+  ciudadDestinoNombre: string;
 }
 
 @Injectable({
@@ -17,14 +18,13 @@ export interface Ruta {
 })
 export class RutasService {
   private readonly baseUrl = 'http://localhost:8081/ruta';
-
   constructor(private http: HttpClient) {}
 
-  obtenerRutas(): Observable<Ruta[]> {
-    return this.http.get<Ruta[]>(`${this.baseUrl}/list`);
+  obtenerRutas(): Observable<RutaDTO[]> {
+    return this.http.get<RutaDTO[]>(`${this.baseUrl}/list`);
   }
 
-  obtenerRuta(id: number): Observable<Ruta> {
-    return this.http.get<Ruta>(`${this.baseUrl}/${id}`);
+  obtenerRuta(id: number): Observable<RutaDTO> {
+    return this.http.get<RutaDTO>(`${this.baseUrl}/${id}`);
   }
 }

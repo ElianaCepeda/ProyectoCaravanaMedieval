@@ -13,11 +13,11 @@ import { PlayerUiComponent } from '../player-ui/player-ui.component';
 export class ProductsComponent {
 
 
-
+  
   constructor(private router: Router  ) {}
 
   vidaActual = 100;
-  dineroActual = 9999;
+  dineroActual = 1200;
 
   btnClick() {
     this.router.navigate(['/commerce']);

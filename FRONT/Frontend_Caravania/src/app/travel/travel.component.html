@@ -1,4 +1,3 @@
-
 <div class="center-box">
   <h2 class="title-header">Viajar desde:</h2>
 
@@ -14,30 +13,24 @@
     </div>
   </div>
 
-  <h2 class="title-header" style="margin-top:24px;">Ciudades adyacentes</h2>
+  <h2 class="title-header" style="padding-bottom:60px; margin-top: 20px;">Ciudades adyacentes</h2>
 
-  <div class="adjacent-container">
-    <div class="city-card" *ngFor="let item of adjacent">
-      <div class="city-card-header">{{ item.city.nombre }}</div>
-      <div class="city-card-body">
-        <button
-          class="city-action-btn"
-          (click)="travelTo(item.route.id)"
-        >
-          Viajar
-          <span *ngIf="item.route.dano > 0">
-            (Daño: {{ item.route.dano }})
-          </span>
-        </button>
-        <button
-          class="city-action-btn"
-          (click)="commerceTo(item.city.id)"
-        >
-          Comerciar
-        </button>
-      </div>
+<div class="adjacent-container">
+  <div class="city-card adjacent" *ngFor="let item of adjacent">
+    <div class="city-card-header">{{ item.city.nombre }}</div>
+    <div class="city-card-body">
+      <p class="city-info"><strong>Tarifa:</strong> {{ item.city.tarifa }}</p>
+      <p class="city-desc">{{ item.route.descripcion }}</p>
+      <button class="city-action-btn" (click)="travelTo(item.route.id)">
+        Viajar
+        <span *ngIf="item.route.dano > 0">
+          (Daño: {{ item.route.dano }})
+        </span>
+      </button>
     </div>
   </div>
+</div>
+
 
   <div class="return-container">
     <button class="button" (click)="btnClick()">Devolverse</button>

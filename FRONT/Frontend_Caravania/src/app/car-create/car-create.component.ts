@@ -29,9 +29,9 @@ export class CarCreateComponent {
       clase: 'Tormenta Rápida',
       stats: {
         salud: 80,
-        velocidad: 100,
-        capacidad: 50,
-        dinero: 1000
+        velocidad: 15,
+        capacidad: 5,
+        dinero: 1200
       }
     },
     {
