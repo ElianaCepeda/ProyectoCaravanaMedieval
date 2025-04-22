@@ -1,0 +1,126 @@
+@import url('https://fonts.cdnfonts.com/css/optimus-princeps');
+@import url('https://fonts.cdnfonts.com/css/drukaatie-burti');
+
+/* ─── Contenedor principal ───────────────────────────────── */
+:host {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  background-color: #23201A;
+  overflow: hidden;
+}
+
+/* ─── Cuadro centrado ampliado ───────────────────────────── */
+.center-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1500px;
+  height: 90%;
+  max-height: 850px;
+  background-color: #171612;
+  border: 2px solid #5E523B;
+  box-shadow: 0 0 0 4px #8D7A56;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Título ──────────────────────────────────────────────── */
+.title-header {
+  font-family: 'OptimusPrinceps', sans-serif;
+  font-size: 36px;
+  color: #C5BFB5;
+  margin: 0 0 16px;
+}
+
+/* ─── Barra de vida/dinero ───────────────────────────────── */
+.top-ui {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+/* ─── Contenedor de tarjetas centrado respecto a la barra roja ── */
+.adjacent-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 8px;
+  margin-top: -60px; /* Centrado vertical visual respecto a la barra */
+}
+
+/* ─── Tarjeta de ciudad ───────────────────────────── */
+.city-card {
+  background-color: #1f1d19;
+  border: 2px solid #8D7A56;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+/* Cabecera de la tarjeta */
+.city-card-header {
+  font-family: 'OptimusPrinceps', serif;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  border-bottom: 1px solid #5E523B;
+  padding-bottom: 6px;
+}
+
+/* Cuerpo con botones */
+.city-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Botones de acción */
+.city-action-btn {
+  font-family: 'Drukaatie burti', sans-serif;
+  padding: 8px 0;
+  background: #fff;
+  color: #23201A;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.city-action-btn:hover {
+  background-color: #eee;
+}
+
+/* ─── Botón de regreso ───────────────────────────────────── */
+.return-container {
+  margin-top: 16px;
+  text-align: center;
+}
+.button {
+  font-family: 'OptimusPrinceps', sans-serif;
+  padding: 10px 40px;
+  border: 3px solid #595856;
+  background: #171613b9;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.button:hover {
+  transform: scale(1.1);
+}

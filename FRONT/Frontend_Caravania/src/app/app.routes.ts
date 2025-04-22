@@ -5,9 +5,9 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
 import { RoleSelectComponent } from './role-select/role-select.component';
 import { MapComponent } from './map/map.component';
 import { ServicesComponent } from './services/services.component';
-
 import { ProductsComponent } from './products/products.component';
 import { CommerceComponent } from './commerce/commerce.component';
+import { TravelComponent } from './travel/travel.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -42,6 +42,10 @@ export const routes: Routes = [
   { 
     path: 'inventory',
     component: ProductsComponent
+  },
+  { 
+    path: 'travel',
+    component: TravelComponent
   }
   
 

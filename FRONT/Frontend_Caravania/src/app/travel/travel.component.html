@@ -1,0 +1,36 @@
+<div class="center-box">
+    <!-- Título general -->
+    <h2 class="title-header">Ciudades adyacentes</h2>
+  
+    <!-- Barra de vida / dinero -->
+    <div class="top-ui">
+      <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
+      <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
+    </div>
+  
+    <!-- Contenedor de cards de ciudad -->
+    <div class="adjacent-container">
+      <div
+        class="city-card"
+        *ngFor="let city of adjacentCities"
+      >
+        <div class="city-card-header">
+          {{ city.name }}
+        </div>
+        <div class="city-card-body">
+          <button class="city-action-btn" (click)="travelTo(city)">
+            Viajar
+          </button>
+          <button class="city-action-btn" (click)="commerceTo(city)">
+            Comerciar
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Botón de regreso -->
+    <div class="return-container">
+      <button class="button" (click)="btnClick()">Devolverse</button>
+    </div>
+  </div>
+  

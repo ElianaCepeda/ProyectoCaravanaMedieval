@@ -11,13 +11,23 @@
 </div>
 
 <!-- Una etiqueta por cada ciudad adyacente -->
+<!-- Ciudad adyacente -->
+<!-- Ciudad adyacente -->
 <div
   *ngFor="let city of adjacentCities; let i = index"
   [id]="'ciudad-adyacente-' + i"
   class="ciudad-marcador ciudad-adyacente"
 >
-  <div class="ciudad-tooltip">{{ city.name }}</div>
+  <div class="ciudad-menu">
+    <div class="city-title">{{ city.name }}</div>
+    <div class="city-info">
+      <p><strong>Tarifa:</strong> {{ city.tarifa }}</p>
+      <!-- si quieres más datos, aquí van -->
+    </div>
+  </div>
 </div>
+
+
 
 
 

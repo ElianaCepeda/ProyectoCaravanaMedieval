@@ -16,8 +16,8 @@ export class MapComponent implements AfterViewInit {
   cityName = 'Ciudad Quemada';
   
   adjacentCities = [
-    { name: 'Ciudad A', x: 16000, y: 7200 },
-    { name: 'Ciudad B', x: 16200, y: 7100 },
+    { name: 'Ciudad A', x: 16000, y: 7200, tarifa: 2 },
+    { name: 'Ciudad B', x: 16200, y: 7100, tarifa: 2 },
     // …más ciudades
   ];
   
@@ -49,7 +49,7 @@ export class MapComponent implements AfterViewInit {
       
       gestureSettingsMouse: {
         clickToZoom: false,
-        dblClickToZoom: true,
+        dblClickToZoom: false,
         scrollToZoom: true,
         pinchToZoom: true
       },
@@ -76,6 +76,6 @@ export class MapComponent implements AfterViewInit {
     this.router.navigate(['/services']);
   }
   goTravel() {
-    this.router.navigate(['/role']);
+    this.router.navigate(['/travel']);
   }
 }

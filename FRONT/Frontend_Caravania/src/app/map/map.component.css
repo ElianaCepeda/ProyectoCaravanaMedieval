@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  background-color: #23201A; 
+  background-color: #23201A;
   overflow: hidden;
   font-family: 'OptimusPrincepsSemiBold', sans-serif;
 }
@@ -22,14 +22,17 @@
   z-index: 1;
 }
 
+/* ─── Marcadores ───────────────────────────────────────── */
+
 .ciudad-marcador {
   position: relative;
+  overflow: visible;    /* permite hover dentro del menú */
   width: 8px;
   height: 8px;
   background-color: #C44536; /* rojo por defecto */
   border: 2px solid white;
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   z-index: 4;
   pointer-events: auto;
@@ -43,15 +46,14 @@
   background-color: #3A6EA5; /* azul */
 }
 
-
-
+/* Tooltip simple */
 .ciudad-tooltip {
   display: none;
   position: absolute;
   top: -1.6em;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0, 0, 0, 0.75);
   color: #a5a4a3;
   font-size: 12px;
   padding: 2px 6px;
@@ -65,36 +67,102 @@
   display: block;
 }
 
+/* ─── Menú de opciones ──────────────────────────────────── */
+
+.ciudad-menu {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 4px); /* justo encima del marcador */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #998e78;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  pointer-events: auto;    /* recibe hover y clics */
+}
+
+/* Mantener menú visible mientras el cursor esté en marcador o menú */
+.ciudad-marcador:hover .ciudad-menu,
+.ciudad-menu:hover {
+  display: block;
+}
+
+/* Título y botones dentro del menú */
+.city-title {
+  font-family: 'OptimusPrincepsSemiBold', sans-serif;
+  color: #f0eab4;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.city-action {
+  display: block;
+  width: 100%;
+  margin: 4px 0;
+  padding: 6px 0;
+  background: #fff;
+  color: #23201A;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'OptimusPrincepsSemiBold', sans-serif;
+}
+.city-action:hover {
+  background: #eee;
+}
+
+/* dentro de tu map.component.css, reemplaza la sección de .city-action y títulos */
+
+.city-title {
+  font-family: 'OptimusPrincepsSemiBold', sans-serif;
+  color: #f0eab4;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.city-info {
+  color: #a5a4a3;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.city-info p {
+  margin: 4px 0;
+}
 
 
-/* Contenedor flotante base para reutilizar */
+/* ─── UI Flotante ───────────────────────────────────────── */
+
 .floating-ui {
   position: absolute;
   z-index: 10;
 }
-
-/* Posiciones posibles */
 .top-left {
   top: 45px;
   left: 25px;
 }
-
 .bottom-right {
   bottom: 45px;
   right: 35px;
 }
 
-
+/* ─── Botones de acción ───────────────────────────────── */
 
 .action-buttons {
   position: absolute;
-  bottom: 45px;     
-  left: 30px;       /* distancia desde el borde izquierdo */
+  bottom: 45px;
+  left: 30px;
   display: flex;
-  gap: 16px;        /* separación entre botones */
+  gap: 16px;
   z-index: 5;
 }
-
 
 .action-btn {
   background-color: rgba(0, 0, 0, 0.6);
@@ -110,4 +178,3 @@
 .action-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
-
