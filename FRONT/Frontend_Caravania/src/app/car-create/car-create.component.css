@@ -234,4 +234,135 @@
   transform: scale(1.02);
 }
 
+/* ========== Escritorio XL (>1600px): sin cambios ========== */
+
+/* ========== Escritorio L (≤1600px) ========== */
+@media (max-width: 1600px) {
+  .character-image img {
+    width: 380px;            /* de 420 → 380 */
+    margin-bottom: 70px;     /* de 80 → 70 */
+  }
+  .main-content {
+    top: 24%;                /* de 25 → 24 */
+    left: 74%;               /* de 75 → 74 */
+    width: 280px;            /* de 300 → 280 */
+  }
+  .controls {
+    top: calc(24% + 300px);  /* recalcula según la nueva imagen */
+    left: 74%;
+    gap: 30px;               /* de 40 → 30 */
+  }
+  .form-container {
+    top: 29%;
+    left: 24%;
+    transform: translate(-64%, -5%);
+  }
+  .stats {
+    top: 34%;
+    left: 52%;
+    transform: translate(-50%, -40%);
+  }
+}
+
+/* ========== Escritorio M (≤1366px) ========== */
+@media (max-width: 1366px) {
+  .character-image img {
+    width: 340px;
+    margin-bottom: 60px;
+  }
+  .main-content {
+    top: 23%;
+    left: 72%;
+    width: 260px;
+  }
+  .controls {
+    top: calc(23% + 260px);
+    left: 72%;
+    gap: 25px;
+  }
+  .form-container {
+    top: 28%;
+    left: 26%;
+    transform: translate(-63%, -5%);
+  }
+  .stats {
+    top: 33%;
+    left:  55%; /* ajusta al 55% si lo necesitas */
+    transform: translate(-50%, -40%);
+  }
+}
+
+/* ========== Laptop (≤1024px) ========== */
+@media (max-width: 1024px) {
+  .character-image img {
+    width: 300px;
+    margin-bottom: 50px;
+  }
+  .main-content {
+    top: 28%;
+    left: 70%;
+    width: 240px;
+  }
+  .controls {
+    top: calc(28% + 240px);
+    left: 70%;
+    gap: 20px;
+  }
+  .form-container {
+    top: 30%;
+    left: 28%;
+    transform: translate(-62%, -5%);
+  }
+  .stats {
+    top: 36%;
+    left: 48%;
+    transform: translate(-50%, -40%);
+  }
+}
+
+/* ========== Tablet (≤768px) ========== */
+@media (max-width: 768px) {
+  .character-image img {
+    width: 80vw;
+    max-width: 260px;
+    margin-bottom: 40px;
+  }
+  .main-content {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: auto;
+  }
+  .controls {
+    top: calc(30% + 260px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    gap: 15px;
+  }
+  .form-container {
+    top: 20%;
+    left: 10%;
+    transform: translate(0, 0);
+    width: 80vw;
+    max-width: 280px;
+  }
+  .stats {
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80vw;
+    max-width: 220px;
+  }
+  .return-container {
+    bottom: auto;
+    top: 90px;    /* justo bajo el banner */
+    left: 5%;
+    transform: none;
+  }
+  .confirm-container {
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
