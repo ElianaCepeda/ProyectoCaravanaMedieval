@@ -8,23 +8,20 @@
   </div>
 
   <!-- Contenido dinámico -->
-  <div class="table-scroll" [class.no-scroll]="productoSeleccionado">
+  <div class="table-scroll" [class.no-scroll]="servicioSeleccionado">
     
-    <ng-container *ngIf="productoSeleccionado; else listaServicios">
+    <ng-container *ngIf="servicioSeleccionado; else listaServicios">
       <div class="detalle-producto-emergente">
         <div class="detalle-cuerpo">
           <div class="info-izquierda">
-            <div class="titulo-producto">{{ productoSeleccionado.nombre }}</div>
+            <div class="titulo-producto">{{ servicioSeleccionado.nombre }}</div>
           </div>
           <div class="info-derecha">
-            <p><strong>Cantidad disponible:</strong> {{ productoSeleccionado.cantidad }}</p>
-            <label>
-              <strong>Cantidad:</strong>
-              <input type="number" [value]="cantidadAComprar" min="1" [max]="productoSeleccionado.cantidad"
-                     (input)="cantidadAComprar = $any($event.target).value">
-            </label>
-            <p><strong>Precio calculado:</strong> {{ calcularPrecio(productoSeleccionado) }} monedas</p>
-            <button class="button2" (click)="comprar(productoSeleccionado)">Comprar</button>
+            <p><strong>Precio:</strong> {{ servicioSeleccionado.precio }} monedas</p>
+            <p><strong>Descripción:</strong> {{ servicioSeleccionado.descripcion }}</p>
+            <button class="button2" (click)="comprar(servicioSeleccionado)">
+              Comprar
+            </button>
           </div>
         </div>
       </div>
@@ -55,6 +52,6 @@
 
   <!-- Botón de regreso -->
   <div class="return-container">
-    <button class="button" (click)="btnClick()">devolverse</button>
+    <button class="button" (click)="btnClick()">Devolverse</button>
   </div>
 </div>

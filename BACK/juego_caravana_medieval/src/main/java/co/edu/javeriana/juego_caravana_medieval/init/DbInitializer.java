@@ -42,150 +42,151 @@ public class DbInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Caravana caravana = new Caravana("nombre1", 3, 4, 30, 5);
         caravanaRepository.save(caravana);
-    
+
         // Crear ciudades
         List<Ciudad> ciudades = List.of(
-            new Ciudad("Burgo de Alba", 8),
-            new Ciudad("Villa del Roble", 10),
-            new Ciudad("Rivendel", 12),
-            new Ciudad("Draconia", 18),
-            new Ciudad("Nimbaria", 10),
-            new Ciudad("Eldoria", 15),
-            new Ciudad("Montespino", 9),
-            new Ciudad("Valderroble", 11),
-            new Ciudad("Castelverde", 14),
-            new Ciudad("Roca Alta", 13),
-            new Ciudad("Brumareda", 8),
-            new Ciudad("Norhavn", 17),
-            new Ciudad("Isenfort", 16),
-            new Ciudad("Viladriana", 10),
-            new Ciudad("Stormhold", 19),
-            new Ciudad("Drakensberg", 12),
-            new Ciudad("Alborea", 9),
-            new Ciudad("Rúnathil", 14),
-            new Ciudad("Monteluz", 11),
-            new Ciudad("Thundara", 18),
-            new Ciudad("Darkhollow", 17),
-            new Ciudad("Windmere", 15),
-            new Ciudad("Agremont", 10),
-            new Ciudad("Zephyria", 13),
-            new Ciudad("Vallargenta", 12),
-            new Ciudad("Ravencrest", 14),
-            new Ciudad("Wintergate", 16),
-            new Ciudad("Galdorheim", 9),
-            new Ciudad("Solhaven", 10),
-            new Ciudad("Erenholm", 8),
-            new Ciudad("Brisavalle", 15),
-            new Ciudad("Dunhollow", 18),
-            new Ciudad("Havenbrook", 12),
-            new Ciudad("Mirvalis", 11),
-            new Ciudad("Vallfior", 9),
-            new Ciudad("Forghast", 17),
-            new Ciudad("Astervale", 14),
-            new Ciudad("Dornwich", 16),
-            new Ciudad("Ivarynth", 19),
-            new Ciudad("Myrkwell", 12),
-            new Ciudad("Tarnwell", 10),
-            new Ciudad("Silverbrook", 13),
-            new Ciudad("Fjordheim", 15),
-            new Ciudad("Oblivion", 18),
-            new Ciudad("Hollowshade", 16),
-            new Ciudad("Velandria", 11),
-            new Ciudad("Starhaven", 17),
-            new Ciudad("Glimmerhold", 12),
-            new Ciudad("Caerthas", 14),
-            new Ciudad("Dravenor", 19),
-            new Ciudad("Flamberg", 13),
-            new Ciudad("Gorundell", 10),
-            new Ciudad("Valsturm", 9),
-            new Ciudad("Daggerfall", 11),
-            new Ciudad("Castelor", 14),
-            new Ciudad("Nordhaven", 15),
-            new Ciudad("Eldwynn", 16),
-            new Ciudad("Lunaris", 12),
-            new Ciudad("Hearthglen", 18),
-            new Ciudad("Ziranthea", 10),
-            new Ciudad("Malveria", 17),
-            new Ciudad("Ivoria", 8),
-            new Ciudad("Brighthaven", 14),
-            new Ciudad("Stormwall", 13),
-            new Ciudad("Thalendor", 15),
-            new Ciudad("Almora", 9),
-            new Ciudad("Runebridge", 12),
-            new Ciudad("Briarcrest", 16),
-            new Ciudad("Falkreath", 10),
-            new Ciudad("Oakheart", 11),
-            new Ciudad("Westfall", 14),
-            new Ciudad("Evermere", 13),
-            new Ciudad("Shadowfen", 17),
-            new Ciudad("Winterhelm", 19),
-            new Ciudad("Stormreach", 18),
-            new Ciudad("Ebonhold", 12),
-            new Ciudad("Harrowgate", 15),
-            new Ciudad("Frostmere", 9),
-            new Ciudad("Dragonspire", 14),
-            new Ciudad("Starspire", 13),
-            new Ciudad("Windhaven", 11),
-            new Ciudad("Dawnveil", 10),
-            new Ciudad("Gloomshade", 17),
-            new Ciudad("Blackstone", 16),
-            new Ciudad("Ravenholm", 18),
-            new Ciudad("Ivorywatch", 12),
-            new Ciudad("Brinehold", 14),
-            new Ciudad("Myrefrost", 15),
-            new Ciudad("Evercrest", 13),
-            new Ciudad("Sylvanvale", 9),
-            new Ciudad("Ashenport", 10),
-            new Ciudad("Moonbright", 16),
-            new Ciudad("Verdenshire", 12),
-            new Ciudad("Helmsgate", 11),
-            new Ciudad("Drifthaven", 19),
-            new Ciudad("Silverkeep", 14)
-        );
-    
+                new Ciudad("Burgo de Alba", 8, generarX(), generarY()),
+                new Ciudad("Villa del Roble", 10, generarX(), generarY()),
+                new Ciudad("Rivendel", 12, generarX(), generarY()),
+                new Ciudad("Draconia", 18, generarX(), generarY()),
+                new Ciudad("Nimbaria", 10, generarX(), generarY()),
+                new Ciudad("Eldoria", 15, generarX(), generarY()),
+                new Ciudad("Montespino", 9, generarX(), generarY()),
+                new Ciudad("Valderroble", 11, generarX(), generarY()),
+                new Ciudad("Castelverde", 14, generarX(), generarY()),
+                new Ciudad("Roca Alta", 13, generarX(), generarY()),
+                new Ciudad("Brumareda", 8, generarX(), generarY()),
+                new Ciudad("Norhavn", 17, generarX(), generarY()),
+                new Ciudad("Isenfort", 16, generarX(), generarY()),
+                new Ciudad("Viladriana", 10, generarX(), generarY()),
+                new Ciudad("Stormhold", 19, generarX(), generarY()),
+                new Ciudad("Drakensberg", 12, generarX(), generarY()),
+                new Ciudad("Alborea", 9, generarX(), generarY()),
+                new Ciudad("Rúnathil", 14, generarX(), generarY()),
+                new Ciudad("Monteluz", 11, generarX(), generarY()),
+                new Ciudad("Thundara", 18, generarX(), generarY()),
+                new Ciudad("Darkhollow", 17, generarX(), generarY()),
+                new Ciudad("Windmere", 15, generarX(), generarY()),
+                new Ciudad("Agremont", 10, generarX(), generarY()),
+                new Ciudad("Zephyria", 13, generarX(), generarY()),
+                new Ciudad("Vallargenta", 12, generarX(), generarY()),
+                new Ciudad("Ravencrest", 14, generarX(), generarY()),
+                new Ciudad("Wintergate", 16, generarX(), generarY()),
+                new Ciudad("Galdorheim", 9, generarX(), generarY()),
+                new Ciudad("Solhaven", 10, generarX(), generarY()),
+                new Ciudad("Erenholm", 8, generarX(), generarY()),
+                new Ciudad("Brisavalle", 15, generarX(), generarY()),
+                new Ciudad("Dunhollow", 18, generarX(), generarY()),
+                new Ciudad("Havenbrook", 12, generarX(), generarY()),
+                new Ciudad("Mirvalis", 11, generarX(), generarY()),
+                new Ciudad("Vallfior", 9, generarX(), generarY()),
+                new Ciudad("Forghast", 17, generarX(), generarY()),
+                new Ciudad("Astervale", 14, generarX(), generarY()),
+                new Ciudad("Dornwich", 16, generarX(), generarY()),
+                new Ciudad("Ivarynth", 19, generarX(), generarY()),
+                new Ciudad("Myrkwell", 12, generarX(), generarY()),
+                new Ciudad("Tarnwell", 10, generarX(), generarY()),
+                new Ciudad("Silverbrook", 13, generarX(), generarY()),
+                new Ciudad("Fjordheim", 15, generarX(), generarY()),
+                new Ciudad("Oblivion", 18, generarX(), generarY()),
+                new Ciudad("Hollowshade", 16, generarX(), generarY()),
+                new Ciudad("Velandria", 11, generarX(), generarY()),
+                new Ciudad("Starhaven", 17, generarX(), generarY()),
+                new Ciudad("Glimmerhold", 12, generarX(), generarY()),
+                new Ciudad("Caerthas", 14, generarX(), generarY()),
+                new Ciudad("Dravenor", 19, generarX(), generarY()),
+                new Ciudad("Flamberg", 13, generarX(), generarY()),
+                new Ciudad("Gorundell", 10, generarX(), generarY()),
+                new Ciudad("Valsturm", 9, generarX(), generarY()),
+                new Ciudad("Daggerfall", 11, generarX(), generarY()),
+                new Ciudad("Castelor", 14, generarX(), generarY()),
+                new Ciudad("Nordhaven", 15, generarX(), generarY()),
+                new Ciudad("Eldwynn", 16, generarX(), generarY()),
+                new Ciudad("Lunaris", 12, generarX(), generarY()),
+                new Ciudad("Hearthglen", 18, generarX(), generarY()),
+                new Ciudad("Ziranthea", 10, generarX(), generarY()),
+                new Ciudad("Malveria", 17, generarX(), generarY()),
+                new Ciudad("Ivoria", 8, generarX(), generarY()),
+                new Ciudad("Brighthaven", 14, generarX(), generarY()),
+                new Ciudad("Stormwall", 13, generarX(), generarY()),
+                new Ciudad("Thalendor", 15, generarX(), generarY()),
+                new Ciudad("Almora", 9, generarX(), generarY()),
+                new Ciudad("Runebridge", 12, generarX(), generarY()),
+                new Ciudad("Briarcrest", 16, generarX(), generarY()),
+                new Ciudad("Falkreath", 10, generarX(), generarY()),
+                new Ciudad("Oakheart", 11, generarX(), generarY()),
+                new Ciudad("Westfall", 14, generarX(), generarY()),
+                new Ciudad("Evermere", 13, generarX(), generarY()),
+                new Ciudad("Shadowfen", 17, generarX(), generarY()),
+                new Ciudad("Winterhelm", 19, generarX(), generarY()),
+                new Ciudad("Stormreach", 18, generarX(), generarY()),
+                new Ciudad("Ebonhold", 12, generarX(), generarY()),
+                new Ciudad("Harrowgate", 15, generarX(), generarY()),
+                new Ciudad("Frostmere", 9, generarX(), generarY()),
+                new Ciudad("Dragonspire", 14, generarX(), generarY()),
+                new Ciudad("Starspire", 13, generarX(), generarY()),
+                new Ciudad("Windhaven", 11, generarX(), generarY()),
+                new Ciudad("Dawnveil", 10, generarX(), generarY()),
+                new Ciudad("Gloomshade", 17, generarX(), generarY()),
+                new Ciudad("Blackstone", 16, generarX(), generarY()),
+                new Ciudad("Ravenholm", 18, generarX(), generarY()),
+                new Ciudad("Ivorywatch", 12, generarX(), generarY()),
+                new Ciudad("Brinehold", 14, generarX(), generarY()),
+                new Ciudad("Myrefrost", 15, generarX(), generarY()),
+                new Ciudad("Evercrest", 13, generarX(), generarY()),
+                new Ciudad("Sylvanvale", 9, generarX(), generarY()),
+                new Ciudad("Ashenport", 10, generarX(), generarY()),
+                new Ciudad("Moonbright", 16, generarX(), generarY()),
+                new Ciudad("Verdenshire", 12, generarX(), generarY()),
+                new Ciudad("Helmsgate", 11, generarX(), generarY()),
+                new Ciudad("Drifthaven", 19, generarX(), generarY()),
+                new Ciudad("Silverkeep", 14, generarX(), generarY()));
+
         ciudadRepository.saveAll(ciudades);
         System.out.println("Ciudades iniciales insertadas.");
-    
-      // Crear rutas aleatorias
-      Random random = new Random();
-      List<Ruta> rutas = ciudades.stream()
-          .flatMap(ciudad -> ciudades.stream()
-              .filter(destino -> !ciudad.equals(destino))
-              .limit(3) // Limitar a 3 rutas por ciudad
-              .map(destino -> {
-                  boolean esSegura = random.nextBoolean();
-                  String descripcion;
-                  if (esSegura) {
-                      descripcion = "Ruta segura. Es más larga, pero la caravana no sufre daño durante el viaje.";
-                  } else {
-                      descripcion = random.nextBoolean() ? 
-                          "Ruta insegura. Hay bandidos en el camino." : 
-                          "Ruta insegura. Hay desastres naturales en el camino.";
-                  }
-                  int costoDano = esSegura ? 0 : random.nextInt(100) + 1; // Costo de daño aleatorio entre 1 y 100 para rutas inseguras, 0 para rutas seguras
-                  return new Ruta(
-                      ciudad,
-                      destino,
-                      costoDano,
-                      descripcion
-                      
-                  );
-              })
-          )
-          .collect(Collectors.toList());
-      
-      rutaRepository.saveAll(rutas);
-      System.out.println("Rutas iniciales insertadas.");
-rutaRepository.saveAll(rutas);
-System.out.println("Rutas iniciales insertadas.");
-    
+
+        // Crear rutas aleatorias
+        Random random = new Random();
+        List<Ruta> rutas = ciudades.stream()
+                .flatMap(ciudad -> ciudades.stream()
+                        .filter(destino -> !ciudad.equals(destino))
+                        .limit(3) // Limitar a 3 rutas por ciudad
+                        .map(destino -> {
+                            boolean esSegura = random.nextBoolean();
+                            String descripcion;
+                            if (esSegura) {
+                                descripcion = "Ruta segura. Es más larga, pero la caravana no sufre daño durante el viaje.";
+                            } else {
+                                descripcion = random.nextBoolean() ? "Ruta insegura. Hay bandidos en el camino."
+                                        : "Ruta insegura. Hay desastres naturales en el camino.";
+                            }
+                            int costoDano = esSegura ? 0 : random.nextInt(100) + 1; // Costo de daño aleatorio entre 1 y
+                                                                                    // 100 para rutas inseguras, 0 para
+                                                                                    // rutas seguras
+                            return new Ruta(
+                                    ciudad,
+                                    destino,
+                                    costoDano,
+                                    descripcion
+
+                        );
+                        }))
+                .collect(Collectors.toList());
+
+        rutaRepository.saveAll(rutas);
+        System.out.println("Rutas iniciales insertadas.");
+        rutaRepository.saveAll(rutas);
+        System.out.println("Rutas iniciales insertadas.");
+
         // Crear servicios
-        servicioRepository.save(new Servicio("Reparación de Caravana", 100, "Repara la caravana y la deja como nueva."));
-        servicioRepository.save(new Servicio("Mejora de Capacidad", 200, "Aumenta la capacidad de carga de la caravana."));
+        servicioRepository
+                .save(new Servicio("Reparación de Caravana", 100, "Repara la caravana y la deja como nueva."));
+        servicioRepository
+                .save(new Servicio("Mejora de Capacidad", 200, "Aumenta la capacidad de carga de la caravana."));
         servicioRepository.save(new Servicio("Mejora de Velocidad", 300, "Aumenta la velocidad de la caravana."));
-        servicioRepository.save(new Servicio("Contratación de Guardias", 400, "Contrata guardias para proteger la caravana."));
-        
-        
+        servicioRepository
+                .save(new Servicio("Contratación de Guardias", 400, "Contrata guardias para proteger la caravana."));
+
         // Crear productos
         productoRepository.save(new Producto("Elixir de vida", 50));
         productoRepository.save(new Producto("Espada de fuego", 120));
@@ -235,12 +236,34 @@ System.out.println("Rutas iniciales insertadas.");
         productoRepository.save(new Producto("Collar de perlas negras", 120));
         productoRepository.save(new Producto("Cetro de reyes", 450));
         productoRepository.save(new Producto("Martillo de los dioses", 600));
-    
+
         System.out.println("Productos iniciales insertados.");
     }
 
 
+    private int generarX() {
+        // { xMin, xMax }
+        int[][] zonas = {
+            { 3000,  8000 },   // Oeste
+            { 9500, 19500 },   // Centro
+            {19500, 24500 },   // Este
+            {24500, 28500 }    // Extremo este
+        };
+        int[] zona = zonas[new Random().nextInt(zonas.length)];
+        return new Random().nextInt(zona[1] - zona[0]) + zona[0];
+    }
 
     
+    private int generarY() {
+        // { yMin, yMax }
+        int[][] zonas = {
+            { 5500, 11000 },   // Oeste
+            { 5500, 11000 },   // Centro
+            { 3500, 10500 },   // Este
+            { 5000, 11000 }    // Extremo este
+        };
+        int[] zona = zonas[new Random().nextInt(zonas.length)];
+        return new Random().nextInt(zona[1] - zona[0]) + zona[0];
+    }
 
 }

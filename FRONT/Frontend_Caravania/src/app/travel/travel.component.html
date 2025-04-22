@@ -1,36 +1,39 @@
+
 <div class="center-box">
-    <!-- Título general -->
-    <h2 class="title-header">Ciudades adyacentes</h2>
-  
-    <!-- Barra de vida / dinero -->
-    <div class="top-ui">
-      <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
-      <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
-    </div>
-  
-    <!-- Contenedor de cards de ciudad -->
-    <div class="adjacent-container">
-      <div
-        class="city-card"
-        *ngFor="let city of adjacentCities"
-      >
-        <div class="city-card-header">
-          {{ city.name }}
-        </div>
-        <div class="city-card-body">
-          <button class="city-action-btn" (click)="travelTo(city)">
-            Viajar
-          </button>
-          <button class="city-action-btn" (click)="commerceTo(city)">
-            Comerciar
-          </button>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Botón de regreso -->
-    <div class="return-container">
-      <button class="button" (click)="btnClick()">Devolverse</button>
+  <h2 class="title-header">Viajar desde:</h2>
+  <div class="city-card actual" *ngIf="actualCity">
+    <div class="city-card-header">{{ actualCity.nombre }}</div>
+    <div class="city-card-body">
+      <p>Tarifa: {{ actualCity.tarifa }}</p>
     </div>
   </div>
-  
+
+  <h2 class="title-header" style="margin-top:24px;">Ciudades adyacentes</h2>
+
+  <div class="adjacent-container">
+    <div class="city-card" *ngFor="let item of adjacent">
+      <div class="city-card-header">{{ item.city.nombre }}</div>
+      <div class="city-card-body">
+        <button
+          class="city-action-btn"
+          (click)="travelTo(item.route.id)"
+        >
+          Viajar
+          <span *ngIf="item.route.dano > 0">
+            (Daño: {{ item.route.dano }})
+          </span>
+        </button>
+        <button
+          class="city-action-btn"
+          (click)="commerceTo(item.city.id)"
+        >
+          Comerciar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="return-container">
+    <button class="button" (click)="btnClick()">Devolverse</button>
+  </div>
+</div>

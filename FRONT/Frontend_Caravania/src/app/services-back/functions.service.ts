@@ -1,23 +1,29 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Servicio } from '../Models/servicio';
+import { Producto } from '../Models/producto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FunctionsService {
+  private readonly baseUrl = 'http://localhost:8081/game';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-
-  
-
-  obtenerServicios(ciudadId: number) {
-    return this.http.get('http://localhost:8081/game/servicios');
+  /** Devuelve la lista de servicios para una ciudad */
+  obtenerServicios(ciudadId: number): Observable<Servicio[]> {
+    return this.http.get<Servicio[]>(`${this.baseUrl}/servicios?ciudadId=${ciudadId}`);
   }
 
-  obtenerProductos(){
-    return this.http.get('http://localhost:8081/game/productos');
+  /** Devuelve la lista de productos */
+  obtenerProductos(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.baseUrl}/productos`);
   }
+
+  // Si tienes un endpoint para confirmar compra, descomenta:
+  // comprarServicio(id: number): Observable<any> {
+  //   return this.http.post(`${this.baseUrl}/comprarServicio/${id}`, {});
+  // }
 }

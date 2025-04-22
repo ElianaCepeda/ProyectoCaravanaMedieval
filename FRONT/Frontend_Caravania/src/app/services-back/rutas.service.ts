@@ -1,20 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Ciudad } from '../Models/ciudad';
+
+export interface Ruta {
+  id: number;
+  dano: number;
+  distancia: number;
+  descripcion_dano: string;
+  ciudadOrigen: Ciudad;
+  ciudadDestino: Ciudad;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class RutasService {
+  private readonly baseUrl = 'http://localhost:8081/ruta';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  obtenerRutas() {
-    return this.http.get('http://localhost:8081/ruta/list')
+  obtenerRutas(): Observable<Ruta[]> {
+    return this.http.get<Ruta[]>(`${this.baseUrl}/list`);
   }
 
-  obtenerRuta(id: number) {
-    return this.http.get('http://localhost:8081/ruta/' + id)
+  obtenerRuta(id: number): Observable<Ruta> {
+    return this.http.get<Ruta>(`${this.baseUrl}/${id}`);
   }
 }

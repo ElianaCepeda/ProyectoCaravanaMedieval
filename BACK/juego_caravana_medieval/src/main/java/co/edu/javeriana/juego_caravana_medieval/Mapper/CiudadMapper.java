@@ -6,12 +6,13 @@ import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 public class CiudadMapper {
 
     public static CiudadDTO toDTO(Ciudad ciudad) {
-        
         CiudadDTO ciudadDTO = new CiudadDTO();
         ciudadDTO.setId(ciudad.getId());
         ciudadDTO.setNombre(ciudad.getNombre());
         ciudadDTO.setTarifa(ciudad.getTarifa());
-
+        // Mapear coordenadas
+        ciudadDTO.setX(ciudad.getX());
+        ciudadDTO.setY(ciudad.getY());
         return ciudadDTO;
     }
 
@@ -20,8 +21,9 @@ public class CiudadMapper {
         ciudad.setId(ciudadDTO.getId());
         ciudad.setNombre(ciudadDTO.getNombre());
         ciudad.setTarifa(ciudadDTO.getTarifa());
-
+        // Mapear coordenadas
+        ciudad.setX(ciudadDTO.getX());
+        ciudad.setY(ciudadDTO.getY());
         return ciudad;
-      
     }
 }

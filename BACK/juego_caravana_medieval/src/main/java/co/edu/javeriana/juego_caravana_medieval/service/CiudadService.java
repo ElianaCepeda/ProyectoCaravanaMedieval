@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
@@ -72,6 +74,20 @@ public class CiudadService {
     ciudad.getRutas().addAll(selectedRutas);
     ciudadRepository.save(ciudad);
 
+    }
+
+    public ResponseEntity<?> actualizarCoordenadas(Long id, CiudadDTO nuevaCoord) {
+    Optional<Ciudad> ciudadOpt = ciudadRepository.findById(id);
+    if (ciudadOpt.isPresent()) {
+        Ciudad ciudad = ciudadOpt.get();
+        ciudad.setX(nuevaCoord.getX());
+        ciudad.setY(nuevaCoord.getY());
+        ciudadRepository.save(ciudad);
+        return ResponseEntity.ok("Coordenadas actualizadas correctamente");
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Ciudad con id " + id + " no encontrada.");
+    }
     }
 
 }

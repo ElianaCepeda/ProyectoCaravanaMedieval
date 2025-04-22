@@ -1,47 +1,89 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+// src/app/travel/travel.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
-import { FunctionsService } from '../services-back/functions.service';
+import { CiudadService } from '../services-back/ciudad.service';
+import { RutasService, Ruta } from '../services-back/rutas.service';
 import { Ciudad } from '../Models/ciudad';
+
+interface Adjacent {
+  city: Ciudad;
+  route: Ruta;
+}
 
 @Component({
   selector: 'app-travel',
   standalone: true,
-  imports: [CommonModule, RouterModule, PlayerUiComponent],
+  imports: [CommonModule, PlayerUiComponent],
   templateUrl: './travel.component.html',
-  styleUrl: './travel.component.css'
+  styleUrls: ['./travel.component.css']
 })
-export class TravelComponent {
-
+export class TravelComponent implements OnInit {
   vidaActual = 100;
   dineroActual = 9999;
 
-  // Lista dinámica de ciudades adyacentes
-  adjacentCities = [
-    { name: 'Ciudad A' },
-    { name: 'Ciudad B' },
-    { name: 'Ciudad C' },
-    // …puedes añadir más
-  ];
+  originCityId!: number;
+  actualCity: Ciudad | null = null;
+  adjacent: Adjacent[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private ciudadService: CiudadService,
+    private rutasService: RutasService
+  ) {}
 
-  // Maneja click en “Viajar”
-  travelTo(city: { name: string }) {
-    console.log('Viajando a', city.name);
-    // this.router.navigate(['/destino'], { queryParams: { ciudad: city.name } });
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const id = +params['origen'];
+      if (!id) {
+        console.error('No se recibió id de ciudad de origen');
+        return;
+      }
+      this.originCityId = id;
+
+      // 1) Carga la ciudad actual
+      this.ciudadService.obtenerCiudad(id).subscribe({
+        next: ciudad => {
+          this.actualCity = ciudad;
+          // 2) Carga las rutas y filtra las adyacentes
+          this.loadAdjacent();
+        },
+        error: () => console.error('No se pudo cargar ciudad actual')
+      });
+    });
   }
 
-  // Maneja click en “Comerciar”
-  commerceTo(city: { name: string }) {
-    console.log('Comerciar en', city.name);
-    // this.router.navigate(['/commerce'], { queryParams: { ciudad: city.name } });
+  private loadAdjacent() {
+    this.adjacent = [];
+    this.rutasService.obtenerRutas().subscribe({
+      next: rutas => {
+        rutas
+          .filter(r => r.ciudadOrigen.id === this.originCityId)
+          .forEach(r => {
+            this.ciudadService
+              .obtenerCiudad(r.ciudadDestino.id)
+              .subscribe(ciudadDestino => {
+                this.adjacent.push({ city: ciudadDestino, route: r });
+              });
+          });
+      },
+      error: () => console.error('No se pudieron cargar rutas')
+    });
   }
 
-  // Botón de regresar
+  travelTo(routeId: number) {
+    console.log('Viajando por ruta', routeId);
+    // Aquí disparas tu lógica de viaje…
+  }
+
+  commerceTo(cityId: number) {
+    console.log('Comerciar en ciudad', cityId);
+    this.router.navigate(['/commerce'], { queryParams: { ciudad: cityId } });
+  }
+
   btnClick() {
     this.router.navigate(['/mapCaravania']);
   }
-
 }
