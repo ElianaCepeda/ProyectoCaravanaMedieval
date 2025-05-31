@@ -3,6 +3,8 @@
 
 <!-- Ciudad actual -->
 <div id="ciudad-actual" class="ciudad-marcador ciudad-actual">
+  <!-- Punto visual rojo para la ciudad actual -->
+  <div class="ciudad-punto-actual"></div>
   <div class="ciudad-tooltip">
     {{ actualCity?.nombre }} (Tarifa: {{ actualCity?.tarifa }})
   </div>
@@ -14,6 +16,8 @@
   [id]="'ciudad-adyacente-' + i"
   class="ciudad-marcador ciudad-adyacente"
 >
+  <!-- Punto visual para ciudades adyacentes -->
+  <div class="ciudad-punto-adyacente"></div>
   <div class="ciudad-menu">
     <div class="city-title">{{ city.nombre }}</div>
     <div class="city-info">

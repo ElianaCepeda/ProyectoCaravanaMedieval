@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router'; // <-- RouterModule
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { FunctionsService } from '../services-back/functions.service';
@@ -12,7 +12,7 @@ import { Caravana } from '../Models/caravana';
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,        // ← en lugar de Router
+    RouterModule,        
     PlayerUiComponent
   ],
   templateUrl: './services.component.html',
@@ -20,18 +20,18 @@ import { Caravana } from '../Models/caravana';
 })
 export class ServicesComponent implements OnInit {
   servicios: Servicio[] = [];
-  vidaActual! : number;
-  dineroActual! : number;
+  vidaActual!: number;
+  dineroActual!: number;
 
-  caravana : Caravana = {
+  caravana: Caravana = {
     id: 0,
     nombre: '',
     vidas: 0,
     dinero: 0,
-    capacidad_actual:0,
-    velocidad_actual:0,
-    capacidad_maxima:0,
-    velocidad_maxima:0,
+    capacidad_actual: 0,
+    velocidad_actual: 0,
+    capacidad_maxima: 0,
+    velocidad_maxima: 0,
     guardias: false
   };
 
@@ -44,18 +44,13 @@ export class ServicesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Cargar servicios disponibles
     this.functionsService.obtenerServicios(1).subscribe({
       next: (data: Servicio[]) => this.servicios = data,
       error: err => console.error('Error al obtener los servicios:', err)
     });
 
-    this.caravanaService.obtenerCaravana(1).subscribe({
-      next: (caravana) => {
-        this.vidaActual = caravana.vidas;
-        this.dineroActual = caravana.dinero;
-      }
-    }); 
-
+    // Cargar datos de la caravana
     this.caravanaService.obtenerCaravana(1).subscribe({
       next: (caravana) => {
         this.caravana = caravana;
@@ -89,7 +84,7 @@ export class ServicesComponent implements OnInit {
         }
         break;
   
-        case 'Mejora de Velocidad':
+      case 'Mejora de Velocidad':
         if (this.caravana.velocidad_actual >= this.caravana.velocidad_maxima) {
           alert('Ya has alcanzado la velocidad máxima.');
           return;
@@ -156,6 +151,13 @@ export class ServicesComponent implements OnInit {
   }
   
   btnClick() {
-    this.router.navigate(['/mapCaravania']);
+    // Regresar al mapa con la ciudad actual de la caravana
+    if (this.caravana && this.caravana.ciudadActualId) {
+      this.router.navigate(['/mapCaravania'], {
+        queryParams: { actual: this.caravana.ciudadActualId }
+      });
+    } else {
+      this.router.navigate(['/mapCaravania']);
+    }
   }
 }

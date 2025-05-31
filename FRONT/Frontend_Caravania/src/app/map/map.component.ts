@@ -1,11 +1,12 @@
 // src/app/map/map.component.ts
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { CiudadService } from '../services-back/ciudad.service';
-import { Ciudad } from '../Models/ciudad';
+import { RutasService, RutaDTO } from '../services-back/rutas.service';
 import { CaravanaService } from '../services-back/caravana.service';
+import { Ciudad } from '../Models/ciudad';
 declare var OpenSeadragon: any;
 
 @Component({
@@ -16,42 +17,119 @@ declare var OpenSeadragon: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, AfterViewInit {
+  vidaActual!: number;
+  dineroActual!: number;
 
-vidaActual! :number
-dineroActual! :number
-
+  // Ciudad actual con sus coordenadas
   actualCity: (Ciudad & { x: number; y: number }) | null = null;
+  // Ciudades adyacentes (tienen x,y para overlay)
   adjacentCities: Array<Ciudad & { x: number; y: number }> = [];
+  
+  // Variables para controlar el estado
+  private viewer: any = null;
+  private viewerReady = false;
+  private dataReady = false;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private ciudadService: CiudadService,
+    private rutasService: RutasService,
     private caravanaService: CaravanaService
   ) {}
 
   ngOnInit(): void {
-    this.ciudadService.obtenerCiudades().subscribe({
-      next: (ciudades: Array<Ciudad & { x: number; y: number }>) => {
-        if (ciudades.length > 0) {
-          // 1) Tomamos la primera como actual
-          this.actualCity = ciudades[0];
-          // 2) El resto como adyacentes
-          this.adjacentCities = ciudades.slice(1);
-        }
-      },
-      error: err => console.error('No se pudieron cargar ciudades:', err)
-    });
-
+    // 1) Primero, cargamos la caravana para mostrar vida y dinero
     this.caravanaService.obtenerCaravana(1).subscribe({
-      next: (caravana) => {
+      next: caravana => {
         this.vidaActual = caravana.vidas;
         this.dineroActual = caravana.dinero;
-      }
-    }); 
+        
+        // 2) Después de cargar la caravana, determinamos la ciudad actual
+        this.route.queryParams.subscribe(params => {
+          const idParam = Number(params['actual']);
+          let cityId: number;
+          
+          if (idParam && !isNaN(idParam)) {
+            // Si nos pasaron explícitamente la ciudad actual
+            cityId = idParam;
+          } else {
+            // Si no vienen parámetros, usar la ciudad actual de la caravana
+            cityId = caravana.ciudadActualId || 1; // fallback a 1 si no existe
+          }
+          
+          this.loadCityAndAdjacents(cityId);
+        });
+      },
+      error: err => console.error('Error cargando caravana:', err)
+    });
+  }
+
+  private loadCityAndAdjacents(cityId: number) {
+    console.log('Cargando ciudad y adyacentes para ID:', cityId);
+    
+    // 1) Cargar la ciudad actual (incluye x,y)
+    this.ciudadService.obtenerCiudad(cityId).subscribe({
+      next: (ciud: Ciudad & { x: number; y: number }) => {
+        console.log('Ciudad actual cargada:', ciud);
+        this.actualCity = ciud;
+
+        // 2) Cargar todas las rutas para filtrar las adyacentes
+        this.rutasService.obtenerRutas().subscribe({
+          next: (rutas: RutaDTO[]) => {
+            // Filtrar rutas donde ciudadOrigenId === cityId
+            const rutasAdj = rutas.filter(r => r.ciudadOrigenId === cityId);
+            console.log('Rutas adyacentes encontradas:', rutasAdj.length);
+
+            // Limpiar array anterior
+            this.adjacentCities = [];
+            
+            // Si no hay rutas adyacentes, marcar datos como listos
+            if (rutasAdj.length === 0) {
+              this.dataReady = true;
+              this.tryUpdateOverlays();
+              return;
+            }
+
+            // Contador para saber cuándo terminamos de cargar todas las ciudades
+            let ciudadesPendientes = rutasAdj.length;
+
+            // Para cada ruta, pedimos la ciudad destino completa (incluyendo x,y)
+            rutasAdj.forEach(r => {
+              this.ciudadService.obtenerCiudad(r.ciudadDestinoId).subscribe({
+                next: ciudadDest => {
+                  console.log('Ciudad adyacente cargada:', ciudadDest);
+                  this.adjacentCities.push(ciudadDest);
+                  ciudadesPendientes--;
+                  
+                  // Cuando terminamos de cargar todas las ciudades
+                  if (ciudadesPendientes === 0) {
+                    console.log('Todas las ciudades adyacentes cargadas');
+                    this.dataReady = true;
+                    this.tryUpdateOverlays();
+                  }
+                },
+                error: err => {
+                  console.error('Error al cargar ciudad adyacente:', err);
+                  ciudadesPendientes--;
+                  if (ciudadesPendientes === 0) {
+                    this.dataReady = true;
+                    this.tryUpdateOverlays();
+                  }
+                }
+              });
+            });
+          },
+          error: err => console.error('Error al cargar rutas:', err)
+        });
+      },
+      error: err => console.error('Error al cargar ciudad actual:', err)
+    });
   }
 
   ngAfterViewInit(): void {
-    const viewer = OpenSeadragon({
+    // Inicializar OpenSeadragon
+    this.viewer = OpenSeadragon({
       id: "opensea-container",
       prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/images/",
       tileSources: "assets/img/map/mapa.dzi",
@@ -75,31 +153,86 @@ dineroActual! :number
       }
     });
 
-    viewer.addHandler('open', () => {
-      // Overlay ciudad actual
-      if (this.actualCity) {
-        const el = document.getElementById('ciudad-actual')!;
-        const coord = viewer.viewport.imageToViewportCoordinates(
-          this.actualCity.x,
-          this.actualCity.y
-        );
-        viewer.addOverlay({
-          element: el,
-          location: coord,
-          placement: OpenSeadragon.Placement.CENTER
-        });
-      }
-      // Overlays ciudades adyacentes
-      this.adjacentCities.forEach((city, i) => {
-        const el = document.getElementById(`ciudad-adyacente-${i}`)!;
-        const coord = viewer.viewport.imageToViewportCoordinates(city.x, city.y);
-        viewer.addOverlay({
-          element: el,
-          location: coord,
-          placement: OpenSeadragon.Placement.CENTER
-        });
-      });
+    this.viewer.addHandler('open', () => {
+      console.log('Viewer abierto correctamente');
+      this.viewerReady = true;
+      this.tryUpdateOverlays();
     });
+  }
+
+  // Método que solo actualiza overlays cuando tanto viewer como datos están listos
+  private tryUpdateOverlays(): void {
+    console.log('Intentando actualizar overlays - Viewer listo:', this.viewerReady, 'Datos listos:', this.dataReady);
+    
+    if (this.viewerReady && this.dataReady) {
+      // Delay para asegurar que Angular haya renderizado los elementos DOM
+      setTimeout(() => {
+        this.updateOverlays();
+      }, 200);
+    }
+  }
+
+  private updateOverlays(): void {
+    if (!this.viewer || !this.viewer.isOpen()) {
+      console.log('Viewer no está listo para overlays');
+      return;
+    }
+
+    console.log('Actualizando overlays...');
+    
+    // Limpiar overlays existentes
+    this.viewer.clearOverlays();
+
+    // 1) Overlay ciudad actual
+    if (this.actualCity) {
+      const elActual = document.getElementById('ciudad-actual');
+      if (elActual) {
+        console.log('Agregando overlay ciudad actual:', this.actualCity.nombre, 'en coordenadas:', this.actualCity.x, this.actualCity.y);
+        
+        // Verificar que las coordenadas sean válidas
+        if (typeof this.actualCity.x === 'number' && typeof this.actualCity.y === 'number') {
+          const coordActual = this.viewer.viewport.imageToViewportCoordinates(
+            this.actualCity.x,
+            this.actualCity.y
+          );
+          
+          this.viewer.addOverlay({
+            element: elActual,
+            location: coordActual,
+            placement: OpenSeadragon.Placement.CENTER
+          });
+          console.log('Overlay ciudad actual agregado exitosamente');
+        } else {
+          console.error('Coordenadas inválidas para ciudad actual:', this.actualCity.x, this.actualCity.y);
+        }
+      } else {
+        console.error('Elemento ciudad-actual no encontrado en el DOM');
+      }
+    } else {
+      console.log('No hay ciudad actual para mostrar');
+    }
+
+    // 2) Overlays ciudades adyacentes
+    console.log('Agregando', this.adjacentCities.length, 'ciudades adyacentes');
+    this.adjacentCities.forEach((city, i) => {
+      const elAdj = document.getElementById(`ciudad-adyacente-${i}`);
+      if (elAdj && typeof city.x === 'number' && typeof city.y === 'number') {
+        const coordAdj = this.viewer.viewport.imageToViewportCoordinates(
+          city.x,
+          city.y
+        );
+        this.viewer.addOverlay({
+          element: elAdj,
+          location: coordAdj,
+          placement: OpenSeadragon.Placement.CENTER
+        });
+        console.log(`Overlay ciudad adyacente ${i} agregado:`, city.nombre);
+      } else {
+        console.error(`Elemento ciudad-adyacente-${i} no encontrado o coordenadas inválidas`);
+      }
+    });
+
+    console.log('Proceso de actualización de overlays completado');
   }
 
   // Navegar a Comercio
@@ -123,5 +256,4 @@ dineroActual! :number
   goCaravan(): void {
     this.router.navigate(['/caravan']);
   }
-
 }

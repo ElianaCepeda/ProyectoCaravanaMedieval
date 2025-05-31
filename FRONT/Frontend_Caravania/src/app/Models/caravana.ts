@@ -8,6 +8,7 @@ export interface Caravana {
     dinero: number;
     vidas: number;
     guardias: boolean;
+    ciudadActualId?: number;
 
 }
 
