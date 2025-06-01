@@ -36,6 +36,22 @@ public class StockCaravana {
         this.id = id;
     }
 
+    public Caravana getCaravana() {
+        return caravana;
+    }
+
+    public void setCaravana(Caravana caravana) {
+        this.caravana = caravana;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -43,6 +59,4 @@ public class StockCaravana {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    
 }

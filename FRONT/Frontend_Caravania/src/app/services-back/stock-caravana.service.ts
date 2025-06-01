@@ -1,32 +1,49 @@
+// src/app/services-back/stock-caravana.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { StockCaravana } from '../Models/stock-caravana';
+// IMPORTA DESDE EL ARCHIVO stock-caravana-dto.ts
+import { StockCaravanaDTO } from '../Models/stock-caravana-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockCaravanaService {
-  private readonly baseUrl = 'http://localhost:8081/stockCaravana'; 
+  private apiUrl = 'http://localhost:8081/stockcaravana';
 
   constructor(private http: HttpClient) {}
 
-  /** Obtiene todos los objetos de una caravana */
-  obtenerStockPorCaravana(caravanaId: number): Observable<StockCaravana[]> {
-    return this.http.get<StockCaravana[]>(`${this.baseUrl}/caravana/${caravanaId}`);
+  /**
+   * 1) Obtiene todo el stock de la caravana {caravanaId}
+   *    GET http://localhost:8081/stockcaravana/caravana/{caravanaId}
+   */
+  obtenerStockPorCaravana(caravanaId: number): Observable<StockCaravanaDTO[]> {
+    return this.http.get<StockCaravanaDTO[]>(`${this.apiUrl}/caravana/${caravanaId}`);
   }
 
-  /** Añade o actualiza un objeto en el inventario */
-  guardarObjeto(stock: StockCaravana): Observable<StockCaravana> {
-    return this.http.post<StockCaravana>(`${this.baseUrl}/guardar`, stock);
+  /**
+   * 2) Aumenta la cantidad en un registro existente de stock
+   *    POST http://localhost:8081/stockcaravana/comprar/{stockId}/{cantidad}
+   */
+  comprarStockCaravana(stockId: number, cantidad: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/comprar/${stockId}/${cantidad}`, {});
   }
 
-  actualizarObjeto(id: number, stock: StockCaravana): Observable<StockCaravana> {
-  return this.http.put<StockCaravana>(`${this.baseUrl}/${id}`, stock);}
-
-  /** Elimina un objeto del inventario de la caravana */
-  eliminarObjeto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/eliminar/${id}`);
+  /**
+   * 3) Crea un nuevo registro de StockCaravana
+   *    POST http://localhost:8081/stockcaravana/crear
+   *    Body: { caravanaId, productoId, cantidad }
+   */
+  crearStockCaravana(
+    caravanaId: number,
+    productoId: number,
+    cantidad: number
+  ): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/crear`, {
+      caravanaId,
+      productoId,
+      cantidad
+    });
   }
 }

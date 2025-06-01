@@ -1,17 +1,20 @@
-// src/app/commerce/commerce.component.ts
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { FunctionsService } from '../services-back/functions.service';
 import { CaravanaService } from '../services-back/caravana.service';
+import { StockCaravanaService } from '../services-back/stock-caravana.service';
+
 import { Producto } from '../Models/producto';
 import { Caravana } from '../Models/caravana';
+import { StockCaravanaDTO } from '../Models/stock-caravana-dto';
 
 @Component({
   selector: 'app-commerce',
   standalone: true,
-  imports: [CommonModule, RouterModule, PlayerUiComponent],
+  imports: [CommonModule, PlayerUiComponent],
   templateUrl: './commerce.component.html',
   styleUrls: ['./commerce.component.css']
 })
@@ -20,53 +23,69 @@ export class CommerceComponent implements OnInit {
 
   vidaActual!: number;
   dineroActual!: number;
-  caravana!: Caravana; // Para almacenar la caravana completa
+  caravana!: Caravana;
 
-  // Para manejar el detalle de un producto
   productoSeleccionado: Producto | null = null;
   cantidadAComprar: number = 1;
+
+  stockCaravana: StockCaravanaDTO[] = [];
 
   constructor(
     private router: Router,
     private functionsService: FunctionsService,
-    private caravanaService: CaravanaService
+    private caravanaService: CaravanaService,
+    private stockCaravanaService: StockCaravanaService
   ) {}
 
-  ngOnInit() {
-    // 1) Obtener productos desde el backend
-    this.functionsService.obtenerProductos().subscribe({
-      next: (data: Producto[]) => {
+  ngOnInit(): void {
+    // Obtener productos desde el backend
+    this.functionsService.obtenerProductos().subscribe(
+      (data: Producto[]) => {
         this.productos = data;
       },
-      error: error => {
+      (error: any) => {
         console.error('Error al obtener los productos:', error);
       }
-    });
+    );
 
-    // 2) Cargar la caravana para mostrar vida y dinero
-    this.caravanaService.obtenerCaravana(1).subscribe({
-      next: c => {
+    // Cargar la caravana y luego su stock
+    this.caravanaService.obtenerCaravana(1).subscribe(
+      (c: Caravana) => {
         this.caravana = c;
         this.vidaActual = c.vidas;
         this.dineroActual = c.dinero;
+        this.cargarStock();
       },
-      error: err => console.error('Error cargando caravana:', err)
-    });
+      (err: any) => {
+        console.error('Error cargando caravana:', err);
+      }
+    );
+  }
+
+  /** Obtiene el stock desde el backend y lo guarda en this.stockCaravana */
+  private cargarStock(): void {
+    this.stockCaravanaService.obtenerStockPorCaravana(this.caravana.id).subscribe(
+      (stockArr: StockCaravanaDTO[]) => {
+        this.stockCaravana = stockArr;
+      },
+      (err: any) => {
+        console.error('Error al cargar stock de caravana:', err);
+      }
+    );
   }
 
   // Volver al mapa
-  btnClick() {
+  btnClick(): void {
     this.router.navigate(['/mapCaravania']);
   }
 
   // Ir al inventario (pantalla de vender)
-  btn2Click() {
+  btn2Click(): void {
     this.router.navigate(['/inventory']);
   }
 
-  // Cuando el usuario hace clic en "Consultar" en la lista de productos
-  consultar(producto: Producto) {
-    // Clonamos el objeto para no modificar directamente el de la lista
+  // Al hacer clic en "Consultar" en la lista de productos
+  consultar(producto: Producto): void {
     this.productoSeleccionado = { ...producto };
     this.cantidadAComprar = 1;
   }
@@ -80,47 +99,77 @@ export class CommerceComponent implements OnInit {
     return this.cantidadAComprar * precioUnitario;
   }
 
-  // Método que efectúa la compra (sin alertas ni toasts)
-  comprar(producto: Producto) {
-    // Determinamos cuántas unidades comprar:
+  /** 
+   * Método que efectúa la compra y luego refresca el stock.
+   * Resta dinero, actualiza la caravana en el backend y luego
+   * invoca a actualizarStock() para crear ó aumentar la fila de stock.
+   */
+  comprar(producto: Producto): void {
     let cantidad = 1;
     if (this.productoSeleccionado && this.productoSeleccionado.id === producto.id) {
-      // Si estamos en el detalle, compramos la cantidad indicada
       cantidad = this.cantidadAComprar;
     }
 
-    // Calcular precio total
     const precioUnitario = Number(producto.precio);
     const precioTotal = cantidad * precioUnitario;
-
-    // Verificar que la caravana tenga suficiente dinero
     if (this.dineroActual < precioTotal) {
-      // No hay suficiente dinero: solo escribimos en consola y salimos
       console.warn('No tienes suficiente dinero para esta compra.');
       return;
     }
 
-    // 1) Descontar el dinero en memoria
+    // Descontar dinero en memoria
     this.dineroActual -= precioTotal;
     this.caravana.dinero = this.dineroActual;
 
-    // 2) Actualizar la caravana en el backend, excluyendo campos extra (p.ej. ciudadActualId)
+    // Actualizar la caravana en el backend (solo vida y dinero)
     const { ciudadActualId, ...caravanaParaEnviar } = this.caravana;
-    this.caravanaService
-      .actualizarCaravana(this.caravana.id, caravanaParaEnviar)
-      .subscribe({
-        next: () => {
-          // Compra exitosa: si estábamos en el detalle, cerramos el detalle
-          if (this.productoSeleccionado) {
-            this.productoSeleccionado = null;
-            this.cantidadAComprar = 1;
-          }
-          // Ya no mostramos alerta; el dinero en pantalla ya refleja el cambio
+    this.caravanaService.actualizarCaravana(this.caravana.id, caravanaParaEnviar).subscribe(
+      () => {
+        // Una vez actualizada la caravana, actualizar el stock
+        this.actualizarStock(producto.id, cantidad);
+      },
+      (err: any) => {
+        console.error('Error al actualizar caravana en backend:', err);
+      }
+    );
+
+    // Si estaba mostrando el detalle, cerrarlo
+    if (this.productoSeleccionado) {
+      this.productoSeleccionado = null;
+      this.cantidadAComprar = 1;
+    }
+  }
+
+  /**
+   * Crea o actualiza (incrementa) una fila en stock_caravana luego
+   * de haber comprado. Si ya existe (productoId coincide), incrementa;
+   * si no existe, crea una nueva fila.
+   */
+  private actualizarStock(productoId: number, cantidad: number): void {
+    const entradaExistente = this.stockCaravana.find(
+      (sc: StockCaravanaDTO) => sc.productoId === productoId
+    );
+
+    if (entradaExistente) {
+      // Si ya hay registro, llamamos al endpoint comprarStockCaravana()
+      this.stockCaravanaService.comprarStockCaravana(entradaExistente.id!, cantidad).subscribe(
+        () => {
+          this.cargarStock();
         },
-        error: err => {
-          // Error al actualizar en backend: solo escribir en consola
-          console.error('Error al actualizar caravana en backend:', err);
+        (err: any) => {
+          console.error('Error al aumentar cantidad en stock:', err);
         }
-      });
+      );
+    } else {
+      // Si NO existe, llamamos a crearStockCaravana()
+      this.stockCaravanaService.crearStockCaravana(this.caravana.id, productoId, cantidad).subscribe(
+        () => {
+          this.cargarStock();
+        },
+        (err: any) => {
+          console.error('Error al crear nueva entrada de stock:', err);
+        }
+      );
+    }
   }
 }

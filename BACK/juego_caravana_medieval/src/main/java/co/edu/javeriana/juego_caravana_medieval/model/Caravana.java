@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 
 @Entity
-public class    Caravana {
+public class Caravana {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,11 +18,8 @@ public class    Caravana {
     @ManyToOne
     private Ciudad ciudad;
 
-    @OneToMany (mappedBy = "caravana")
+    @OneToMany(mappedBy = "caravana")
     private List<StockCaravana> stock;
-
-    
-
     private String nombre;
     private int velocidad_actual;
     private int velocidad_maxima;
@@ -30,17 +27,18 @@ public class    Caravana {
     private int capacidad_maxima;
     private int dinero;
     private int vidas;
-    private boolean guardias=false;
+    private boolean guardias = false;
 
     public Caravana() {
     }
 
-    public Caravana(String nombre, int velocidad_actual, int capacidad_actual, int dinero, int vidas, boolean guardias) {
+    public Caravana(String nombre, int velocidad_actual, int capacidad_actual, int dinero, int vidas,
+            boolean guardias) {
         this.nombre = nombre;
-        this.velocidad_actual = velocidad_actual*2;
-        this.velocidad_maxima = (int) (this.velocidad_actual * 1.5) ;
+        this.velocidad_actual = velocidad_actual * 2;
+        this.velocidad_maxima = (int) (this.velocidad_actual * 1.5);
         this.capacidad_actual = capacidad_actual;
-        this.capacidad_maxima = capacidad_actual*4;
+        this.capacidad_maxima = capacidad_actual * 4;
         this.dinero = dinero;
         this.vidas = vidas;
         this.guardias = guardias;
@@ -117,7 +115,7 @@ public class    Caravana {
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
-    
+
     public boolean isGuardias() {
         return guardias;
     }
@@ -126,6 +124,12 @@ public class    Caravana {
         this.guardias = guardias;
     }
 
-    
+    public List<StockCaravana> getStock() {
+        return stock;
+    }
+
+    public void setStock(List<StockCaravana> stock) {
+        this.stock = stock;
+    }
 
 }
