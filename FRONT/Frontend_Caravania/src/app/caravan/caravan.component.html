@@ -1,37 +1,44 @@
 <!-- src/app/caravan/caravan.component.html -->
 <div class="center-box">
-    <h2 class="title-header">Caravana Actual</h2>
+  <h2 class="title-header">Caravana Actual</h2>
   
-    <!-- vida / dinero -->
-    <div class="top-ui">
-      <app-player-ui
-        [vida]="vidaActual"
-        [mostrarDinero]="false">
-      </app-player-ui>
-      <app-player-ui
-        [dinero]="dineroActual"
-        [mostrarVida]="false">
-      </app-player-ui>
+  <!-- vida / dinero -->
+  <div class="top-ui">
+    <app-player-ui
+      [vida]="vidaActual"
+      [mostrarDinero]="false">
+    </app-player-ui>
+    <app-player-ui
+      [dinero]="dineroActual"
+      [mostrarVida]="false">
+    </app-player-ui>
+  </div>
+  
+  <!-- stats + inventario -->
+  <div class="stats-inventory-container">
+    <div class="stats-box">
+      <h3>Caravana Stats</h3>
+      <!-- aquí uso tus campos reales -->
+      <p>Salud: {{ currentCaravana.vidas }}</p>
+      <p>Velocidad: {{ currentCaravana.velocidad_actual }}</p>
+      <p>Capacidad: {{ currentCaravana.capacidad_actual }}</p>
     </div>
-  
-    <!-- stats + posible imagen -->
-    <div class="stats-image-container">
-      <div class="stats-box">
-        <h3>Caravana Stats</h3>
-        <!-- aquí uso tus campos reales -->
-        <p>Salud:     {{ currentCaravana.vidas }}</p>
-        <p>Velocidad: {{ currentCaravana.velocidad_actual }}</p>
-        <p>Capacidad: {{ currentCaravana.capacidad_actual }}</p>
+    
+    <div class="inventory-box">
+      <h3>Inventario</h3>
+      <div class="inventory-list">
+        <div class="inventory-item" *ngFor="let item of inventoryItems">
+          <div class="item-info">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-quantity">x{{ item.quantity }}</span>
+          </div>
+        </div>
       </div>
-      <div class="image-box">
-        <!-- si tienes un campo img en Caravana, úsalo; si no elimina esta línea -->
-        <img [src]="caravanaImg" alt="Caravana" />
-      </div>
-    </div>
-  
-    <!-- botón de regreso -->
-    <div class="return-container">
-      <button class="button" (click)="btnClick()">Devolverse</button>
     </div>
   </div>
   
+  <!-- botón de regreso -->
+  <div class="return-container">
+    <button class="button" (click)="btnClick()">Devolverse</button>
+  </div>
+</div>

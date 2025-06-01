@@ -7,45 +7,61 @@
     <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
   </div>
 
-  <!-- Contenedor dinámico -->
+  <!-- Contenedor dinámico: si hay productoSeleccionado, muestro detalle; si no, la lista -->
   <div class="table-scroll" [class.no-scroll]="productoSeleccionado">
-
     <ng-container *ngIf="productoSeleccionado; else listaProductos">
+      <!-- Detalle emergente -->
       <div class="detalle-producto-emergente">
         <div class="detalle-cuerpo">
           <div class="info-izquierda">
             <div class="titulo-producto">{{ productoSeleccionado.nombre }}</div>
           </div>
           <div class="info-derecha">
-            <p><strong>Cantidad disponible:</strong> {{ productoSeleccionado.cantidad }}</p>
             <label>
-              <strong>Cantidad:</strong>
-              <input type="number" [value]="cantidadAComprar" min="1" [max]="productoSeleccionado.cantidad"
-                     (input)="cantidadAComprar = $any($event.target).value">
+              <strong>Cantidad a comprar:</strong>
+              <input
+                type="number"
+                [value]="cantidadAComprar"
+                min="1"
+                (input)="cantidadAComprar = $any($event.target).value"
+              />
             </label>
-            <p><strong>Precio calculado:</strong> {{ calcularPrecio(productoSeleccionado) }} monedas</p>
-            <button class="button2" (click)="comprar(productoSeleccionado)">Comprar</button>
+            <p>
+              <strong>Precio calculado:</strong>
+              {{ calcularPrecio(productoSeleccionado) }} monedas
+            </p>
+            <button class="button2" (click)="comprar(productoSeleccionado)">
+              Comprar
+            </button>
+            <button class="button2" (click)="productoSeleccionado = null">
+              Cerrar
+            </button>
           </div>
         </div>
       </div>
     </ng-container>
 
+    <!-- Lista de productos -->
     <ng-template #listaProductos>
       <table class="service-table">
         <thead>
           <tr>
             <th>PRODUCTO</th>
-            <th>VALOR</th>
+            <th>PRECIO</th>
             <th>ACCIONES</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let producto of productos">
             <td><strong>{{ producto.nombre }}</strong></td>
-            <td>{{ producto.precio }}</td>
+            <td>{{ producto.precio }} monedas</td>
             <td>
-              <button class="button2" (click)="consultar(producto)">Consultar</button>
-              <button class="button2" (click)="comprar(producto)">Comprar</button>
+              <button class="button2" (click)="consultar(producto)">
+                Consultar
+              </button>
+              <button class="button2" (click)="comprar(producto)">
+                Comprar
+              </button>
             </td>
           </tr>
         </tbody>
@@ -56,6 +72,6 @@
   <!-- Botones inferiores -->
   <div class="return-container">
     <button class="button" (click)="btn2Click()">Vender</button>
-    <button class="button" (click)="btnClick()">devolverse</button>
+    <button class="button" (click)="btnClick()">Devolverse</button>
   </div>
 </div>
