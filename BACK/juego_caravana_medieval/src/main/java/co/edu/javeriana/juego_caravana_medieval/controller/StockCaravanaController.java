@@ -1,9 +1,11 @@
 package co.edu.javeriana.juego_caravana_medieval.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.StockCaravanaDTO;
@@ -26,8 +28,8 @@ public class StockCaravanaController {
     public List<StockCaravanaDTO> obtenerStockCaravana(@PathVariable Long caravanaId) {
         List<StockCaravana> stockEntidades = stockCaravanaService.obtenerStockPorCaravana(caravanaId);
         return stockEntidades.stream()
-                              .map(StockCaravanaMapper::toDTO)
-                              .collect(Collectors.toList());
+                .map(StockCaravanaMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -52,4 +54,17 @@ public class StockCaravanaController {
     public void crearStockCaravana(@RequestBody StockCaravanaDTO dto) {
         stockCaravanaService.crearStockCaravana(dto.getCaravanaId(), dto.getProductoId(), dto.getCantidad());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizarCantidadStockCaravana(@PathVariable Long id,
+            @RequestBody Map<String, Integer> body) {
+        Integer cantidad = body.get("cantidad");
+        stockCaravanaService.actualizarCantidadStockCaravana(id, cantidad);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+public void eliminarStockCaravana(@PathVariable Long id) {
+    stockCaravanaService.eliminarStockCaravana(id);
+}
 }

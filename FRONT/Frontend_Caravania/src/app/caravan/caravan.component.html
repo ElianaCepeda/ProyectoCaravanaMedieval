@@ -1,4 +1,3 @@
-<!-- src/app/caravan/caravan.component.html -->
 <div class="center-box">
   <h2 class="title-header">Caravana Actual</h2>
   
@@ -18,7 +17,6 @@
   <div class="stats-inventory-container">
     <div class="stats-box">
       <h3>Caravana Stats</h3>
-      <!-- aquí uso tus campos reales -->
       <p>Salud: {{ currentCaravana.vidas }}</p>
       <p>Velocidad: {{ currentCaravana.velocidad_actual }}</p>
       <p>Capacidad: {{ currentCaravana.capacidad_actual }}</p>
@@ -27,11 +25,14 @@
     <div class="inventory-box">
       <h3>Inventario</h3>
       <div class="inventory-list">
-        <div class="inventory-item" *ngFor="let item of inventoryItems">
+        <div class="inventory-item" *ngFor="let item of productos">
           <div class="item-info">
-            <span class="item-name">{{ item.name }}</span>
-            <span class="item-quantity">x{{ item.quantity }}</span>
+            <span class="item-name">{{ item.productoNombre }}</span>
+            <span class="item-quantity">x{{ item.cantidad }}</span>
           </div>
+        </div>
+        <div *ngIf="productos.length === 0">
+          <span>No tienes productos en el inventario.</span>
         </div>
       </div>
     </div>

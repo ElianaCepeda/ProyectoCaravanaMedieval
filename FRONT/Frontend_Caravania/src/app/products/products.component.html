@@ -1,7 +1,6 @@
 <div class="center-box">
   <h2 class="title-header">Tus productos</h2>
 
-  <!-- UI flotante arriba derecha -->
   <div class="top-ui">
     <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
     <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
@@ -11,22 +10,28 @@
     <button class="button" (click)="btnClick()">devolverse</button>
   </div>
 
-  <!-- Contenedor de tabla scrollable -->
   <div class="table-scroll">
     <table class="service-table">
       <thead>
         <tr>
           <th>PRODUCTO</th>
           <th>CANTIDAD</th>
+          <th>VENDER</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of productos">
           <td>{{ item.productoNombre }}</td>
           <td>{{ item.cantidad }}</td>
+          <td>
+            <input type="number" min="1" [max]="item.cantidad" [value]="cantidadAVender[item.id] || 1" (input)="actualizarCantidad(item.id, $event)" style="width:50px;">
+            <button class="button2" (click)="venderProducto(item)">
+              Ruleta (Vender)
+            </button>
+          </td>
         </tr>
         <tr *ngIf="productos.length === 0">
-          <td colspan="2">No tienes productos comprados.</td>
+          <td colspan="3">No tienes productos comprados.</td>
         </tr>
       </tbody>
     </table>

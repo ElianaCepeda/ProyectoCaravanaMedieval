@@ -27,9 +27,6 @@ public class StockCaravanaService {
     /**
      * Elimina un registro de stock por su ID.
      */
-    public void eliminarStockCaravana(Long id) {
-        stockCaravanaRepository.deleteById(id);
-    }
 
     /**
      * Incrementa la cantidad de un stock existente.
@@ -86,4 +83,17 @@ public class StockCaravanaService {
 
         stockCaravanaRepository.save(nuevoStock);
     }
+
+    public void actualizarCantidadStockCaravana(Long id, int cantidad) {
+    StockCaravana stock = stockCaravanaRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("El stock con el ID " + id + " no existe."));
+    stock.setCantidad(cantidad);
+    stockCaravanaRepository.save(stock);
+
+    
+}
+
+public void eliminarStockCaravana(Long id) {
+    stockCaravanaRepository.deleteById(id);
+}
 }

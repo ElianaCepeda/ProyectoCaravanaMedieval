@@ -46,4 +46,18 @@ export class StockCaravanaService {
       cantidad
     });
   }
+
+  venderStockCaravana(stockId: number, cantidad: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/vender/${stockId}/${cantidad}`, {});
+  }
+
+  eliminarStockCaravana(stockId: number): Observable<any> {
+    // CORREGIDO: No repitas /stockcaravana
+    return this.http.delete(`${this.apiUrl}/${stockId}`);
+  }
+
+  actualizarCantidadStockCaravana(stockId: number, nuevaCantidad: number): Observable<any> {
+    // CORREGIDO: No repitas /stockcaravana
+    return this.http.put(`${this.apiUrl}/${stockId}`, { cantidad: nuevaCantidad });
+  }
 }
