@@ -6,7 +6,9 @@ import { PlayerUiComponent } from '../player-ui/player-ui.component';
 import { CiudadService } from '../services-back/ciudad.service';
 import { RutasService, RutaDTO } from '../services-back/rutas.service';
 import { CaravanaService } from '../services-back/caravana.service';
+import { ClockService } from '../services-back/clock.service';
 import { Ciudad } from '../Models/ciudad';
+import { Subscription } from 'rxjs';
 declare var OpenSeadragon: any;
 
 @Component({
@@ -30,15 +32,34 @@ export class MapComponent implements OnInit, AfterViewInit {
   private viewerReady = false;
   private dataReady = false;
 
+  
+  displayTime: string = '00:00';            // Lo que se mostrará en el botón
+  private clockSub!: Subscription;          // Para cancelar la suscripción
+
+  getTiempoIcon(): string {
+    
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 18) {
+      return '☀️'; // Día
+    } else {
+      return '🌙'; // Noche
+    }
+  }
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private ciudadService: CiudadService,
     private rutasService: RutasService,
-    private caravanaService: CaravanaService
+    private caravanaService: CaravanaService,
+    private clockService: ClockService       // ← Inyectamos el servicio
   ) {}
 
   ngOnInit(): void {
+
+    this.clockSub = this.clockService.displayTime$.subscribe(time => {
+      this.displayTime = time;
+    });
     // 1) Primero, cargamos la caravana para mostrar vida y dinero
     this.caravanaService.obtenerCaravana(1).subscribe({
       next: caravana => {
@@ -63,6 +84,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       },
       error: err => console.error('Error cargando caravana:', err)
     });
+    
   }
 
   private loadCityAndAdjacents(cityId: number) {
@@ -160,6 +182,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
+
+ 
+
   // Método que solo actualiza overlays cuando tanto viewer como datos están listos
   private tryUpdateOverlays(): void {
     console.log('Intentando actualizar overlays - Viewer listo:', this.viewerReady, 'Datos listos:', this.dataReady);
@@ -255,5 +280,13 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   goCaravan(): void {
     this.router.navigate(['/caravan']);
+  }
+
+  ngOnDestroy(): void {
+    // 1) Cancelar la suscripción del reloj
+    if (this.clockSub) {
+      this.clockSub.unsubscribe();
+    }
+    
   }
 }

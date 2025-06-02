@@ -34,6 +34,13 @@
   <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>
 </div>
 
+<div class="floating-ui bottom-right-tiempo">
+  <div class="tiempo-display">
+    {{ displayTime }}
+    <span class="tiempo-icon">{{ getTiempoIcon() }}</span>
+  </div>
+</div>
+
 <!-- Botones de navegación -->
 <div class="action-buttons">
   <button class="action-btn" (click)="goCommerce()">Comerciar</button>

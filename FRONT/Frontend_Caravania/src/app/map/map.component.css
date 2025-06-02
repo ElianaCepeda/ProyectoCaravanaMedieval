@@ -26,10 +26,12 @@
 
 .ciudad-marcador {
   position: relative;
-  overflow: visible;    /* permite hover dentro del menú */
+  overflow: visible;
+  /* permite hover dentro del menú */
   width: 8px;
   height: 8px;
-  background-color: #C44536; /* rojo por defecto */
+  background-color: #C44536;
+  /* rojo por defecto */
   border: 2px solid white;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
@@ -39,11 +41,13 @@
 }
 
 .ciudad-actual {
-  background-color: #C44536; /* rojo */
+  background-color: #C44536;
+  /* rojo */
 }
 
 .ciudad-adyacente {
-  background-color: #3A6EA5; /* azul */
+  background-color: #3A6EA5;
+  /* azul */
 }
 
 /* Tooltip simple */
@@ -72,7 +76,8 @@
 .ciudad-menu {
   display: none;
   position: absolute;
-  bottom: calc(100% + 4px); /* justo encima del marcador */
+  bottom: calc(100% + 4px);
+  /* justo encima del marcador */
   left: 50%;
   transform: translateX(-50%);
   width: 160px;
@@ -82,7 +87,8 @@
   border-radius: 6px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   z-index: 10;
-  pointer-events: auto;    /* recibe hover y clics */
+  pointer-events: auto;
+  /* recibe hover y clics */
 }
 
 /* Mantener menú visible mientras el cursor esté en marcador o menú */
@@ -113,6 +119,7 @@
   font-size: 13px;
   font-family: 'OptimusPrincepsSemiBold', sans-serif;
 }
+
 .city-action:hover {
   background: #eee;
 }
@@ -144,10 +151,12 @@
   position: absolute;
   z-index: 10;
 }
+
 .top-left {
   top: 45px;
   left: 25px;
 }
+
 .bottom-right {
   bottom: 45px;
   right: 35px;
@@ -175,6 +184,51 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 .action-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Posicionamiento del contenedor del reloj */
+.bottom-right-tiempo {
+  position: absolute;
+  bottom: 105px;
+  right: 35px;
+}
+
+/* Estilos para mostrar la hora (reemplaza el botón por un elemento no clicable) */
+.bottom-right-tiempo {
+  position: absolute;
+  bottom: 105px;
+  right: 35px;
+}
+
+/* Estilos mejorados para el display del tiempo */
+.tiempo-display {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-family: 'Drukaatie burti', sans-serif;
+  color: #fff;
+  min-width: 75px;
+  text-align: center;
+  position: relative;
+}
+
+.tiempo-icon {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+/* Si quieres que el ícono tenga una animación sutil */
+.tiempo-icon {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-left: 4px;
+  transition: transform 0.2s ease;
 }
