@@ -29,7 +29,7 @@ export class CarCreateComponent {
       clase: 'Tormenta Rápida',
       stats: {
         salud: 100,
-        velocidad: 2,
+        velocidad: 3,
         capacidad: 2,
         dinero: 1250
       }
@@ -41,7 +41,7 @@ export class CarCreateComponent {
         salud: 100,
         velocidad: 1,
         capacidad: 1,
-        dinero: 3500
+        dinero: 2500
       }
     },
     {

@@ -46,14 +46,13 @@ public class DbInitializer implements CommandLineRunner {
         // false);
         // caravanaRepository.save(caravana);
 
-        Caravana tormentaRapida = new Caravana("Tormenta Rápida", 100, 2, 1250, 2, false);
-        Caravana caravanaReal = new Caravana("Caravana Real", 100, 1, 3500, 1, false);
-        Caravana giganteCarga = new Caravana("Gigante de Carga", 100, 1, 1000, 3, false);
+        Caravana tormentaRapida = new Caravana("Tormenta Rápida", 2, 2, 1250, 100, false);
+        Caravana caravanaReal = new Caravana("Caravana Real", 1, 1, 2500, 100, false);
+        Caravana giganteCarga = new Caravana("Gigante de Carga", 1, 3, 1000, 100, false);
 
         caravanaRepository.save(tormentaRapida);
         caravanaRepository.save(caravanaReal);
         caravanaRepository.save(giganteCarga);
-
         // Crear ciudades
         List<Ciudad> ciudades = List.of(
                 new Ciudad("Burgo de Alba", 8, generarX(), generarY()),

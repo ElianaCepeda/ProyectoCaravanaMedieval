@@ -57,4 +57,9 @@ export class ClockService implements OnDestroy {
   public getCurrentTime(): string {
     return this.formatTime();
   }
+
+  public sumarHoras(horas: number): void {
+  this.currentHour = (this.currentHour + horas) % 24;
+  this.displaySubject.next(this.formatTime());
+}
 }

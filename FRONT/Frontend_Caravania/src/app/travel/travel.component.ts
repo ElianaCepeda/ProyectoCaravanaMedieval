@@ -8,6 +8,7 @@ import { RutasService, RutaDTO } from '../services-back/rutas.service';
 import { CaravanaService } from '../services-back/caravana.service';
 import { Ciudad } from '../Models/ciudad';
 import { Caravana } from '../Models/caravana';
+import { ClockService } from '../services-back/clock.service'; 
 
 interface Adjacent {
   city: Ciudad;
@@ -37,7 +38,8 @@ export class TravelComponent implements OnInit {
     private route: ActivatedRoute,
     private ciudadService: CiudadService,
     private rutasService: RutasService,
-    private caravanaService: CaravanaService
+    private caravanaService: CaravanaService,
+    private clockService: ClockService
   ) { }
 
   ngOnInit(): void {
@@ -163,6 +165,14 @@ export class TravelComponent implements OnInit {
       this.caravana.vidas = Math.max(0, this.caravana.vidas - dañoReal);
       this.caravana.dinero = Math.max(0, this.caravana.dinero - costoTarifa);
       this.caravana.ciudadActualId = ciudadDestinoId;
+
+      const v = this.caravana.velocidad_actual;
+      // Lineal entre 3h (v=1) y 1h (v=8)
+      let horasViaje = 3 - ((v - 1) * (2 / 7));
+      horasViaje = Math.ceil(horasViaje); // Redondea hacia arriba
+
+      // Sumar horas al reloj ficticio
+      this.clockService.sumarHoras(horasViaje);
   
 
       // Crear objeto para enviar (sin ciudadActualId si el backend no lo acepta)
