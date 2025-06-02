@@ -85,7 +85,7 @@ export class ServicesComponent implements OnInit {
         break;
   
       case 'Mejora de Velocidad':
-        if (this.caravana.velocidad_actual >= this.caravana.velocidad_maxima) {
+        if (this.caravana.velocidad_actual >= 8) {
           alert('Ya has alcanzado la velocidad máxima.');
           return;
         }
@@ -98,8 +98,7 @@ export class ServicesComponent implements OnInit {
         }
         break;
   
-      default:
-        console.warn('Servicio desconocido:', servicio.nombre);
+      
     }
   
     // 2) Validar que hay suficiente dinero
@@ -120,18 +119,14 @@ export class ServicesComponent implements OnInit {
         break;
   
       case 'Mejora de Capacidad':
-        this.caravana.capacidad_actual = Math.min(
-          this.caravana.capacidad_actual + 5,
-          this.caravana.capacidad_maxima
-        );
-        break;
+      this.caravana.capacidad_actual += 1;
+      break;
   
       case 'Mejora de Velocidad':
-        this.caravana.velocidad_actual = Math.min(
-          this.caravana.velocidad_actual + 5,
-          this.caravana.velocidad_maxima
-        );
-        break;
+      if (this.caravana.velocidad_actual < 8) {
+        this.caravana.velocidad_actual += 1;
+      }
+      break;
   
       case 'Contratación de Guardias':
         this.caravana.guardias = true;

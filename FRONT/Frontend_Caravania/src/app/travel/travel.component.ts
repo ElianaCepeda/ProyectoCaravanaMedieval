@@ -158,12 +158,12 @@ export class TravelComponent implements OnInit {
 
     // 4) Actualizar la caravana localmente (vidas, dinero y ciudadActualId)
     if (this.caravana) {
-      // Restar daño
-      this.caravana.vidas = Math.max(0, this.caravana.vidas - dañoRuta);
-      // Restar dinero por tarifa
+      
+      const dañoReal = this.caravana.guardias ? 0 : dañoRuta;
+      this.caravana.vidas = Math.max(0, this.caravana.vidas - dañoReal);
       this.caravana.dinero = Math.max(0, this.caravana.dinero - costoTarifa);
-      // Asignar nueva ciudad actual
       this.caravana.ciudadActualId = ciudadDestinoId;
+  
 
       // Crear objeto para enviar (sin ciudadActualId si el backend no lo acepta)
       const { ciudadActualId, ...caravanaParaEnviar } = this.caravana;
