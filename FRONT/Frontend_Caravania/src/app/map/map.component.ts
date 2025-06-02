@@ -37,14 +37,15 @@ export class MapComponent implements OnInit, AfterViewInit {
   private clockSub!: Subscription;          // Para cancelar la suscripción
 
   getTiempoIcon(): string {
-    
-    const hour = new Date().getHours();
-    if (hour >= 6 && hour < 18) {
-      return '☀️'; // Día
-    } else {
-      return '🌙'; // Noche
-    }
+  
+  const [hh, mm] = this.displayTime.split(':').map(Number);
+  // Noche: 18:00 (6pm) hasta 5:59 (6am)
+  if (hh >= 6 && hh < 18) {
+    return '☀️'; // Día
+  } else {
+    return '🌙'; // Noche
   }
+}
 
   constructor(
     private router: Router,

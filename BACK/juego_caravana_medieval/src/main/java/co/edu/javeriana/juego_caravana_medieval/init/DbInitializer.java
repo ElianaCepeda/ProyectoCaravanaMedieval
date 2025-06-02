@@ -1,8 +1,10 @@
 package co.edu.javeriana.juego_caravana_medieval.init;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,8 +42,9 @@ public class DbInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //Caravana caravana = new Caravana("Destructor de Pueblos", 15, 5, 1200, 200, false);
-        //caravanaRepository.save(caravana);
+        // Caravana caravana = new Caravana("Destructor de Pueblos", 15, 5, 1200, 200,
+        // false);
+        // caravanaRepository.save(caravana);
 
         Caravana tormentaRapida = new Caravana("Tormenta Rápida", 100, 2, 1250, 2, false);
         Caravana caravanaReal = new Caravana("Caravana Real", 100, 1, 3500, 1, false);
@@ -51,7 +54,7 @@ public class DbInitializer implements CommandLineRunner {
         caravanaRepository.save(caravanaReal);
         caravanaRepository.save(giganteCarga);
 
-        // Crear ciudades 
+        // Crear ciudades
         List<Ciudad> ciudades = List.of(
                 new Ciudad("Burgo de Alba", 8, generarX(), generarY()),
                 new Ciudad("Villa del Roble", 10, generarX(), generarY()),
@@ -154,32 +157,38 @@ public class DbInitializer implements CommandLineRunner {
         System.out.println("Ciudades iniciales insertadas.");
 
         // Crear rutas aleatorias
+        // Crear rutas aleatorias
         Random random = new Random();
-        List<Ruta> rutas = ciudades.stream()
-                .flatMap(ciudad -> ciudades.stream()
-                        .filter(destino -> !ciudad.equals(destino))
-                        .limit(5) // Limitar a 3 rutas por ciudad
-                        .map(destino -> {
-                            boolean esSegura = random.nextBoolean();
-                            String descripcion;
-                            if (esSegura) {
-                                descripcion = "Ruta segura. Es más larga, pero la caravana no sufre daño durante el viaje.";
-                            } else {
-                                descripcion = random.nextBoolean() ? "Ruta insegura. Hay bandidos en el camino."
-                                        : "Ruta insegura. Hay desastres naturales en el camino.";
-                            }
-                            int costoDano = esSegura ? 0 : random.nextInt(100) + 1; // Costo de daño aleatorio entre 1 y
-                                                                                    // 100 para rutas inseguras, 0 para
-                                                                                    // rutas seguras
-                            return new Ruta(
-                                    ciudad,
-                                    destino,
-                                    costoDano,
-                                    descripcion
+        List<Ruta> rutas = new ArrayList<>();
 
-                        );
-                        }))
-                .collect(Collectors.toList());
+        for (Ciudad ciudad : ciudades) {
+            // Crear una lista de posibles destinos (todas menos la ciudad actual)
+            List<Ciudad> posiblesDestinos = new ArrayList<>(ciudades);
+            posiblesDestinos.remove(ciudad);
+
+            // Mezclar la lista para obtener destinos aleatorios
+            Collections.shuffle(posiblesDestinos, random);
+
+            // Tomar los primeros 5 destinos aleatorios
+            List<Ciudad> destinosSeleccionados = posiblesDestinos.stream().limit(5).collect(Collectors.toList());
+
+            for (Ciudad destino : destinosSeleccionados) {
+                boolean esSegura = random.nextBoolean();
+                String descripcion;
+                if (esSegura) {
+                    descripcion = "Ruta segura. Es más larga, pero la caravana no sufre daño durante el viaje.";
+                } else {
+                    descripcion = random.nextBoolean() ? "Ruta insegura. Hay bandidos en el camino."
+                            : "Ruta insegura. Hay desastres naturales en el camino.";
+                }
+                int costoDano = esSegura ? 0 : random.nextInt(100) + 1; // 1 a 100 para inseguras, 0 para seguras
+                rutas.add(new Ruta(
+                        ciudad,
+                        destino,
+                        costoDano,
+                        descripcion));
+            }
+        }
 
         rutaRepository.saveAll(rutas);
         System.out.println("Rutas iniciales insertadas.");
@@ -248,27 +257,25 @@ public class DbInitializer implements CommandLineRunner {
         System.out.println("Productos iniciales insertados.");
     }
 
-
     private int generarX() {
         // { xMin, xMax }
         int[][] zonas = {
-            { 3000,  8000 },   // Oeste
-            { 9500, 19500 },   // Centro
-            {19500, 24500 },   // Este
-            {24500, 28500 }    // Extremo este
+                { 3000, 8000 }, // Oeste
+                { 9500, 19500 }, // Centro
+                { 19500, 24500 }, // Este
+                { 24500, 28500 } // Extremo este
         };
         int[] zona = zonas[new Random().nextInt(zonas.length)];
         return new Random().nextInt(zona[1] - zona[0]) + zona[0];
     }
 
-    
     private int generarY() {
         // { yMin, yMax }
         int[][] zonas = {
-            { 5500, 11000 },   // Oeste
-            { 5500, 11000 },   // Centro
-            { 3500, 10500 },   // Este
-            { 5000, 11000 }    // Extremo este
+                { 5500, 11000 }, // Oeste
+                { 5500, 11000 }, // Centro
+                { 3500, 10500 }, // Este
+                { 5000, 11000 } // Extremo este
         };
         int[] zona = zonas[new Random().nextInt(zonas.length)];
         return new Random().nextInt(zona[1] - zona[0]) + zona[0];
