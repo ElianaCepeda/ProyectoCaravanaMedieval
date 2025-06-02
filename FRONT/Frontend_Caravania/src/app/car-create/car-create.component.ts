@@ -28,29 +28,29 @@ export class CarCreateComponent {
       img: '../../assets/img/creation/velocidad.png',
       clase: 'Tormenta Rápida',
       stats: {
-        salud: 80,
-        velocidad: 15,
-        capacidad: 5,
-        dinero: 1200
+        salud: 100,
+        velocidad: 2,
+        capacidad: 2,
+        dinero: 1250
       }
     },
     {
       img: '../../assets/img/creation/realeza.png',
       clase: 'Caravana Real',
       stats: {
-        salud: 80,
-        velocidad: 40,
-        capacidad: 40,
-        dinero: 6000
+        salud: 100,
+        velocidad: 1,
+        capacidad: 1,
+        dinero: 3500
       }
     },
     {
       img: '../../assets/img/creation/capacidad.png',
       clase: 'Gigante de Carga',
       stats: {
-        salud: 80,
-        velocidad: 40,
-        capacidad: 800,
+        salud: 100,
+        velocidad: 1,
+        capacidad: 3,
         dinero: 1000
       }
     }

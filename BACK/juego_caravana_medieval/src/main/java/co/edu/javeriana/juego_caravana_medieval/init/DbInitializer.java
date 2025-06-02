@@ -40,8 +40,16 @@ public class DbInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Caravana caravana = new Caravana("Destructor de Pueblos", 15, 5, 1200, 80, false);
-        caravanaRepository.save(caravana);
+        //Caravana caravana = new Caravana("Destructor de Pueblos", 15, 5, 1200, 200, false);
+        //caravanaRepository.save(caravana);
+
+        Caravana tormentaRapida = new Caravana("Tormenta Rápida", 100, 2, 1250, 2, false);
+        Caravana caravanaReal = new Caravana("Caravana Real", 100, 1, 3500, 1, false);
+        Caravana giganteCarga = new Caravana("Gigante de Carga", 100, 1, 1000, 3, false);
+
+        caravanaRepository.save(tormentaRapida);
+        caravanaRepository.save(caravanaReal);
+        caravanaRepository.save(giganteCarga);
 
         // Crear ciudades 
         List<Ciudad> ciudades = List.of(
@@ -150,7 +158,7 @@ public class DbInitializer implements CommandLineRunner {
         List<Ruta> rutas = ciudades.stream()
                 .flatMap(ciudad -> ciudades.stream()
                         .filter(destino -> !ciudad.equals(destino))
-                        .limit(3) // Limitar a 3 rutas por ciudad
+                        .limit(5) // Limitar a 3 rutas por ciudad
                         .map(destino -> {
                             boolean esSegura = random.nextBoolean();
                             String descripcion;

@@ -110,12 +110,23 @@ export class CommerceComponent implements OnInit {
       cantidad = this.cantidadAComprar;
     }
 
-    const precioUnitario = Number(producto.precio);
-    const precioTotal = cantidad * precioUnitario;
-    if (this.dineroActual < precioTotal) {
-      console.warn('No tienes suficiente dinero para esta compra.');
-      return;
-    }
+    // Sumar la cantidad total de objetos en el inventario
+  const totalActual = this.stockCaravana.reduce((acc, item) => acc + item.cantidad, 0);
+
+  // Validar capacidad máxima
+  if (totalActual + cantidad > this.caravana.capacidad_maxima) {
+    alert('¡No puedes exceder la capacidad máxima de la caravana!');
+    return;
+  }
+
+  const precioUnitario = Number(producto.precio);
+  const precioTotal = cantidad * precioUnitario;
+  if (this.dineroActual < precioTotal) {
+    console.warn('No tienes suficiente dinero para esta compra.');
+    return;
+  }
+
+  
 
     // Descontar dinero en memoria
     this.dineroActual -= precioTotal;

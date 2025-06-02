@@ -66,8 +66,8 @@ export class ProductsComponent implements OnInit {
 
   // Ruleta: premio aleatorio entre 0 y 100 por unidad
   calcularPremio(): number {
-    return Math.floor(Math.random() * 101);
-  }
+  return Math.floor(Math.random() * 201) - 100; // -100 a 100
+}
 
   venderProducto(item: StockCaravanaDTO) {
     const cantidad = this.cantidadAVender[item.id!] || 1;
