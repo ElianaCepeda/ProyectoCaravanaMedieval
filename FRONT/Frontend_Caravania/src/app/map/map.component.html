@@ -29,6 +29,7 @@
 <!-- Barra flotante de vida/dinero -->
 <div class="floating-ui top-left">
   <app-player-ui [vida]="vidaActual" [mostrarDinero]="false"></app-player-ui>
+ <div class="vida-amount" style="display: none;" aria-hidden="true">{{ vidaActual }}</div>
 </div>
 <div class="floating-ui bottom-right">
   <app-player-ui [dinero]="dineroActual" [mostrarVida]="false"></app-player-ui>

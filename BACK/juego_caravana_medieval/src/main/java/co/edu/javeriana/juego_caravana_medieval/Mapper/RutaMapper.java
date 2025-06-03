@@ -17,6 +17,7 @@ public class RutaMapper {
     public static RutaDTO toDTO(Ruta ruta) {
         RutaDTO rutaDTO = new RutaDTO();
         rutaDTO.setId(ruta.getId());
+        rutaDTO.setDistancia(ruta.getDistancia());
         rutaDTO.setCantidad_dano(ruta.getCantidad_dano());
         rutaDTO.setDescripcion_dano(ruta.getDescripcion_dano());
         rutaDTO.setCiudadOrigenId(ruta.getCiudad_origen() != null ? ruta.getCiudad_origen().getId() : null);
@@ -29,7 +30,7 @@ public class RutaMapper {
         ruta.setId(rutaDTO.getId());
         ruta.setCantidad_dano(rutaDTO.getCantidad_dano());
         ruta.setDescripcion_dano(rutaDTO.getDescripcion_dano());
-
+        ruta.setDistancia(rutaDTO.getDistancia());
         ruta.setCiudad_destino(ciudadService.obtenerCiudadPorId(rutaDTO.getCiudadDestinoId()));
         ruta.setCiudad_origen(ciudadService.obtenerCiudadPorId(rutaDTO.getCiudadOrigenId()));
         

@@ -8,6 +8,7 @@ public class RutaDTO {
     private Long ciudadDestinoId;
     private String ciudadOrigenNombre;
     private String ciudadDestinoNombre;
+    private float distancia;
 
     public RutaDTO() {
     }
@@ -78,6 +79,13 @@ public class RutaDTO {
         this.ciudadDestinoNombre = ciudadDestinoNombre;
     }
 
+    public float getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(float distancia) {
+        this.distancia = distancia;
+    }
 
 
     

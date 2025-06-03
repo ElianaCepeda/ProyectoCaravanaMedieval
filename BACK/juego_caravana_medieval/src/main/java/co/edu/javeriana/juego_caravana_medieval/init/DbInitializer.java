@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import co.edu.javeriana.juego_caravana_medieval.model.Caravana;
@@ -22,6 +23,9 @@ import co.edu.javeriana.juego_caravana_medieval.repository.ServicioRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.CiudadRepository;
 //import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
 
+
+//0 ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=default
+@Profile({"default"})
 @Component
 public class DbInitializer implements CommandLineRunner {
 
