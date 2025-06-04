@@ -7,9 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import co.edu.javeriana.juego_caravana_medieval.model.*;
 import co.edu.javeriana.juego_caravana_medieval.repository.*;
@@ -31,6 +34,11 @@ public class CaravanaMejorasSystemTest {
     @Autowired
     private ServicioRepository servicioRepository;
 
+   @Autowired private UserRepository userRepository;
+    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private WebTestClient webTestClient;
+    @Autowired private TestRestTemplate rest;
+
     private Playwright playwright;
     private Browser browser;
     private BrowserContext browserContext;
@@ -39,7 +47,7 @@ public class CaravanaMejorasSystemTest {
     private String BASE_URL = "http://localhost:4200";
 
     @BeforeEach
-    void setup() {
+    void setup() {  
         Ciudad origen = ciudadRepository.save(new Ciudad("Origen", 100, 5000, 5000));
     
         Caravana caravana = new Caravana("Exploradora", 2, 10, 1000, 70, true);
@@ -51,6 +59,8 @@ public class CaravanaMejorasSystemTest {
         servicioRepository.save(new Servicio("Mejora de Capacidad", 200, "Aumenta la capacidad de carga de la caravana."));
         servicioRepository.save(new Servicio("Mejora de Velocidad", 300, "Aumenta la velocidad de la caravana."));
 
+       userRepository.save(new User("Bob", "Bobson", "bob@bob.com", passwordEncoder.encode("bob123"), Role.CARAVANERO));
+
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         browserContext = browser.newContext();
@@ -60,57 +70,63 @@ public class CaravanaMejorasSystemTest {
 
 @Test
 void mejorarCaravana() {
-    page.navigate(BASE_URL + "/mapCaravania");
+    // === 1. Iniciar desde pantalla de Login ===
+    page.navigate(BASE_URL + "/login");
 
-    // === Ir a Caravana ===
+    // === 2. Ingresar credenciales ===
+    page.locator("#txtEmail").fill("bob@bob.com");
+    page.locator("#txtPassword").fill("bob123");
+
+    // === 3. Hacer login ===
+    page.locator("button:has-text('Login')").click();
+
+    // === 4. Esperar carga del mapa ===
+
+    // === 5. Ir a Caravana ===
     page.locator("button:has-text('Caravana')").click();
 
-   
-   // Esperar explícitamente que los textos aparezcan
-Locator saludLocator = page.locator(".stats-box >> text=Salud:");
-Locator velocidadLocator = page.locator(".stats-box >> text=Velocidad:");
-Locator capacidadLocator = page.locator(".stats-box >> text=Capacidad:");
+    // === 6. Esperar visibilidad de estadísticas ===
+    Locator saludLocator = page.locator(".stats-box >> text=Salud:");
+    Locator velocidadLocator = page.locator(".stats-box >> text=Velocidad:");
+    Locator capacidadLocator = page.locator(".stats-box >> text=Capacidad:");
 
-saludLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
-velocidadLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
-capacidadLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
+    saludLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
+    velocidadLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
+    capacidadLocator.waitFor(new Locator.WaitForOptions().setTimeout(3000));
 
-// Usar PlaywrightAssertions después de la espera
-PlaywrightAssertions.assertThat(saludLocator).hasText("Salud: 70");
-PlaywrightAssertions.assertThat(velocidadLocator).hasText("Velocidad: 4");
-PlaywrightAssertions.assertThat(capacidadLocator).hasText("Capacidad: 10");
-    // Devolverse al mapa
+    PlaywrightAssertions.assertThat(saludLocator).hasText("Salud: 70");
+    PlaywrightAssertions.assertThat(velocidadLocator).hasText("Velocidad: 4");
+    PlaywrightAssertions.assertThat(capacidadLocator).hasText("Capacidad: 10");
+
+    // === 7. Devolverse al mapa ===
     page.locator("button:has-text('Devolverse')").click();
 
-    // === Capturar dinero antes de comprar ===
+    // === 8. Capturar dinero antes de comprar ===
     String dineroAntes = page.locator(".money-amount").textContent();
     int dineroInicial = Integer.parseInt(dineroAntes.trim());
 
-    // Ir a Servicios
+    // === 9. Ir a Servicios ===
     page.locator("button:has-text('Servicios')").click();
 
-    // Comprar todos los servicios disponibles
+    // === 10. Comprar servicios ===
     for (String servicio : new String[]{"Reparación de Caravana", "Mejora de Capacidad", "Mejora de Velocidad"}) {
         Locator fila = page.locator("tr:has(td:has-text('" + servicio + "'))");
         fila.locator("button:has-text('Comprar')").click();
-        page.waitForTimeout(500); // Espera breve por efecto visual
+        page.waitForTimeout(500); // Por efecto visual
     }
 
-    // Devolverse al mapa
+    // === 11. Volver al mapa ===
     page.locator("button:has-text('Devolverse')").click();
 
-    // === Verificar dinero restante ===
+    // === 12. Verificar dinero restante ===
     String dineroDespues = page.locator(".money-amount").textContent();
     int dineroFinal = Integer.parseInt(dineroDespues.trim());
 
-    int esperado = dineroInicial - (100 + 200 + 300); // Total gasto
-    
+    int esperado = dineroInicial - (100 + 200 + 300);
     PlaywrightAssertions.assertThat(page.locator(".money-amount")).hasText(String.valueOf(esperado));
 
-    // === Ir de nuevo a Caravana ===
+    // === 13. Verificar estadísticas después de mejoras ===
     page.locator("button:has-text('Caravana')").click();
-
-    // Verificar estadísticas actualizadas
     PlaywrightAssertions.assertThat(page.locator(".stats-box >> text=Salud: 100")).isVisible();
     PlaywrightAssertions.assertThat(page.locator(".stats-box >> text=Velocidad: 5")).isVisible();
     PlaywrightAssertions.assertThat(page.locator(".stats-box >> text=Capacidad: 11")).isVisible();

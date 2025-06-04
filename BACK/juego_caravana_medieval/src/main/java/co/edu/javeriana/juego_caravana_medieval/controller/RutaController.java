@@ -1,6 +1,7 @@
 package co.edu.javeriana.juego_caravana_medieval.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.javeriana.juego_caravana_medieval.DTO.RutaDTO;
+import co.edu.javeriana.juego_caravana_medieval.model.Role;
 import co.edu.javeriana.juego_caravana_medieval.service.RutaService;
 
 @RestController
@@ -22,7 +24,7 @@ public class RutaController {
     @Autowired
     private RutaService rutaService;
 
-   
+   @Secured({Role.Code.CARAVANERO})
     
     @GetMapping("/list")
     public List<RutaDTO> mostrarRutas() {
@@ -30,6 +32,7 @@ public class RutaController {
 
     }
 
+    @Secured({Role.Code.CARAVANERO})
     @GetMapping("{idRuta}")
     public RutaDTO buscarRuta(@PathVariable("idRuta") Long idRuta) {
         return rutaService.searchById(idRuta).orElseThrow();

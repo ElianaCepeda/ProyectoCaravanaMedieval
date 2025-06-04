@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.StockCaravanaDTO;
 import co.edu.javeriana.juego_caravana_medieval.Mapper.StockCaravanaMapper;
+import co.edu.javeriana.juego_caravana_medieval.model.Role;
 import co.edu.javeriana.juego_caravana_medieval.model.StockCaravana;
 import co.edu.javeriana.juego_caravana_medieval.service.StockCaravanaService;
 
@@ -24,7 +26,8 @@ public class StockCaravanaController {
      * Obtener todo el stock de una caravana determinada.
      * GET http://localhost:8081/stockcaravana/caravana/{caravanaId}
      */
-    @GetMapping("/caravana/{caravanaId}")
+      @Secured({Role.Code.CARAVANERO, Role.Code.COMERCIANTE})
+     @GetMapping("/caravana/{caravanaId}")
     public List<StockCaravanaDTO> obtenerStockCaravana(@PathVariable Long caravanaId) {
         List<StockCaravana> stockEntidades = stockCaravanaService.obtenerStockPorCaravana(caravanaId);
         return stockEntidades.stream()
@@ -36,7 +39,8 @@ public class StockCaravanaController {
      * Método para comprar (aumentar) stock en la caravana.
      * POST http://localhost:8081/stockcaravana/comprar/{id}/{cantidad}
      */
-    @PostMapping("/comprar/{id}/{cantidad}")
+    @Secured({Role.Code.CARAVANERO, Role.Code.COMERCIANTE})
+     @PostMapping("/comprar/{id}/{cantidad}")
     public void comprarStockCaravana(@PathVariable Long id, @PathVariable int cantidad) {
         stockCaravanaService.comprarStockCaravana(id, cantidad);
     }
@@ -45,6 +49,7 @@ public class StockCaravanaController {
      * Método para vender (disminuir) stock en la caravana.
      * POST http://localhost:8081/stockcaravana/vender/{id}/{cantidad}
      */
+    @Secured({Role.Code.CARAVANERO, Role.Code.COMERCIANTE})
     @PostMapping("/vender/{id}/{cantidad}")
     public void venderStockCaravana(@PathVariable Long id, @PathVariable int cantidad) {
         stockCaravanaService.venderStockCaravana(id, cantidad);

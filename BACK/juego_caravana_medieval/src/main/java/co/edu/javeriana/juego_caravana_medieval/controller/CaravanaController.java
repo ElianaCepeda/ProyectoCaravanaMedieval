@@ -3,6 +3,7 @@ package co.edu.javeriana.juego_caravana_medieval.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.CaravanaDTO;
 import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
+import co.edu.javeriana.juego_caravana_medieval.model.Role;
 import co.edu.javeriana.juego_caravana_medieval.service.CaravanaService;
 
 @RestController
@@ -35,6 +37,7 @@ public class CaravanaController {
         return caravanaService.searchById(idCaravana).orElseThrow();
     }
 
+    @Secured({Role.Code.CARAVANERO})
     @GetMapping("/viajar/{rutaId}")
     public void viajarCaravana(@PathVariable("rutaId") Long rutaId) {
         caravanaService.viajarCaravana(rutaId);

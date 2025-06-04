@@ -9,22 +9,29 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import co.edu.javeriana.juego_caravana_medieval.model.Caravana;
 import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
 import co.edu.javeriana.juego_caravana_medieval.model.Producto;
+import co.edu.javeriana.juego_caravana_medieval.model.Role;
 import co.edu.javeriana.juego_caravana_medieval.model.Ruta;
 import co.edu.javeriana.juego_caravana_medieval.model.Servicio;
+import co.edu.javeriana.juego_caravana_medieval.model.User;
 import co.edu.javeriana.juego_caravana_medieval.repository.CaravanaRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.ProductoRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.ServicioRepository;
+import co.edu.javeriana.juego_caravana_medieval.repository.UserRepository;
 import co.edu.javeriana.juego_caravana_medieval.repository.CiudadRepository;
 //import co.edu.javeriana.juego_caravana_medieval.repository.RutaRepository;
 
+import jakarta.transaction.Transactional;
+
 
 //0 ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=default
+//1 ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=aaa
 @Profile({"default"})
 @Component
 public class DbInitializer implements CommandLineRunner {
@@ -44,11 +51,28 @@ public class DbInitializer implements CommandLineRunner {
     @Autowired
     private ServicioRepository servicioRepository;
 
+
+        @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+  
+
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         // Caravana caravana = new Caravana("Destructor de Pueblos", 15, 5, 1200, 200,
         // false);
         // caravanaRepository.save(caravana);
+
+              userRepository.save(
+                new User("Alice", "Alisson", "alice@alice.com", passwordEncoder.encode("alice123"), Role.CARAVANERO));
+        userRepository.save(
+                new User("Bob", "Bobson", "bob@bob.com", passwordEncoder.encode("bob123"), Role.COMERCIANTE));
+
+
 
         Caravana tormentaRapida = new Caravana("Tormenta Rápida", 2, 2, 1250, 100, false);
         Caravana caravanaReal = new Caravana("Caravana Real", 1, 1, 2500, 100, false);
@@ -283,5 +307,7 @@ public class DbInitializer implements CommandLineRunner {
         int[] zona = zonas[new Random().nextInt(zonas.length)];
         return new Random().nextInt(zona[1] - zona[0]) + zona[0];
     }
+
+    
 
 }

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.javeriana.juego_caravana_medieval.DTO.CiudadDTO;
 import co.edu.javeriana.juego_caravana_medieval.model.Ciudad;
+import co.edu.javeriana.juego_caravana_medieval.model.Role;
 import co.edu.javeriana.juego_caravana_medieval.service.CiudadService;
 
 @RestController
@@ -19,12 +21,14 @@ public class CiudadController {
     private CiudadService ciudadService;
 
     // Obtener todas las ciudades
+    // @Secured({"ROLE_CARAVANERO"})
     @GetMapping("/list")
     public List<CiudadDTO> mostrarCiudades() {
         return ciudadService.searchAll();
     }
 
     // Buscar una ciudad por su ID
+    @Secured({Role.Code.CARAVANERO})
     @GetMapping("{idCiudad}")
     public CiudadDTO buscarCiudad(@PathVariable("idCiudad") Long idCiudad){ 
         return ciudadService.searchById(idCiudad).orElseThrow();
